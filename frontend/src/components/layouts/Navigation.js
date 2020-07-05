@@ -10,11 +10,13 @@ import Skill from '../pages/Skill';
 import Language from '../pages/Language';
 import Award from '../pages/Award';
 import CoverLetter from '../pages/CoverLetter';
+import PageNotFound from '../pages/PageNotFound';
+
 
 function Navigation() {
   return (
     <BrowserRouter>
-      <nav id="sidebarMenu" className="col-md-2 col-lg-2 d-md-block sidebar collapse">
+      <nav id="sidebarMenu" className="col-md-3 col-lg-2 d-md-block sidebar collapse">
         <div className="sidebar-sticky pt-3">
           <ul className="nav flex-column">
             <li className="nav-item">
@@ -50,7 +52,7 @@ function Navigation() {
           </ul>
         </div>
       </nav>
-      <main role='main' className='col-md-10 ml-sm-auto col-lg-10 px-md-4'>
+      <main role='main' className='col-md-9 ml-sm-auto col-lg-10 px-md-4'>
         <Switch>
           <Route path='/' exact component={Home} />
           <Route path='/basic-information' exact component={BasicInformation} />
@@ -62,6 +64,7 @@ function Navigation() {
           <Route path='/language' exact component={Language} />
           <Route path='/award' exact component={Award} />
           <Route path='/cover-letter' exact component={CoverLetter} />
+          <Route component={PageNotFound} />
         </Switch>
       </main>
     </BrowserRouter>
