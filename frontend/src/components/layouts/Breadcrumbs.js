@@ -12,7 +12,7 @@ function Breadcrumbs(props) {
                         </li>
                         :
                         <li key={index} className='breadcrumb-item'>
-                            <NavLink exact to={breadcrumb.path}>
+                            <NavLink exact to={breadcrumb.path} className='text-dark'>
                                 {breadcrumb.label}
                             </NavLink>
                         </li>

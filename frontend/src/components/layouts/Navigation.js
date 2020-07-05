@@ -6,6 +6,7 @@ import BasicInformation from '../pages/BasicInformation';
 import JobObjective from '../pages/JobObjective';
 import Education from '../pages/Education';
 import Experience from '../pages/Experience';
+import AddExperience from '../pages/AddExperience';
 import Skill from '../pages/Skill';
 import Language from '../pages/Language';
 import Award from '../pages/Award';
@@ -60,6 +61,7 @@ function Navigation() {
           <Route path='/job-objective' exact component={JobObjective} />
           <Route path='/education' exact component={Education} />
           <Route path='/experience' exact component={Experience} />
+          <Route path='/experience/add' exact component={AddExperience} />
           <Route path='/skill' exact component={Skill} />
           <Route path='/language' exact component={Language} />
           <Route path='/award' exact component={Award} />

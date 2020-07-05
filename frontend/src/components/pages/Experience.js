@@ -61,7 +61,7 @@ function Experience() {
               </Col>
             </Form.Row>
           </Form>
-          <NavLink exact to='/experience/add' className='btn btn-outline-success float-right'>New Experience</NavLink>
+          <NavLink exact to='/experience/add' className='btn btn-outline-secondary float-right'>New Experience</NavLink>
         </Card.Header>
         <Card.Body>
           <Card.Title>Experiences</Card.Title>
