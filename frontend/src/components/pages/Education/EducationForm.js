@@ -20,7 +20,6 @@ const CONTAINER = styled.div`
 
   label {
     color: #24B9B6;
-    font-size: 1.2em;
     font-weight: 400;
   }
 
@@ -60,7 +59,7 @@ const MYFORM = styled(Form)`
 const BUTTON = styled(Button)`
   background: #1863AB;
   border: none;
-  font-size: 1.2em;
+ 
   font-weight: 400;
 
   &:hover {
@@ -77,18 +76,13 @@ const validationSchema = Yup.object().shape({
   .required("*Degree is required"),
   field: Yup.string()
   .required("*Field of study is required"),
-  start: Yup.number()
-  .required("*Start year is required"),
-  end: Yup.number()
-  .required("*End year is required")
+ 
 });
 
 const EducationForm = () => {
-  return(
-    <CONTAINER>
-    
+  return(<CONTAINER> 
     <Formik
-      initialValues={{ school:"", degree:"", field:"", start:"", end:""}}
+      initialValues={{ school:"", degree:"", field:"", start:"2019", end:"2020"}}
       validationSchema={validationSchema}
       onSubmit={(values, {setSubmitting, resetForm}) => {
           setSubmitting(true);
@@ -131,7 +125,7 @@ const EducationForm = () => {
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.degree}
-              className={touched.degree && errors.degree ? "has-error" : null}
+           
                />
                {touched.degree && errors.degree ? (
                  <div className="error-message">{errors.degree}</div>
@@ -146,7 +140,7 @@ const EducationForm = () => {
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.field}
-              className={touched.field && errors.field ? "has-error" : null}
+             
                />
              {touched.field && errors.field ? (
                  <div className="error-message">{errors.field}</div>
@@ -154,15 +148,18 @@ const EducationForm = () => {
           </Form.Group>
           <Form.Group controlId="formStart">
             <Form.Label>Start :</Form.Label>
-            <Form.Control
-              type="text"
-              name="start"
-              placeholder="Start Year"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.start}
-              className={touched.start && errors.start ? "has-error" : null}
-              />
+            <Form.Control as="select" 
+             name="start"   
+             onChange={handleChange}
+             onBlur={handleBlur}
+             value={values.start}
+            >
+                <option>2020</option>
+                <option>2019</option>
+                <option>2018</option>
+                <option>2017</option>
+                <option>2016</option>
+            </Form.Control>
             {touched.start && errors.start ? (
                 <div className="error-message">{errors.start}</div>
               ): null}
@@ -171,14 +168,18 @@ const EducationForm = () => {
           <Form.Group controlId="formEnd">
             <Form.Label>Start :</Form.Label>
             <Form.Control
-              type="text"
+               as="select" 
               name="end"
-              placeholder="end Year"
               onChange={handleChange}
               onBlur={handleBlur}
               value={values.end}
-              className={touched.end && errors.end ? "has-error" : null}
-              />
+              > 
+              <option>2020</option>
+              <option>2019</option>
+              <option>2018</option>
+              <option>2017</option>
+              <option>2016</option>
+          </Form.Control>
             {touched.end && errors.end ? (
                 <div className="error-message">{errors.end}</div>
               ): null}
