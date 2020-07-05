@@ -1,6 +1,18 @@
 import React from 'react'
 import { Table, Button } from 'react-bootstrap';
 
+const TableRowFunc = ({row, onEdit,onDelete}) => (
+    <tr >
+      <td >{row.school}</td>
+      <td>{row.degree}</td>
+      <td>{row.field}</td>
+      <td >{row.start}</td>
+      <td>{row.finish}</td>
+      <td><Button value={row.id} onClick = {onEdit}>Edit</Button></td>
+      <td><Button variant="danger" value={row.id} onClick = {onDelete}>Delete</Button></td>
+    </tr>
+  )
+
 function EducationTable({education, onEdit, onDelete}) {
     return (
         <div>
@@ -17,61 +29,10 @@ function EducationTable({education, onEdit, onDelete}) {
                 </thead>
                 <tbody>
 
-               
-                <tr>
-                    <td>Humber College</td>
-                    <td>Post Graduate Diploma</td>
-                    <td>IT</td>
-                    <td>2019</td>
-                    <td>2020</td>
-                    <td><Button onClick = {onEdit}>Edit</Button></td>
-                    <td><Button  onClick = {onDelete}>Delete</Button></td>
-                </tr>
-                <tr>
-                    <td>Humber College</td>
-                    <td>Post Graduate Diploma</td>
-                    <td>IT</td>
-                    <td>2019</td>
-                    <td>2020</td>
-                    <td><Button>Edit</Button></td>
-                    <td><Button>Delete</Button></td>
-                </tr>
-                <tr>
-                    <td>Humber College</td>
-                    <td>Post Graduate Diploma</td>
-                    <td>IT</td>
-                    <td>2019</td>
-                    <td>2020</td>
-                    <td><Button>Edit</Button></td>
-                    <td><Button>Delete</Button></td>
-                </tr>
-                <tr>
-                    <td>Humber College</td>
-                    <td>Post Graduate Diploma</td>
-                    <td>IT</td>
-                    <td>2019</td>
-                    <td>2020</td>
-                    <td><Button>Edit</Button></td>
-                    <td><Button>Delete</Button></td>
-                </tr>
-                <tr>
-                    <td>Humber College</td>
-                    <td>Post Graduate Diploma</td>
-                    <td>IT</td>
-                    <td>2019</td>
-                    <td>2020</td>
-                    <td><Button>Edit</Button></td>
-                    <td><Button>Delete</Button></td>
-                </tr>
-                <tr>
-                    <td>Humber College</td>
-                    <td>Post Graduate Diploma</td>
-                    <td>IT</td>
-                    <td>2019</td>
-                    <td>2020</td>
-                    <td><Button>Edit</Button></td>
-                    <td><Button>Delete</Button></td>
-                </tr>
+                {education.map(row => (
+                    <TableRowFunc key={row.id} row={row} onEdit={onEdit} onDelete={onDelete} />
+                 ))}
+
                 </tbody>
             </Table>
             

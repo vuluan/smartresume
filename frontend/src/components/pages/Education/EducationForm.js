@@ -166,7 +166,7 @@ const EducationForm = () => {
           </Form.Group>
 
           <Form.Group controlId="formEnd">
-            <Form.Label>Start :</Form.Label>
+            <Form.Label>Finish :</Form.Label>
             <Form.Control
                as="select" 
               name="end"
