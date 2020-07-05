@@ -6,6 +6,11 @@ import Profile from '../pages/Profile';
 import BasicInformation from '../pages/BasicInformation';
 import JobObjective from '../pages/JobObjective';
 import Education from '../pages/Education';
+import Experience from '../pages/Experience';
+import Skill from '../pages/Skill';
+import Language from '../pages/Language';
+import Award from '../pages/Award';
+import CoverLetter from '../pages/CoverLetter';
 
 function Navigation() {
   return (
@@ -28,6 +33,21 @@ function Navigation() {
             <li>
               <NavLink exact to='/education' className='nav-link'>Education</NavLink>
             </li>
+            <li>
+              <NavLink exact to='/experience' className='nav-link'>Experience</NavLink>
+            </li>
+            <li>
+              <NavLink exact to='/skill' className='nav-link'>Skill</NavLink>
+            </li>
+            <li>
+              <NavLink exact to='/language' className='nav-link'>Language</NavLink>
+            </li>
+            <li>
+              <NavLink exact to='/award' className='nav-link'>Award</NavLink>
+            </li>
+            <li>
+              <NavLink exact to='/cover-letter' className='nav-link'>Cover Letter</NavLink>
+            </li>
           </ul>
         </div>
       </nav>
@@ -38,6 +58,11 @@ function Navigation() {
           <Route path='/profile' exact component={Profile} />
           <Route path='/job-objective' exact component={JobObjective} />
           <Route path='/education' exact component={Education} />
+          <Route path='/experience' exact component={Experience} />
+          <Route path='/skill' exact component={Skill} />
+          <Route path='/language' exact component={Language} />
+          <Route path='/award' exact component={Award} />
+          <Route path='/cover-letter' exact component={CoverLetter} />
         </Switch>
       </main>
     </BrowserRouter>
