@@ -9,7 +9,7 @@ const CONTAINER = styled.div`
   background: #F7F9FA;
   height: auto;
   width: 90%;
-  margin: 5em auto;
+  margin: 1em auto;
   color: snow;
   -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.4);
@@ -68,8 +68,6 @@ const BUTTON = styled(Button)`
   }
 `;
 
-
-// Schema for yup
 const validationSchema = Yup.object().shape({
   school: Yup.string()
   .required("*School is required"),
@@ -77,7 +75,6 @@ const validationSchema = Yup.object().shape({
   .required("*Degree is required"),
   field: Yup.string()
   .required("*Field of study is required"),
- 
 });
 
 const EducationForm = () => {

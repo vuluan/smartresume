@@ -2,7 +2,7 @@ import React from 'react'
 import { Table, Button } from 'react-bootstrap';
 
 const TableRow = ({row, onEdit,onDelete}) => (
-    <tr >
+    <tr>
       <td >{row.school}</td>
       <td>{row.degree}</td>
       <td>{row.field}</td>
@@ -34,8 +34,7 @@ function EducationTable({education, onEdit, onDelete}) {
                  ))}
 
                 </tbody>
-            </Table>
-            
+            </Table>         
         </div>
     )
 }
