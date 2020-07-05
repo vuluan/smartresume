@@ -1,6 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, NavLink } from 'react-router-dom';
 import Home from '../pages/Home';
 import Profile from '../pages/Profile';
 import BasicInformation from '../pages/BasicInformation';
@@ -15,7 +14,7 @@ import CoverLetter from '../pages/CoverLetter';
 function Navigation() {
   return (
     <BrowserRouter>
-      <nav id="sidebarMenu" className="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <nav id="sidebarMenu" className="col-md-2 col-lg-2 d-md-block sidebar collapse">
         <div className="sidebar-sticky pt-3">
           <ul className="nav flex-column">
             <li className="nav-item">
@@ -51,7 +50,7 @@ function Navigation() {
           </ul>
         </div>
       </nav>
-      <main role='main' className='col-md-9 ml-sm-auto col-lg-10 px-md-4'>
+      <main role='main' className='col-md-10 ml-sm-auto col-lg-10 px-md-4'>
         <Switch>
           <Route path='/' exact component={Home} />
           <Route path='/basic-information' exact component={BasicInformation} />

@@ -1,8 +1,23 @@
 import React from 'react';
+import Breadcrumbs from '../layouts/Breadcrumbs';
+
+const breadcrumbLinks = [
+  {
+    label: 'Home',
+    path: '/'
+  },
+  {
+    label: 'Experience',
+    path: '/experience',
+    active: true
+  }
+];
 
 function Experience() {
   return (
-    <div>Experience</div>
+    <div>
+      <Breadcrumbs links={breadcrumbLinks} />
+    </div>
   );
 }
 
