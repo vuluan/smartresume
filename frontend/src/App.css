@@ -40,5 +40,6 @@
 /* Common */
 .breadcrumb {
   background: none;
+  padding: .75rem 0;
 }
 /* Experiences */
