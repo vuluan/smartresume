@@ -1,6 +1,6 @@
 # Front-End
 
-Front-End uses React and NodeJS
+Front-End uses React
 
 ## Setup
 
