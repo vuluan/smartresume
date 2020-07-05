@@ -1,8 +1,8 @@
 import React from 'react';
-
+import EducationForm from './EducationForm';
 function Education() {
   return (
-    <div>Education</div>
+    <EducationForm/>
   );
 }
 
