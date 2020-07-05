@@ -1,7 +1,7 @@
 import React from 'react'
 import { Table, Button } from 'react-bootstrap';
 
-const TableRowFunc = ({row, onEdit,onDelete}) => (
+const TableRow = ({row, onEdit,onDelete}) => (
     <tr >
       <td >{row.school}</td>
       <td>{row.degree}</td>
@@ -30,7 +30,7 @@ function EducationTable({education, onEdit, onDelete}) {
                 <tbody>
 
                 {education.map(row => (
-                    <TableRowFunc key={row.id} row={row} onEdit={onEdit} onDelete={onDelete} />
+                    <TableRow key={row.id} row={row} onEdit={onEdit} onDelete={onDelete} />
                  ))}
 
                 </tbody>

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Form, Button } from 'react-bootstrap';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import Years from './Years';
 
 const CONTAINER = styled.div`
   background: #F7F9FA;
@@ -154,11 +155,7 @@ const EducationForm = () => {
              onBlur={handleBlur}
              value={values.start}
             >
-                <option>2020</option>
-                <option>2019</option>
-                <option>2018</option>
-                <option>2017</option>
-                <option>2016</option>
+              <Years/>
             </Form.Control>
             {touched.start && errors.start ? (
                 <div className="error-message">{errors.start}</div>
@@ -174,11 +171,7 @@ const EducationForm = () => {
               onBlur={handleBlur}
               value={values.end}
               > 
-              <option>2020</option>
-              <option>2019</option>
-              <option>2018</option>
-              <option>2017</option>
-              <option>2016</option>
+              <Years/>
           </Form.Control>
             {touched.end && errors.end ? (
                 <div className="error-message">{errors.end}</div>
