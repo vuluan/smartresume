@@ -3,8 +3,7 @@ import { Form, Container, Jumbotron, Accordion, Card, Button} from 'react-bootst
 
 function CoverLetter() {
   return (
-    <Container>
-    <Jumbotron>
+    <Container className="mb-2">
     <Accordion defaultActiveKey="1">
   <Card>
     <Card.Header>
@@ -29,7 +28,6 @@ function CoverLetter() {
     </Accordion.Collapse>
   </Card>
 </Accordion>
-    </Jumbotron>
 </Container>
   );
 }

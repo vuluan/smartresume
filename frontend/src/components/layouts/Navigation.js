@@ -10,7 +10,9 @@ import AddExperience from '../pages/AddExperience';
 import Skill from '../pages/Skill';
 import Language from '../pages/Language';
 import Award from '../pages/Award';
-import CoverLetter from '../pages/CoverLetter';
+import CoverLetters from '../pages/CoverLetters';
+import AddCoverLetter from '../pages/AddCoverLetter';
+import ContactMe from '../pages/ContactMe';
 import PageNotFound from '../pages/PageNotFound';
 
 
@@ -48,7 +50,10 @@ function Navigation() {
               <NavLink exact to='/award' className='nav-link'>Award</NavLink>
             </li>
             <li>
-              <NavLink exact to='/cover-letter' className='nav-link'>Cover Letter</NavLink>
+              <NavLink exact to='/cover-letter' className='nav-link'>Cover Letters</NavLink>
+            </li>
+            <li>
+              <NavLink exact to='/contact-me' className='nav-link'>Contact Me</NavLink>
             </li>
           </ul>
         </div>
@@ -65,7 +70,9 @@ function Navigation() {
           <Route path='/skill' exact component={Skill} />
           <Route path='/language' exact component={Language} />
           <Route path='/award' exact component={Award} />
-          <Route path='/cover-letter' exact component={CoverLetter} />
+          <Route path='/cover-letter' exact component={CoverLetters} />
+          <Route path='/cover-letter/add' exact component={AddCoverLetter} />
+          <Route path='/contact-me' exact component={ContactMe} />
           <Route component={PageNotFound} />
         </Switch>
       </main>
