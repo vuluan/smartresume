@@ -32,7 +32,7 @@ function Navigation() {
               <NavLink exact to='/profile' className='nav-link'>Profile</NavLink>
             </li>
             <li>
-              <NavLink exact to='/job-objective' className='nav-link'>JobObjective</NavLink>
+              <NavLink exact to='/job-objective' className='nav-link'>Job Objective</NavLink>
             </li>
             <li>
               <NavLink exact to='/education' className='nav-link'>Education</NavLink>
