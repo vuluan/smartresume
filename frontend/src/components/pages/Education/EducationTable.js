@@ -9,7 +9,7 @@ const TableRow = ({row, onEdit,onDelete}) => (
       <td >{row.start}</td>
       <td>{row.finish}</td>
       <td><Button value={row.id} onClick = {onEdit}>Edit</Button></td>
-      <td><Button variant="danger" value={row.id} onClick = {onDelete}>Delete</Button></td>
+      <td><Button variant="danger" value={row.id} onClick = {()=>onDelete(row.id)}>Delete</Button></td>
     </tr>
   )
 

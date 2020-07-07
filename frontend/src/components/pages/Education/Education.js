@@ -6,7 +6,7 @@ function Education() {
 
   const [education,setEducation] = useState([
         {
-          id:12345,
+          id:1,
           school: "Humber College",
           degree :"Post Grad Diploma",
           field: "IT",
@@ -14,7 +14,7 @@ function Education() {
           finish: 2020
         },
         {
-          id:12346,
+          id:2,
           school: "UCT",
           degree :"Bachelors of Commerce",
           field: "Information Systems",
@@ -22,7 +22,7 @@ function Education() {
           finish: 2020
         },
         {
-          id:12347,
+          id:3,
           school: "Agha Khan Mzizima",
           degree :"Diploma",
           field: "PCM",
@@ -35,13 +35,23 @@ function Education() {
     console.log("Edit clicked");   
   }
 
-  const handleDelete = () =>{
-    console.log("Delete clicked");
+  const handleSave = (data) =>{
+  
+    console.log("Save clicked: " +  JSON.stringify(data));
+    data.id= education.length +1;
+    setEducation(prevEducation => [...prevEducation, data]);
+  }
+
+  const handleDelete = (id) =>{
+    console.log("Delete clicked:" +id);
+
+    setEducation(prevEducation=>  prevEducation.filter((g) => g.id !== id))
+
   }
 
   return (
     <>
-    <EducationForm />
+    <EducationForm onSave={handleSave} />
     <EducationTable education ={education} onEdit={handleEdit} onDelete={handleDelete}/>
     </>
   );

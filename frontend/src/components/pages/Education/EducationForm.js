@@ -77,15 +77,15 @@ const validationSchema = Yup.object().shape({
   .required("*Field of study is required"),
 });
 
-const EducationForm = () => {
+const EducationForm = ({onSave}) => {
   return(<CONTAINER> 
     <Formik
-      initialValues={{ school:"", degree:"", field:"", start:"2019", end:"2020"}}
+      initialValues={{ school:"", degree:"", field:"", start:"2019", finish:"2020"}}
       validationSchema={validationSchema}
       onSubmit={(values, {setSubmitting, resetForm}) => {
           setSubmitting(true);
           setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
+           onSave(values);
             resetForm();
             setSubmitting(false);
           }, 500);
@@ -159,23 +159,23 @@ const EducationForm = () => {
               ): null}
           </Form.Group>
 
-          <Form.Group controlId="formEnd">
+          <Form.Group controlId="formFinish">
             <Form.Label>Finish :</Form.Label>
             <Form.Control
                as="select" 
-              name="end"
+              name="finish"
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.end}
+              value={values.finish}
               > 
               <Years/>
           </Form.Control>
-            {touched.end && errors.end ? (
-                <div className="error-message">{errors.end}</div>
+            {touched.finish && errors.finish ? (
+                <div className="error-message">{errors.finish}</div>
               ): null}
           </Form.Group>
      
-          <BUTTON variant="primary" type="submit" disabled={isSubmitting}>
+          <BUTTON variant="primary" type="submit" disabled={isSubmitting} >
             Save
           </BUTTON>
         </MYFORM>
