@@ -4,7 +4,7 @@ import Home from '../pages/Home';
 import Profile from '../pages/Profile';
 import BasicInformation from '../pages/BasicInformation';
 import JobObjective from '../pages/JobObjective';
-import Education from '../pages/Education';
+import Education from '../pages/Education/Education';
 import Experience from '../pages/Experience';
 import AddExperience from '../pages/AddExperience';
 import Skill from '../pages/Skill';
