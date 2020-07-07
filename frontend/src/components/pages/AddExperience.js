@@ -27,12 +27,11 @@ function AddExperience() {
         bg='light'
         text='dark'
       >
-        <Card.Header>
-          <NavLink exact to='/experience' className='btn btn-outline-secondary float-left'>Back to Experiences</NavLink>
-          <Button variant="success" className='float-right'>Save</Button>
+        <Card.Header>New Experience
+          
         </Card.Header>
         <Card.Body>
-          <Card.Title>New Experience</Card.Title>
+          
           <Form>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Email address</Form.Label>
@@ -49,9 +48,8 @@ function AddExperience() {
             <Form.Group controlId="formBasicCheckbox">
               <Form.Check type="checkbox" label="Check me out" />
             </Form.Group>
-            <Button variant="primary" type="submit">
-              Submit
-  </Button>
+            <Button variant="primary" type="submit">Submit</Button>
+            <NavLink exact to='/experience' className='btn btn-outline-secondary float-right'>Back to Experiences</NavLink>
           </Form>
         </Card.Body>
       </Card>
