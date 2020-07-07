@@ -5,69 +5,6 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Years from './Years';
 
-const CONTAINER = styled.div`
-  background: #F7F9FA;
-  height: auto;
-  width: 90%;
-  margin: 1em auto;
-  color: snow;
-  -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.4);
-  -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.4);
-  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.4);
-
-  @media(min-width: 786px) {
-    width: 60%;
-  }
-
-  label {
-    color: #24B9B6;
-    font-weight: 400;
-  }
-
-  .error {
-    border: 2px solid #FF6565;
-  }
-
-  .error-message {
-    color: #FF6565;
-    padding: .5em .2em;
-    height: 1em;
-    position: absolute;
-    font-size: .8em;
-  }
-
-  h1 {
-    color: #24B9B6;
-    padding-top: .5em;
-  }
-
-  .form-group {
-    margin-bottom: 1.5em;
-  }
-`;
-
-const MYFORM = styled(Form)`
-  width: 90%;
-  text-align: left;
-  padding-top: 2em;
-  padding-bottom: 2em;
-
-  @media(min-width: 786px) {
-    width: 50%;
-  }
-`;
-
-const BUTTON = styled(Button)`
-  background: #1863AB;
-  border: none;
- 
-  font-weight: 400;
-
-  &:hover {
-    background: #1D3461;
-  }
-`;
-
 const validationSchema = Yup.object().shape({
   school: Yup.string()
   .required("*School is required"),
@@ -78,7 +15,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const EducationForm = ({onSave}) => {
-  return(<CONTAINER> 
+  return(<div> 
     <Formik
       initialValues={{ school:"", degree:"", field:"", start:"2019", finish:"2020"}}
       validationSchema={validationSchema}
@@ -98,7 +35,7 @@ const EducationForm = ({onSave}) => {
           handleBlur,
           handleSubmit,
           isSubmitting }) => (
-        <MYFORM onSubmit={handleSubmit} className="mx-auto">
+        <Form onSubmit={handleSubmit} className="mx-auto">
           <Form.Group controlId="formSchool">
             <Form.Label>School :</Form.Label>
             <Form.Control
@@ -175,13 +112,13 @@ const EducationForm = ({onSave}) => {
               ): null}
           </Form.Group>
      
-          <BUTTON variant="primary" type="submit" disabled={isSubmitting} >
+          <Button variant="primary" type="submit" disabled={isSubmitting} >
             Save
-          </BUTTON>
-        </MYFORM>
+          </Button>
+        </Form>
       )}
     </Formik>
-    </CONTAINER>
+    </div>
   );
 }
 
