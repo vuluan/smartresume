@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, NavLink } from 'react-router-dom';
 import Home from '../pages/Home';
-import Profile from '../pages/Profile';
+import Profile from '../pages/Profile/Profile';
 import BasicInformation from '../pages/BasicInformation';
 import JobObjective from '../pages/JobObjective';
 import Education from '../pages/Education/Education';
