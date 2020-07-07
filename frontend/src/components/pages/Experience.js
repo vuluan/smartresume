@@ -1,6 +1,6 @@
 import React from 'react';
 import Breadcrumbs from '../layouts/Breadcrumbs';
-import { Table, ButtonGroup, Button, Pagination, Card, Form, Col, InputGroup, FormControl } from 'react-bootstrap';
+import { Table, ButtonGroup, Button, Pagination, Card, Form, Col, InputGroup, FormControl, Row } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
 const breadcrumbLinks = [
@@ -45,7 +45,9 @@ function Experience() {
         bg='light'
         text='dark'
       >
-        <Card.Header>
+
+        <Card.Header>Experiences</Card.Header>
+        <Card.Body>
           <Form className='float-left'>
             <Form.Row className="align-items-center">
               <Col xs="auto">
@@ -61,10 +63,7 @@ function Experience() {
               </Col>
             </Form.Row>
           </Form>
-          <NavLink exact to='/experience/add' className='btn btn-outline-success float-right'>New Experience</NavLink>
-        </Card.Header>
-        <Card.Body>
-          <Card.Title>Experiences</Card.Title>
+          <NavLink exact to='/experience/add' className='btn btn-outline-secondary float-right'>New Experience</NavLink>
           <Table bordered hover>
             <thead>
               <tr>

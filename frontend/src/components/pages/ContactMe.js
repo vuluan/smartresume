@@ -5,15 +5,6 @@ function ContactMe() {
   return (
     <Container>
     <Jumbotron>
-    <Accordion defaultActiveKey="1">
-  <Card>
-    <Card.Header>
-      <Accordion.Toggle as={Button} variant="primary" eventKey="0">
-        Contact Me
-      </Accordion.Toggle>
-    </Card.Header>
-    <Accordion.Collapse eventKey="0">
-    <Container>
     <Form className="mt-4 mb-4">
   <Form.Group controlId="email">
     <Form.Control type="email" placeholder="Your email" />
@@ -25,10 +16,6 @@ function ContactMe() {
     Send
   </Button>
 </Form>
-    </Container>
-    </Accordion.Collapse>
-  </Card>
-</Accordion>
     </Jumbotron>
 </Container>
   );
