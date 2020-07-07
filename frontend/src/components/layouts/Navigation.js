@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch, NavLink } from 'react-router-dom';
 import Home from '../pages/Home';
 import Profile from '../pages/Profile/Profile';
 import BasicInformation from '../pages/BasicInformation';
-import JobObjective from '../pages/JobObjective';
+import JobObjective from '../pages/JobObjective/JobObjective';
 import Education from '../pages/Education/Education';
 import Experience from '../pages/Experience';
 import AddExperience from '../pages/AddExperience';
