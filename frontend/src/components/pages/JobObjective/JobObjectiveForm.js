@@ -5,15 +5,15 @@ import * as Yup from 'yup';
 
 
 const validationSchema = Yup.object().shape({
-  profile: Yup.string()
-  .required("*Profile is required"),
+  objective: Yup.string()
+  .required("*Objective is required"),
 
 });
 
-const ProfileForm = ({onSave}) => {
+const JobObjectiveForm = ({onSave}) => {
   return(<div> 
     <Formik
-      initialValues={{ profile:""}}
+      initialValues={{ objective:""}}
       validationSchema={validationSchema}
       onSubmit={(values, {setSubmitting, resetForm}) => {
           setSubmitting(true);
@@ -32,18 +32,18 @@ const ProfileForm = ({onSave}) => {
           handleSubmit,
           isSubmitting }) => (
         <Form onSubmit={handleSubmit} className="mx-auto">
-          <Form.Group controlId="formProfile">
-            <Form.Label>Profile :</Form.Label>
+          <Form.Group controlId="formObjective">
+            <Form.Label>Objective :</Form.Label>
             <Form.Control
               as="textarea" rows="3"
-              name="profile"
-              placeholder="Enter your profile here.."
+              name="objective"
+              placeholder="Enter your objective here.. A resume objective is a statement of your goals for employment, usually listed at the top of your resume."
               onChange={handleChange}
               onBlur={handleBlur}
-              value={values.profile}
+              value={values.objective}
               />
-              {touched.profile && errors.profile ? (
-                <div className="error-message">{errors.profile}</div>
+              {touched.objective && errors.objective ? (
+                <div className="error-message">{errors.objective}</div>
               ): null}
           </Form.Group>     
           <Button variant="primary" type="submit" disabled={isSubmitting} >
@@ -56,4 +56,4 @@ const ProfileForm = ({onSave}) => {
   );
 }
 
-export default ProfileForm;
+export default JobObjectiveForm;
