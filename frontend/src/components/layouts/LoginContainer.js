@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import { Route } from 'react-router-dom';
-import Login from '../pages/Login';
+import Login from './Login';
 
 function LoginContainer() {
     return (
