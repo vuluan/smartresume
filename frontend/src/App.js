@@ -1,18 +1,16 @@
 import React from 'react';
-import { Container, Row } from 'react-bootstrap';
+import { Switch, Route } from 'react-router-dom';
 import './App.css';
-import Navigation from './components/layouts/Navigation';
-import Header from './components/layouts/Header';
+import DashboardContainer from './components/layouts/DashboardContainer';
+import LoginContainer from './components/layouts/LoginContainer';
 
 function App() {
   return (
     <div>
-      <Header />
-      <Container fluid>
-        <Row>
-          <Navigation />
-        </Row>
-      </Container>
+      <Switch>
+        <Route exact path="/login" component={LoginContainer} />
+        <Route exact component={DashboardContainer} />
+      </Switch>
     </div>
   );
 }

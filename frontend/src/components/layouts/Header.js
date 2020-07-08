@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route, Switch, NavLink } from 'react-router-dom';
 
 function Header() {
     return (
@@ -9,7 +10,7 @@ function Header() {
             </button>
             <ul className="navbar-nav px-3">
                 <li className="nav-item text-nowrap">
-                    <a className="nav-link" href="/sign-out">Sign out</a>
+                    <NavLink exact to='/login' className='nav-link'>Login</NavLink>
                 </li>
             </ul>
         </nav>
