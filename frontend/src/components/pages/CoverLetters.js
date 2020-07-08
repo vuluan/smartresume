@@ -51,7 +51,7 @@ function CoverLetters() {
               </Col>
             </Form.Row>
           </Form>
-          <NavLink exact to='/cover-letter/add' className='btn btn-outline-secondary float-right'>New CoverLetter</NavLink>
+          <NavLink exact to='/cover-letter/add' className='btn btn-outline-danger float-right'>New Cover Letter</NavLink>
         </Card.Header>
         <Card.Body>
           <Card.Title>Cover Letters</Card.Title>
