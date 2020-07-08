@@ -25,6 +25,14 @@ body {
 
 }
 
+.sidebar li i {
+  font-size: 20px;
+}
+
+.sidebar li a {
+  text-transform: uppercase;
+}
+
 @media (max-width: 767.98px) {
   .sidebar {
     top: 5rem;
@@ -59,7 +67,7 @@ body {
 }
 
 .sidebar .nav-link.active {
-  background-color: #eb525d;
+  color: #eb525d;
 }
 
 .sidebar .nav-link:hover .feather,
