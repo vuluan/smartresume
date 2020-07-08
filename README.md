@@ -41,3 +41,10 @@ npm install
 ```python
 npm start
 ```
+
+# Responsibilities
+
+Luan Nguyen: create the layout structure, Experience page, Languages page
+Hung Phung: Registration Page, Login Page, Project List Page
+Michael: Contact Me, Resume Basic Information, Cover Letter
+Roman: Resume List, Profile + Job Objective, Education
