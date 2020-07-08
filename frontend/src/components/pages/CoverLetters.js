@@ -1,6 +1,6 @@
 import React from 'react';
 import Breadcrumbs from '../layouts/Breadcrumbs';
-import { Table, ButtonGroup, Button, Pagination, Card, Form, Col, InputGroup, FormControl } from 'react-bootstrap';
+import { Button, Pagination, Card, Form, Col} from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import CoverLetter from './CoverLetter.js';
 
@@ -26,17 +26,6 @@ for (let number = 1; number <= 5; number++) {
   );
 }
 
-const paginationBasic = (
-  <div>
-    <Pagination>{items}</Pagination>
-    <br />
-
-    <Pagination size="lg">{items}</Pagination>
-    <br />
-
-    <Pagination size="sm">{items}</Pagination>
-  </div>
-);
 
 function CoverLetters() {
   return (
@@ -62,7 +51,7 @@ function CoverLetters() {
               </Col>
             </Form.Row>
           </Form>
-          <NavLink exact to='/cover-letter/add' className='btn btn-outline-secondary float-right'>New CoverLetter</NavLink>
+          <NavLink exact to='/cover-letter/add' className='btn btn-outline-danger float-right'>New Cover Letter</NavLink>
         </Card.Header>
         <Card.Body>
           <Card.Title>Cover Letters</Card.Title>
