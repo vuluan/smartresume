@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import './App.css';
+import './App.scss';
+import './login.css';
 import DashboardContainer from './components/layouts/DashboardContainer';
 import LoginContainer from './components/layouts/LoginContainer';
 

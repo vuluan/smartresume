@@ -1,11 +1,11 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import Login from '../pages/Login';
 
 function LoginContainer() {
     return (
-        <Container fluid>
+        <Container fluid className='login-container'>
             <Route path="/login" component={Login} />
         </Container>
     );
