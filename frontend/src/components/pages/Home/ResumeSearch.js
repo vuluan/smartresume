@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, ButtonGroup, Button, Pagination, Card, Form, Col } from 'react-bootstrap';
+import { Button, Form, Col } from 'react-bootstrap';
 function ResumeSearch() {
     return (
         <div>

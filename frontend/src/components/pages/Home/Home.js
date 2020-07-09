@@ -1,6 +1,5 @@
 
 import React, { useState } from 'react';
-import ResumeCreate from './ResumeCreate';
 import ResumeTable from './ResumeTable';
 import ResumeSearch from './ResumeSearch';
 import { NavLink } from 'react-router-dom';
