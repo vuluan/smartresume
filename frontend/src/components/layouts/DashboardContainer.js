@@ -1,13 +1,13 @@
 import React from 'react';
-import { Route, Switch, NavLink } from 'react-router-dom';
+import { Route, NavLink } from 'react-router-dom';
 import { Row } from 'react-bootstrap';
 import Home from '../pages/Home';
 import Profile from '../pages/Profile/Profile';
 import BasicInformation from '../pages/BasicInformation';
 import JobObjective from '../pages/JobObjective/JobObjective';
 import Education from '../pages/Education/Education';
-import Experience from '../pages/Experience';
-import AddExperience from '../pages/AddExperience';
+import Experience from '../pages/Experience/Experience';
+import AddExperience from '../pages/Experience/AddExperience';
 import Skill from '../pages/Skill';
 import Language from '../pages/Language';
 import Award from '../pages/Award';

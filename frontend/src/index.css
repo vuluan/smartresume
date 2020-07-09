@@ -3,6 +3,14 @@ body {
   background-color: #F6F7FB;
 }
 
+main {
+  padding: 1.5rem 0;
+}
+
+.pagination {
+  margin: 0;
+}
+
 .feather {
   width: 16px;
   height: 16px;
