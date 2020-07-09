@@ -50,6 +50,14 @@ function BasicInformation() {
   </Form.Group>
 
   <Form.Row>
+    <Form.Group as={Col} controlId="country">
+      <Form.Label>Country</Form.Label>
+      <CountryDropdown 
+      className={styles.custom}
+          value={country}
+          onChange={(val) => selectCountry(val)} />
+    </Form.Group>
+    
     <Form.Group as={Col} controlId="region">
       <Form.Label>Region</Form.Label>
       <div></div>
@@ -58,15 +66,7 @@ function BasicInformation() {
           country={country}
           value={region}
           onChange={(val) => selectRegion(val)} />
-    </Form.Group>
-    
-    <Form.Group as={Col} controlId="country">
-      <Form.Label>Country</Form.Label>
-      <CountryDropdown 
-      className={styles.custom}
-          value={country}
-          onChange={(val) => selectCountry(val)} />
-    </Form.Group>
+    </Form.Group>    
 
   </Form.Row>
   
