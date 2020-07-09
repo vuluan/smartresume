@@ -11,7 +11,7 @@ function GoogleLoginButton() {
         <GoogleLogin
             clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
             render={renderProps => (
-                <Button className='btn-block' variant="google-red" onClick={renderProps.onClick} disabled={renderProps.disabled}>Sign in with Google</Button>
+                <Button size='sm' className='btn-block' variant="google-red" onClick={renderProps.onClick} disabled={renderProps.disabled}>Sign in with Google</Button>
             )}
             buttonText="Login"
             onSuccess={responseGoogle}

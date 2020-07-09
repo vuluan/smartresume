@@ -1,6 +1,6 @@
 import React from 'react';
-import Breadcrumbs from '../layouts/Breadcrumbs';
-import { Table, ButtonGroup, Button, Pagination, Card, Form, Col, InputGroup, FormControl } from 'react-bootstrap';
+import Breadcrumbs from '../../layouts/Breadcrumbs';
+import { Button, Card, Form} from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
 const breadcrumbLinks = [

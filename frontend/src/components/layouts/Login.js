@@ -6,25 +6,25 @@ import GoogleLoginButton from './GoogleLoginButton';
 function Login() {
   return (
     <Row>
-      <Col md={{ span: 4, offset: 4 }} className='mt-5'>
+      <Col md={{ span: 4, offset: 4 }} className='mt-5 mb-5'>
         <Card>
           <Card.Img variant="top" src={process.env.PUBLIC_URL + '/login.jpg'} />
           <Card.Body>
             <Form>
               <Form.Group>
                 <Form.Label>Email address</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" />
+                <Form.Control size='sm' type="email" placeholder="Enter email" />
                 <Form.Text className="text-muted">We'll never share your email with anyone else.</Form.Text>
               </Form.Group>
               <Form.Group>
                 <Form.Label>Password</Form.Label>
-                <Form.Control type="password" placeholder="Password" />
+                <Form.Control size='sm' type="password" placeholder="Password" />
               </Form.Group>
               <Form.Group>
                 <Form.Check type="checkbox" label="Remember me" />
               </Form.Group>
               <Form.Group className='clearfix'>
-                <Button className='float-right' variant="carrot" type="submit">Login</Button>
+                <Button size='sm' className='btn-block' variant="carrot" type="submit">Login</Button>
               </Form.Group>
               <Form.Group>
                 <GoogleLoginButton />

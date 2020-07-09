@@ -1,13 +1,13 @@
 import React from 'react';
-import { Route, Switch, NavLink } from 'react-router-dom';
+import { Route, NavLink } from 'react-router-dom';
 import { Row } from 'react-bootstrap';
 import Home from '../pages/Home';
 import Profile from '../pages/Profile/Profile';
 import BasicInformation from '../pages/BasicInformation';
 import JobObjective from '../pages/JobObjective/JobObjective';
 import Education from '../pages/Education/Education';
-import Experience from '../pages/Experience';
-import AddExperience from '../pages/AddExperience';
+import Experience from '../pages/Experience/Experience';
+import AddExperience from '../pages/Experience/AddExperience';
 import Skill from '../pages/Skill';
 import Language from '../pages/Language';
 import Award from '../pages/Award';
@@ -16,6 +16,10 @@ import AddCoverLetter from '../pages/AddCoverLetter';
 import ContactMe from '../pages/ContactMe';
 import Header from './Header';
 import { Container } from 'react-bootstrap';
+import {
+  FaHouseDamage, FaInfo, FaUser, FaBullseye, FaUniversity, FaBuilding, FaTools,
+  FaGlobe, FaAward, FaEnvelopeOpenText, FaIdCard
+} from 'react-icons/fa';
 
 
 function DashboardContainer() {
@@ -27,38 +31,38 @@ function DashboardContainer() {
           <nav id="sidebarMenu" className="col-md-3 col-lg-2 d-md-block sidebar collapse">
             <div className="sidebar-sticky pt-3">
               <ul className="nav flex-column">
-                <li className="nav-item">
-                  <NavLink exact to='/' className='nav-link'>Home</NavLink>
+                <li className="text-center">
+                  <NavLink exact to='/' className='nav-link'><i><FaHouseDamage /></i><br />Home</NavLink>
                 </li>
-                <li>
-                  <NavLink exact to='/basic-information' className='nav-link'>Basic Information</NavLink>
+                <li className="text-center">
+                  <NavLink exact to='/basic-information' className='nav-link'><i><FaInfo /></i><br />Basic Information</NavLink>
                 </li>
-                <li>
-                  <NavLink exact to='/profile' className='nav-link'>Profile</NavLink>
+                <li className="text-center">
+                  <NavLink exact to='/profile' className='nav-link'><i><FaUser /></i><br />Profile</NavLink>
                 </li>
-                <li>
-                  <NavLink exact to='/job-objective' className='nav-link'>Job Objective</NavLink>
+                <li className="text-center">
+                  <NavLink exact to='/job-objective' className='nav-link'><i><FaBullseye /></i><br />Job Objective</NavLink>
                 </li>
-                <li>
-                  <NavLink exact to='/education' className='nav-link'>Education</NavLink>
+                <li className="text-center">
+                  <NavLink exact to='/education' className='nav-link'><i><FaUniversity /></i><br />Education</NavLink>
                 </li>
-                <li>
-                  <NavLink exact to='/experience' className='nav-link'>Experience</NavLink>
+                <li className="text-center">
+                  <NavLink exact to='/experience' className='nav-link'><i><FaBuilding /></i><br />Experience</NavLink>
                 </li>
-                <li>
-                  <NavLink exact to='/skill' className='nav-link'>Skill</NavLink>
+                <li className="text-center">
+                  <NavLink exact to='/skill' className='nav-link'><i><FaTools /></i><br />Skill</NavLink>
                 </li>
-                <li>
-                  <NavLink exact to='/language' className='nav-link'>Language</NavLink>
+                <li className="text-center">
+                  <NavLink exact to='/language' className='nav-link'><i><FaGlobe /></i><br />Language</NavLink>
                 </li>
-                <li>
-                  <NavLink exact to='/award' className='nav-link'>Award</NavLink>
+                <li className="text-center">
+                  <NavLink exact to='/award' className='nav-link'><i><FaAward /></i><br />Award</NavLink>
                 </li>
-                <li>
-                  <NavLink exact to='/cover-letter' className='nav-link'>Cover Letters</NavLink>
+                <li className="text-center">
+                  <NavLink exact to='/cover-letter' className='nav-link'><i><FaEnvelopeOpenText /></i><br />Cover Letters</NavLink>
                 </li>
-                <li>
-                  <NavLink exact to='/contact-me' className='nav-link'>Contact Me</NavLink>
+                <li className="text-center">
+                  <NavLink exact to='/contact-me' className='nav-link'><i><FaIdCard /></i><br />Contact Me</NavLink>
                 </li>
               </ul>
             </div>
