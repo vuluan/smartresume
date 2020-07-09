@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Container, Jumbotron, Accordion, Card, Button, Col} from 'react-bootstrap';
+import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
+import styles from  '../styles/BasicInformation.module.css';
 
 function BasicInformation() {
+
+  const [country, setCountry] = useState(0);
+  const [region, setRegion] = useState(0);
+
+  function selectCountry (val) {
+    setCountry(val);
+  }
+ 
+  function selectRegion (val) {
+    setRegion(val);
+  }
+
   return (
     <Container>
     <Jumbotron>
@@ -36,14 +50,22 @@ function BasicInformation() {
   </Form.Group>
 
   <Form.Row>
-    <Form.Group as={Col} controlId="city">
-      <Form.Label>City</Form.Label>
-      <Form.Control />
+    <Form.Group as={Col} controlId="region">
+      <Form.Label>Region</Form.Label>
+      <div></div>
+      <RegionDropdown 
+      className={styles.custom}
+          country={country}
+          value={region}
+          onChange={(val) => selectRegion(val)} />
     </Form.Group>
     
     <Form.Group as={Col} controlId="country">
       <Form.Label>Country</Form.Label>
-      <Form.Control />
+      <CountryDropdown 
+      className={styles.custom}
+          value={country}
+          onChange={(val) => selectCountry(val)} />
     </Form.Group>
 
   </Form.Row>
