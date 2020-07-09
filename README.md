@@ -1,3 +1,9 @@
+# Responsibilities
+**Luan Nguyen:** Create the layout structure, Experience Page, Languages Page  
+**Hung Phung:** Registration Page, Login Page, Project List Page  
+**Michael Anetor:** Contact Me Page, Basic Information Page, Cover Letter Page  
+**Roman Mbwasi:** Resume List (Home) Page, Profile Page, Job Objective Page, Education Page   
+
 # Front-End
 
 Front-End uses React
@@ -42,10 +48,4 @@ npm install
 npm start
 ```
 
-# Responsibilities
-```python
-Luan Nguyen: create the layout structure, Experience page, Languages page
-Hung Phung: Registration Page, Login Page, Project List Page
-Michael: Contact Me, Resume Basic Information, Cover Letter
-Roman: Resume List, Profile + Job Objective, Education
-```
+
