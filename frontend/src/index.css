@@ -33,8 +33,13 @@ main {
 
 }
 
+.sidebar li {
+  border-bottom: 1px solid #626f84;
+}
+
 .sidebar li i {
   font-size: 20px;
+  margin-right: 5px;
 }
 
 .sidebar li a {
@@ -74,7 +79,7 @@ main {
   color: #999;
 }
 
-.sidebar .nav-link.active {
+.sidebar .nav-link.active i {
   color: #eb525d;
 }
 

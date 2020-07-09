@@ -104,7 +104,7 @@ function Experience() {
           </Table>
         </Card.Body>
         <Card.Footer>
-          <div class='float-left'>Showing 1 to 10 of 100 entries</div>
+          <div className='float-left'>Showing 1 to 10 of 100 entries</div>
           <Pagination size='sm' className='float-right'>{items}</Pagination>
         </Card.Footer>
       </Card>
