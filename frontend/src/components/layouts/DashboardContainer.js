@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, NavLink } from 'react-router-dom';
 import { Row } from 'react-bootstrap';
-import Home from '../pages/Home';
+import Home from '../pages/Home/Home';
 import Profile from '../pages/Profile/Profile';
 import BasicInformation from '../pages/BasicInformation';
 import JobObjective from '../pages/JobObjective/JobObjective';
@@ -15,6 +15,7 @@ import CoverLetters from '../pages/CoverLetters';
 import AddCoverLetter from '../pages/AddCoverLetter';
 import ContactMe from '../pages/ContactMe';
 import Header from './Header';
+import CreateResume from '../pages/Home/ResumeCreate';
 import { Container } from 'react-bootstrap';
 import {
   FaHouseDamage, FaInfo, FaUser, FaBullseye, FaUniversity, FaBuilding, FaTools,
@@ -81,6 +82,7 @@ function DashboardContainer() {
             <Route path='/cover-letter' exact component={CoverLetters} />
             <Route path='/cover-letter/add' exact component={AddCoverLetter} />
             <Route path='/contact-me' exact component={ContactMe} />
+            <Route path='/resume/create' exact component={CreateResume} />
           </main>
         </Row>
       </Container>
