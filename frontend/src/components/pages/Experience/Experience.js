@@ -1,6 +1,6 @@
 import React from 'react';
 import Breadcrumbs from '../../layouts/Breadcrumbs';
-import { Table, ButtonGroup, Button, Pagination, Card, Form, Col } from 'react-bootstrap';
+import { Table, Button, Pagination, Card, Form, Col } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { FaPenSquare, FaTrash } from 'react-icons/fa';
 
@@ -17,18 +17,6 @@ const breadcrumbLinks = [
 ];
 
 function Experience() {
-
-  let active = 2;
-  let items = [];
-
-  for (let number = 1; number <= 5; number++) {
-    items.push(
-      <Pagination.Item key={number} active={number === active}>
-        {number}
-      </Pagination.Item>,
-    );
-  }
-
   return (
     <div>
       <Breadcrumbs links={breadcrumbLinks} />
@@ -44,13 +32,13 @@ function Experience() {
                 <Form.Label for="inlineFormInput" srOnly>Title</Form.Label>
                 <Form.Control
                   size="sm"
-                  className="mb-2"
+                  className="mb-4"
                   id="inlineFormInput"
                   placeholder="Title"
                 />
               </Col>
               <Col xs="auto">
-                <Button size="sm" type="submit" className="mb-2">Search</Button>
+                <Button size="sm" type="submit" className="mb-4" variant='info'>Search</Button>
               </Col>
             </Form.Row>
           </Form>
@@ -74,7 +62,7 @@ function Experience() {
                 <td>@mdo</td>
                 <td>@mdo</td>
                 <td className='text-center'>
-                  <NavLink exact to='/experience/edit' className='mr-1'><FaPenSquare className='text-warning' /></NavLink>
+                  <NavLink exact to='/experience/edit' className='mr-3'><FaPenSquare className='text-warning' /></NavLink>
                   <NavLink exact to='/experience/delete'><FaTrash className='text-danger' /></NavLink>
                 </td>
               </tr>
@@ -85,7 +73,7 @@ function Experience() {
                 <td>@mdo</td>
                 <td>@mdo</td>
                 <td className='text-center'>
-                  <NavLink exact to='/experience/edit' className='mr-1'><FaPenSquare className='text-warning' /></NavLink>
+                  <NavLink exact to='/experience/edit' className='mr-3'><FaPenSquare className='text-warning' /></NavLink>
                   <NavLink exact to='/experience/delete'><FaTrash className='text-danger' /></NavLink>
                 </td>
               </tr>
@@ -96,7 +84,7 @@ function Experience() {
                 <td>@mdo</td>
                 <td>@mdo</td>
                 <td className='text-center'>
-                  <NavLink exact to='/experience/edit' className='mr-1'><FaPenSquare className='text-warning' /></NavLink>
+                  <NavLink exact to='/experience/edit' className='mr-3'><FaPenSquare className='text-warning' /></NavLink>
                   <NavLink exact to='/experience/delete'><FaTrash className='text-danger' /></NavLink>
                 </td>
               </tr>
@@ -104,8 +92,12 @@ function Experience() {
           </Table>
         </Card.Body>
         <Card.Footer>
-          <div className='float-left'>Showing 1 to 10 of 100 entries</div>
-          <Pagination size='sm' className='float-right'>{items}</Pagination>
+          <div className='float-left mt-1 mb-1'>Showing 1 to 10 of 100 entries</div>
+          <Pagination size='sm' className='float-right pagination-danger'>
+            <Pagination.Item key='1' active='true'>1</Pagination.Item>
+            <Pagination.Item key='2'>2</Pagination.Item>
+            <Pagination.Item key='3'>3</Pagination.Item>
+          </Pagination>
         </Card.Footer>
       </Card>
     </div>

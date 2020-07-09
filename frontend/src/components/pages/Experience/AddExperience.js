@@ -1,6 +1,6 @@
 import React from 'react';
 import Breadcrumbs from '../../layouts/Breadcrumbs';
-import { Button, Card, Form} from 'react-bootstrap';
+import { Button, Card, Form, Col} from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
 const breadcrumbLinks = [
@@ -31,27 +31,51 @@ function AddExperience() {
           
         </Card.Header>
         <Card.Body>
-          
           <Form>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" />
-              <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-    </Form.Text>
+            <Form.Group>
+              <Form.Label>Title</Form.Label>
+              <Form.Control size='sm' type="text" placeholder="Enter title" />
             </Form.Group>
-
-            <Form.Group controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
+            <Form.Group>
+              <Form.Label>Employment Type</Form.Label>
+              <Form.Control size='sm' as="select">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+              </Form.Control>
             </Form.Group>
-            <Form.Group controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Check me out" />
+            <Form.Group>
+              <Form.Label>Company Name</Form.Label>
+              <Form.Control size='sm' type="text" placeholder="Enter company name" />
             </Form.Group>
-            <Button variant="primary" type="submit">Submit</Button>
-            <NavLink exact to='/experience' className='btn btn-outline-secondary float-right'>Back to Experiences</NavLink>
+            <Form.Group>
+              <Form.Row>
+                <Col>
+                  <Form.Label>Location</Form.Label>
+                  <Form.Control size='sm' type="text" placeholder="Enter location" />
+                </Col>
+                <Col>
+                  <Form.Label>Start Date</Form.Label>
+                  <Form.Control size='sm' placeholder="Start Date" />
+                </Col>
+                <Col>
+                  <Form.Label>End Date</Form.Label>
+                  <Form.Control size='sm' placeholder="End Date" />
+                </Col>
+              </Form.Row>
+            </Form.Group>
+            <Form.Group controlId="exampleForm.ControlTextarea1">
+              <Form.Label>Description</Form.Label>
+              <Form.Control size='sm' as="textarea" rows="3" />
+            </Form.Group>
           </Form>
         </Card.Body>
+        <Card.Footer>
+          <Button size='sm' variant="success" type="submit" className='float-right'>Save</Button>
+          <NavLink exact to='/experience' className='btn btn-outline-secondary btn-sm float-left'>Back to Experiences</NavLink>
+        </Card.Footer>
       </Card>
     </div>
   );
