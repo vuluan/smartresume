@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Form, Container, Jumbotron, Accordion, Card, Button, Col} from 'react-bootstrap';
+import Breadcrumbs from '../layouts/Breadcrumbs';
+import { Form, Container, Pagination, Jumbotron, Accordion, Card, Button, Col} from 'react-bootstrap';
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
-import styles from  '../styles/BasicInformation.module.css';
+
 
 function BasicInformation() {
 
@@ -16,8 +17,36 @@ function BasicInformation() {
     setRegion(val);
   }
 
+  const breadcrumbLinks = [
+    {
+      label: 'Home',
+      path: '/'
+    },
+    {
+      label: 'Basic Information',
+      path: '/basic-information',
+      active: true
+    }
+  ];
+  
+  let active = 2;
+  let items = [];
+  for (let number = 1; number <= 5; number++) {
+    items.push(
+      <Pagination.Item key={number} active={number === active}>
+        {number}
+      </Pagination.Item>,
+    );
+  }
+
   return (
     <Container>
+    <div>
+      <Breadcrumbs links={breadcrumbLinks} />
+      <Card
+        bg='light'
+        text='dark'
+      ></Card>
     <Jumbotron>
     <Form className="mt-4 mb-4">
   <Form.Row>
@@ -50,25 +79,23 @@ function BasicInformation() {
   </Form.Group>
 
   <Form.Row>
-    <Form.Group as={Col} controlId="country">
-      <Form.Label>Country</Form.Label>
-      <CountryDropdown 
-      className={styles.custom}
-          value={country}
-          onChange={(val) => selectCountry(val)} />
-    </Form.Group>
-    
-    <Form.Group as={Col} controlId="region">
-      <Form.Label>Region</Form.Label>
-      <div></div>
-      <RegionDropdown 
-      className={styles.custom}
-          country={country}
-          value={region}
-          onChange={(val) => selectRegion(val)} />
-    </Form.Group>    
+            <Form.Group as={Col} controlId="country">
+              <Form.Label>Country</Form.Label>
+              <CountryDropdown
+                className='form-control'
+                value={country}
+                onChange={(val) => selectCountry(val)} />
+            </Form.Group>
 
-  </Form.Row>
+            <Form.Group as={Col} controlId="region">
+              <Form.Label>Region</Form.Label>
+              <RegionDropdown
+                className='form-control'
+                country={country}
+                value={region}
+                onChange={(val) => selectRegion(val)} />
+            </Form.Group>
+          </Form.Row>
   
   <Form.Row>
     <Form.Group as={Col} controlId="gitHub">
@@ -87,6 +114,7 @@ function BasicInformation() {
   </Button>
 </Form>
     </Jumbotron>
+</div>
 </Container>
   );
 }
