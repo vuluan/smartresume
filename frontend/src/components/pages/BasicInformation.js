@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Breadcrumbs from '../layouts/Breadcrumbs';
 import { Form, Container, Pagination, Jumbotron, Accordion, Card, Button, Col} from 'react-bootstrap';
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
-import styles from  '../../App.css';
+
 
 function BasicInformation() {
 
@@ -79,25 +79,23 @@ function BasicInformation() {
   </Form.Group>
 
   <Form.Row>
-    <Form.Group as={Col} controlId="country">
-      <Form.Label>Country</Form.Label>
-      <CountryDropdown 
-      className={styles.custom}
-          value={country}
-          onChange={(val) => selectCountry(val)} />
-    </Form.Group>
-    
-    <Form.Group as={Col} controlId="region">
-      <Form.Label>Region</Form.Label>
-      <div></div>
-      <RegionDropdown 
-      className={styles.custom}
-          country={country}
-          value={region}
-          onChange={(val) => selectRegion(val)} />
-    </Form.Group>    
+            <Form.Group as={Col} controlId="country">
+              <Form.Label>Country</Form.Label>
+              <CountryDropdown
+                className='form-control'
+                value={country}
+                onChange={(val) => selectCountry(val)} />
+            </Form.Group>
 
-  </Form.Row>
+            <Form.Group as={Col} controlId="region">
+              <Form.Label>Region</Form.Label>
+              <RegionDropdown
+                className='form-control'
+                country={country}
+                value={region}
+                onChange={(val) => selectRegion(val)} />
+            </Form.Group>
+          </Form.Row>
   
   <Form.Row>
     <Form.Group as={Col} controlId="gitHub">
