@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Form, Container, Jumbotron, Accordion, Card, Button, Col} from 'react-bootstrap';
+import Breadcrumbs from '../layouts/Breadcrumbs';
+import { Form, Container, Pagination, Jumbotron, Accordion, Card, Button, Col} from 'react-bootstrap';
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
-import styles from  '../styles/BasicInformation.module.css';
+import styles from  '../../App.css';
 
 function BasicInformation() {
 
@@ -16,8 +17,36 @@ function BasicInformation() {
     setRegion(val);
   }
 
+  const breadcrumbLinks = [
+    {
+      label: 'Home',
+      path: '/'
+    },
+    {
+      label: 'Basic Information',
+      path: '/basic-information',
+      active: true
+    }
+  ];
+  
+  let active = 2;
+  let items = [];
+  for (let number = 1; number <= 5; number++) {
+    items.push(
+      <Pagination.Item key={number} active={number === active}>
+        {number}
+      </Pagination.Item>,
+    );
+  }
+
   return (
     <Container>
+    <div>
+      <Breadcrumbs links={breadcrumbLinks} />
+      <Card
+        bg='light'
+        text='dark'
+      ></Card>
     <Jumbotron>
     <Form className="mt-4 mb-4">
   <Form.Row>
@@ -87,6 +116,7 @@ function BasicInformation() {
   </Button>
 </Form>
     </Jumbotron>
+</div>
 </Container>
   );
 }

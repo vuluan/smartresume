@@ -43,3 +43,21 @@
   padding: .75rem 0;
 }
 /* Experiences */
+
+/* Basic Information country and region dropdown*/
+.custom {
+  position: relative;
+  font-family: Arial;
+  height: 35px;
+  width:100%;
+  color: #495057;
+  font-family: inherit;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.custom:focus {
+  outline: none !important;
+  border:1px solid rgb(149, 197, 241);
+  box-shadow: 0 0 5px rgb(84, 167, 245);
+}
