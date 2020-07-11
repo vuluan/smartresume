@@ -1,8 +1,9 @@
 import express from 'express';
-const cors = require('cors');
+import cors from 'cors';
+import authRoutes from './routes/authRoutes';
+import 'dotenv/config';
 
 const connectDB = require('./dbConnection');
-require('dotenv').config();
 
 const app = express();
 
@@ -32,9 +33,13 @@ app.all('*', (req, res, err, next) => {
     next();
 });
 
+// Register resource folder
 app.use('/images', express.static(__dirname + '/images'));
 
 connectDB();
+
+// Register api Routing
+authRoutes(app);
 
 app.listen(process.env.PORT, () => {
     console.log('Server started...');
