@@ -9,7 +9,7 @@ import Education from '../pages/Education/Education';
 import Experience from '../pages/Experience/Experience';
 import AddExperience from '../pages/Experience/AddExperience';
 import Skill from '../pages/Skill';
-import Language from '../pages/Language';
+import Language from '../pages/Language/Language';
 import Award from '../pages/Award';
 import CoverLetters from '../pages/CoverLetters';
 import AddCoverLetter from '../pages/AddCoverLetter';
