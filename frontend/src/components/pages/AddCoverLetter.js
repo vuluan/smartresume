@@ -7,10 +7,10 @@ function CoverLetter() {
     <Jumbotron>
     <Form className="mt-4 mb-4">
   <Form.Group controlId="title">
-    <Form.Control type="text" placeholder="Title" />
+    <Form.Control type="text" placeholder="Title" required />
   </Form.Group>
   <Form.Group controlId="letter">
-    <Form.Control as="textarea" rows="6" placeholder="Body.." />
+    <Form.Control as="textarea" rows="6" placeholder="Body.." required />
   </Form.Group>
   <Button variant="primary" type="submit">
     Save

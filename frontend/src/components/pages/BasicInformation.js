@@ -52,30 +52,30 @@ function BasicInformation() {
   <Form.Row>
     <Form.Group as={Col} controlId="firstName">
       <Form.Label>First Name</Form.Label>
-      <Form.Control type="text" placeholder="Enter First Name" />
+      <Form.Control type="text" placeholder="Enter First Name" required />
     </Form.Group>
 
     <Form.Group as={Col} controlId="lastName">
       <Form.Label>Last Name</Form.Label>
-      <Form.Control type="text" placeholder="Enter Last Name" />
+      <Form.Control type="text" placeholder="Enter Last Name" required />
     </Form.Group>
   </Form.Row>
   
   <Form.Row>
     <Form.Group as={Col} controlId="email">
       <Form.Label>Email</Form.Label>
-      <Form.Control type="email" placeholder="Enter email" />
+      <Form.Control type="email" placeholder="Enter email" required />
     </Form.Group>
 
     <Form.Group as={Col} controlId="phone">
       <Form.Label>Phone</Form.Label>
-      <Form.Control type="tel" placeholder="Phone Number" />
+      <Form.Control type="tel" placeholder="Phone Number" required />
     </Form.Group>
   </Form.Row>
 
   <Form.Group controlId="address">
     <Form.Label>Address</Form.Label>
-    <Form.Control placeholder="1234 Main St E" />
+    <Form.Control placeholder="1234 Main St E" required />
   </Form.Group>
 
   <Form.Row>
@@ -84,7 +84,8 @@ function BasicInformation() {
               <CountryDropdown
                 className='form-control'
                 value={country}
-                onChange={(val) => selectCountry(val)} />
+                onChange={(val) => selectCountry(val)} 
+                required />
             </Form.Group>
 
             <Form.Group as={Col} controlId="region">
@@ -93,7 +94,8 @@ function BasicInformation() {
                 className='form-control'
                 country={country}
                 value={region}
-                onChange={(val) => selectRegion(val)} />
+                onChange={(val) => selectRegion(val)} 
+                required />
             </Form.Group>
           </Form.Row>
   
