@@ -16,7 +16,11 @@ export const register = async (req, res) => {
         return await res.status(200).send(new HttpResponseResult(true, "", createdUser));
 
     } catch (err) {
+        if (err.isBusinessException) {
+            return await res.send(new HttpResponseResult(false, err.message, null));
+        }
         logger.error(err);
+        console.log(err);
         return await res.status(err.code | 400).send(new HttpResponseResult(false, err, null));
     }
 };
@@ -28,7 +32,7 @@ export const login = async (req, res) => {
         let email = data.username;
         let password = data.password;
 
-        let userInfo = await userServices.login(username, password);
+        let userInfo = await userServices.login(email, password);
 
         return await res.send(new HttpResponseResult(true, "", userInfo));
 
@@ -38,6 +42,7 @@ export const login = async (req, res) => {
         }
 
         logger.error(err);
+        console.log(err);
         return await res.send(new HttpResponseResult(false, err, null));
     }
 }
