@@ -29,7 +29,7 @@ export const login = async (req, res) => {
     try {
         let data = req.body;
 
-        let email = data.username;
+        let email = data.email;
         let password = data.password;
 
         let userInfo = await userServices.login(email, password);
@@ -47,7 +47,8 @@ export const login = async (req, res) => {
     }
 }
 
-export const loginRequired = (req, res, next) => {
+export const authRequired = (req, res, next) => {
+    console.log('Auth is invokved');
     if (req.userInfo)
         next();
     else {

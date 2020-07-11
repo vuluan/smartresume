@@ -1,7 +1,7 @@
 import { UserEntity } from '../entities/UserEntity';
 
 
-export const login = async (username, password) => {
+export const login = async (email, password) => {
     try {
 
         let logginUser = await UserEntity.findOne({
