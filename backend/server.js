@@ -1,6 +1,9 @@
 import express from 'express';
 import cors from 'cors';
 import authRoutes from './routes/authRoutes';
+import profileRoutes from './routes/profileRoutes';
+import { logger } from './shared/utils/loggerUtilities';
+import * as jwtUtilities from './shared/utils/jsonWebTokenUtilities';
 import 'dotenv/config';
 
 const connectDB = require('./dbConnection');
@@ -14,7 +17,14 @@ app.use(express.static('public'));
 
 app.use(cors({ origin: true }));
 
+connectDB();
+
+// Register resource folder
+app.use('/images', express.static(__dirname + '/images'));
+
+// Middleware to register CORS
 app.all('*', (req, res, err, next) => {
+    console.log('CORS invoked');
     if (err) {
         logger.error(req, err);
     } else {
@@ -33,13 +43,39 @@ app.all('*', (req, res, err, next) => {
     next();
 });
 
-// Register resource folder
-app.use('/images', express.static(__dirname + '/images'));
+// Middleware to register JWT Authentication
+app.use(async (req, res, next) => {
+    try {
+        if (
+            req.headers &&
+            req.headers.authorization &&
+            req.headers.authorization.split(' ')[0] === 'Bearer'
+        ) {
+            let authorization = req.headers.authorization;
+            let accessToken = authorization.split(' ')[1];
 
-connectDB();
+            let userData = await jwtUtilities.verifyToken(accessToken);
+
+            console.log(userData);
+
+            req.userInfo = userData;
+            next();
+        } else {
+            req.userInfo = undefined;
+            next();
+        }
+    } catch (err) {
+        logger.error(err);
+        console.log(err);
+        req.userInfo = undefined;
+        next();
+    }
+});
+
 
 // Register api Routing
 authRoutes(app);
+profileRoutes(app);
 
 app.listen(process.env.PORT, () => {
     console.log('Server started...');
