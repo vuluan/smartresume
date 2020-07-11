@@ -135,3 +135,7 @@ main {
   color: #000;
   text-decoration: underline;
 }
+
+.react-datepicker-wrapper {
+  display: block;
+}
