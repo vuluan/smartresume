@@ -1,10 +1,9 @@
 import winston from 'winston';
-import config from '../../../config.json';
-
+import 'dotenv/config';
 
 
 const transport = new winston.transports.File({
-    filename: config.logger.errorLog,
+    filename: process.env.LOG_PATH,
     level: 'error',
     handleExceptions: true
 });
