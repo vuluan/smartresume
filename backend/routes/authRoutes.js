@@ -4,7 +4,7 @@ import {
 } from '../controllers/userControllers';
 
 const routes = (app) => {
-    app.route('/auth/register')
+    app.route('/api/auth/register')
         .post((req, res, next) => {
             // middleware
             console.log(`Request from: ${req.originalUrl}`)
@@ -12,7 +12,7 @@ const routes = (app) => {
             next();
         }, register);
 
-    app.route('/auth/login')
+    app.route('/api/auth/login')
         .post((req, res, next) => {
             // middleware
             console.log(`Request from: ${req.originalUrl}`)

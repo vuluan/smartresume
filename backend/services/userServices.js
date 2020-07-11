@@ -4,16 +4,23 @@ import * as jwtUtilities from '../shared/utils/jsonWebTokenUtilities';
 import CustomException from '../shared/models/CustomException';
 import * as errorMessage from '../shared/constants/messages';
 import AuthenticatedUser from '../dto/AuthenticatedUser';
+import { isNullOrUndefined } from '../shared/utils/generalUtilities';
 
-export const register = async (user) => {
+export const register = async (userDto) => {
     try {
-        if (user.password !== user.confirmedPassword) {
+        if (userDto.password !== userDto.confirmedPassword) {
             throw new CustomException(true, errorMessage.PASSWORD_CONFIRMEDPASSWORD_MISMATCHED);
         }
 
-        user.password = encryptUtilities.encrypt(user.password);
+        const existingUser = await userRepositories.findUserByEmail(userDto.email);
 
-        return await userRepositories.register(user);
+        if (!isNullOrUndefined(existingUser)) {
+            throw new CustomException(true, errorMessage.USER_WITH_EMAIL_EXISTED);
+        }
+
+        userDto.password = encryptUtilities.encrypt(userDto.password);
+
+        return await userRepositories.register(userDto);
     } catch (err) {
         throw err;
     }

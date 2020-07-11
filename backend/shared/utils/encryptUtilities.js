@@ -1,9 +1,9 @@
 import bcrypt from 'bcrypt'
 
-export const encrypt = (value) => {
-    return bcrypt.hashSync(value, 10);
+export const encrypt = (plaintextValue) => {
+    return bcrypt.hashSync(plaintextValue, 10);
 }
 
-export const compare = (value, hashedValue) => {
-    return bcrypt.compareSync(value, hashedValue);
+export const compare = (plaintextValue, hashedValue) => {
+    return bcrypt.compareSync(plaintextValue, hashedValue);
 }

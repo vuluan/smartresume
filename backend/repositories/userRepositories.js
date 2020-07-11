@@ -28,5 +28,16 @@ export const register = async (user) => {
     } catch (err) {
         throw err;
     }
+}
 
+export const findUserByEmail = async (email) => {
+    try {
+        let user = await UserEntity.findOne({
+            email: email
+        });
+
+        return await user;
+    } catch (err) {
+        throw err;
+    }
 }
