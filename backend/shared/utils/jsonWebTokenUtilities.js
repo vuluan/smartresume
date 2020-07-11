@@ -1,18 +1,17 @@
 import jwt from 'jsonwebtoken';
-import config from '../../../config.json';
 import { INVALID_ACCESS_TOKEN } from '../constants/messages';
+import 'dotenv/config';
 
 
-export const createToken = async (username, userId, role) => {
+export const createToken = async (email, userId) => {
 
     try {
         var user = {
-            "username": username,
-            "displayName": displayName,
+            "email": email,
             "_id": userId
         }
 
-        return await jwt.sign({ user: user }, config.jwt.secretKey);
+        return await jwt.sign({ user: user }, process.env.JWT_SECRETKEY);
     } catch (err) {
         throw err;
     }
@@ -20,7 +19,7 @@ export const createToken = async (username, userId, role) => {
 
 export const verifyToken = async (token) => {
     try {
-        let data = await jwt.verify(token, config.jwt.secretKey);
+        let data = await jwt.verify(token, process.env.JWT_SECRETKEY);
         return await data;
     }
     catch (err) {
