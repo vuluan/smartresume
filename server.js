@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import authRoutes from './routes/authRoutes';
 import profileRoutes from './routes/profileRoutes';
+import languageRoutes from './routes/languageRoutes';
 import { logger } from './shared/utils/loggerUtilities';
 import * as jwtUtilities from './shared/utils/jsonWebTokenUtilities';
 import 'dotenv/config';
@@ -76,6 +77,7 @@ app.use(async (req, res, next) => {
 // Register api Routing
 authRoutes(app);
 profileRoutes(app);
+languageRoutes(app);
 
 app.listen(process.env.PORT, () => {
     console.log('Server started...');
