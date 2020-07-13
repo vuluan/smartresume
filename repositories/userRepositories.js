@@ -8,7 +8,7 @@ export const login = async (email, password) => {
             email: email
         });
 
-        return await logginUser;
+        return logginUser;
     } catch (err) {
         throw err;
     }
@@ -24,7 +24,7 @@ export const register = async (user) => {
 
         createdUser.password = undefined;
 
-        return await createdUser;
+        return createdUser;
     } catch (err) {
         throw err;
     }
@@ -36,7 +36,7 @@ export const findUserByEmail = async (email) => {
             email: email
         });
 
-        return await user;
+        return user;
     } catch (err) {
         throw err;
     }
