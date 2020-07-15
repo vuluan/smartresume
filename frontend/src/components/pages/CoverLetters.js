@@ -36,21 +36,6 @@ function CoverLetters() {
         text='dark'
       >
         <Card.Header>
-          <Form className='float-left'>
-            <Form.Row className="align-items-center">
-              <Col xs="auto">
-                <Form.Label for="inlineFormInput" srOnly>Title</Form.Label>
-                <Form.Control
-                  className="mb-2"
-                  id="inlineFormInput"
-                  placeholder="Title"
-                />
-              </Col>
-              <Col xs="auto">
-                <Button type="submit" className="mb-2">Search</Button>
-              </Col>
-            </Form.Row>
-          </Form>
           <NavLink exact to='/cover-letter/add' className='btn btn-outline-danger float-right'>New Cover Letter</NavLink>
         </Card.Header>
         <Card.Body>
