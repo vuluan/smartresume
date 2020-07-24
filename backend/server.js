@@ -3,6 +3,8 @@ import cors from 'cors';
 import authRoutes from './routes/authRoutes';
 import profileRoutes from './routes/profileRoutes';
 import languageRoutes from './routes/languageRoutes';
+import coverLetterRoutes from './routes/coverLetterRoutes';
+import basicInfoRoutes from './routes/basicInfoRoutes';
 import { logger } from './shared/utils/loggerUtilities';
 import * as jwtUtilities from './shared/utils/jsonWebTokenUtilities';
 import 'dotenv/config';
@@ -78,6 +80,8 @@ app.use(async (req, res, next) => {
 authRoutes(app);
 profileRoutes(app);
 languageRoutes(app);
+coverLetterRoutes(app);
+basicInfoRoutes(app);
 
 app.listen(process.env.PORT, () => {
     console.log('Server started...');
