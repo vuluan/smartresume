@@ -2,19 +2,100 @@ import React, { useState } from 'react';
 import Breadcrumbs from '../layouts/Breadcrumbs';
 import { Form, Container, Pagination, Jumbotron, Accordion, Card, Button, Col} from 'react-bootstrap';
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
+import axios from 'axios';
 
 
 function BasicInformation() {
 
-  const [country, setCountry] = useState(0);
-  const [region, setRegion] = useState(0);
+
+  const [formData, setFormData] = useState({
+    firstName : '',
+lastName : '',
+email : '',
+phone : '',
+address : '',
+country : '',
+region : '',
+gitHub : '',
+linkedin : '',
+  });
+
+  const { firstName,
+    lastName,
+    email,
+    phone,
+    address,
+    country,
+    region,
+    gitHub,
+    linkedin, } = formData;
+
+    const onLoad = async (e) => {
+      /* try {
+        const response = await axios.get(
+          'http://localhost:5000/api/basicinfo',
+          data,
+          config
+        );
+  
+        console.log('Basic Info Updated');
+      } catch (e) {
+        console.log(e.response.data.errors);
+      }
+      setFormData({ ...formData, [e.target.name]: e.target.value }); */
+    }
+
+  const onChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+
+    // let token = localStorage.getItem('token');
+    // let config = {
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'x-auth-token': token,
+    //   },
+    // };
+
+    /* let data = {
+      firstName,
+lastName,
+email,
+phone,
+address,
+country,
+region,
+gitHub,
+linkedin,
+    };
+    try {
+      const response = await axios.post(
+        'http://localhost:5000/api/basicinfo',
+        data,
+        config
+      );
+
+      console.log('Basic Info Updated');
+    } catch (e) {
+      console.log(e.response.data.errors);
+    } */
+  };
+
+
+
+
+
+  // const [country, setCountry] = useState(0);
+  // const [region, setRegion] = useState(0);
 
   function selectCountry (val) {
-    setCountry(val);
+    setFormData({ ...formData, country: val });
   }
  
   function selectRegion (val) {
-    setRegion(val);
+    setFormData({ ...formData, region: val });
   }
 
   const breadcrumbLinks = [
@@ -48,34 +129,49 @@ function BasicInformation() {
         text='dark'
       ></Card>
     <Jumbotron>
-    <Form className="mt-4 mb-4">
+    <Form className="mt-4 mb-4" onSubmit={(e) => onSubmit(e)}>
   <Form.Row>
     <Form.Group as={Col} controlId="firstName">
       <Form.Label>First Name</Form.Label>
-      <Form.Control type="text" placeholder="Enter First Name" required />
+      <Form.Control 
+                value={firstName}
+                onChange={(e) => onChange(e)} 
+                type="text" placeholder="Enter First Name" required />
     </Form.Group>
 
     <Form.Group as={Col} controlId="lastName">
       <Form.Label>Last Name</Form.Label>
-      <Form.Control type="text" placeholder="Enter Last Name" required />
+      <Form.Control 
+                value={lastName}
+                onChange={(e) => onChange(e)}
+                type="text" placeholder="Enter Last Name" required />
     </Form.Group>
   </Form.Row>
   
   <Form.Row>
     <Form.Group as={Col} controlId="email">
       <Form.Label>Email</Form.Label>
-      <Form.Control type="email" placeholder="Enter email" required />
+      <Form.Control 
+                value={email}
+                onChange={(e) => onChange(e)}
+                type="email" placeholder="Enter email" required />
     </Form.Group>
 
     <Form.Group as={Col} controlId="phone">
       <Form.Label>Phone</Form.Label>
-      <Form.Control type="tel" placeholder="Phone Number" required />
+      <Form.Control 
+                value={phone}
+                onChange={(e) => onChange(e)} 
+                type="tel" placeholder="Phone Number" required />
     </Form.Group>
   </Form.Row>
 
   <Form.Group controlId="address">
     <Form.Label>Address</Form.Label>
-    <Form.Control placeholder="1234 Main St E" required />
+    <Form.Control 
+                value={address}
+                onChange={(e) => onChange(e)} 
+                placeholder="1234 Main St E" required />
   </Form.Group>
 
   <Form.Row>
@@ -83,7 +179,7 @@ function BasicInformation() {
               <Form.Label>Country</Form.Label>
               <CountryDropdown
                 className='form-control'
-                value={country}
+                value={country} 
                 onChange={(val) => selectCountry(val)} 
                 required />
             </Form.Group>
@@ -102,12 +198,18 @@ function BasicInformation() {
   <Form.Row>
     <Form.Group as={Col} controlId="gitHub">
       <Form.Label>GitHub Link</Form.Label>
-      <Form.Control type="text" placeholder="Type github link.." />
+      <Form.Control 
+                value={gitHub}
+                onChange={(e) => onChange(e)} 
+                type="text" placeholder="Type github link.." />
     </Form.Group>
 
     <Form.Group as={Col} controlId="linkedin">
       <Form.Label>LinkedIn</Form.Label>
-      <Form.Control type="text" placeholder="Type linkedin link" />
+      <Form.Control 
+                value={linkedin}
+                onChange={(e) => onChange(e)} 
+                type="text" placeholder="Type linkedin link" />
     </Form.Group>
   </Form.Row>
   

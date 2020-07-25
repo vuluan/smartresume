@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Breadcrumbs from '../layouts/Breadcrumbs';
 import { Button, Pagination, Card, Form, Col} from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import CoverLetter from './CoverLetter.js';
+import axios from 'axios';
 
 const breadcrumbLinks = [
   {
@@ -42,6 +43,11 @@ function CoverLetters() {
           <Card.Title>Cover Letters</Card.Title>
           <CoverLetter/>
           <CoverLetter/>
+          {/* {data.map(
+    (cl)=>(
+      <CoverLetter data ={cl}/>
+    )
+  )} */}
           <div class='float-left'>Showing 1 to 10 of 100 entries</div>
           <Pagination className='float-right'>{items}</Pagination>
         </Card.Body>
