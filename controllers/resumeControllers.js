@@ -126,7 +126,7 @@ export const add = async (req, res) => {
 };
     export const findByUserId = async (req, res) => {
         try {
-            let resume = await resumeervices.findByUserId(req.params.id);
+            let resume = await resumeServices.findByUserId(req.params.id);
     
             return await res.status(200).send(new HttpResponseResult(true, "", resume));
     

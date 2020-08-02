@@ -32,7 +32,7 @@ export const deleteById = async (id) => {
 export const updateById = async (id, objectiveDTO) => {
     try {
         let updateObjective = await ObjectiveEntity.findById(id);
-newObjective.objective = objectiveDTO.objective; 
+updateObjective.objective = objectiveDTO.objective; 
              return await updateObjective.save();
 } catch (err) {
     throw err;

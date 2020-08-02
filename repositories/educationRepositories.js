@@ -36,11 +36,11 @@ export const deleteById = async (id) => {
 export const updateById = async (id, educationDTO) => {
     try {
         let updateEducation = await EducationEntity.findById(id);
-newEducation.school = educationDTO.school; 
-            newEducation.degree = educationDTO.degree; 
-            newEducation.field = educationDTO.field; 
-            newEducation.start = educationDTO.start; 
-            newEducation.finish = educationDTO.finish; 
+updateEducation.school = educationDTO.school; 
+            updateEducation.degree = educationDTO.degree; 
+            updateEducation.field = educationDTO.field; 
+            updateEducation.start = educationDTO.start; 
+            updateEducation.finish = educationDTO.finish; 
              return await updateEducation.save();
 } catch (err) {
     throw err;

@@ -1,14 +1,14 @@
-import { JobprofileEntity} from '../entities/JobprofileEntity';
+import { JobprofileEntity } from '../entities/JobprofileEntity';
 
 export const add = async (jobprofileDTO) => {
     try {
-        let newJobprofile = new JobprofileEntity();newJobprofile.user_id = jobprofileDTO.user_id; 
-        newJobprofile.profile = jobprofileDTO.profile; 
+        let newJobprofile = new JobprofileEntity(); newJobprofile.user_id = jobprofileDTO.user_id;
+        newJobprofile.profile = jobprofileDTO.profile;
         const createdJobprofile = await newJobprofile.save();
-    return createdJobprofile;
-} catch (err) {
-    throw err;
-}
+        return createdJobprofile;
+    } catch (err) {
+        throw err;
+    }
 }
 
 export const detail = async (id) => {
@@ -32,11 +32,11 @@ export const deleteById = async (id) => {
 export const updateById = async (id, jobprofileDTO) => {
     try {
         let updateJobprofile = await JobprofileEntity.findById(id);
-newJobprofile.profile = jobprofileDTO.profile; 
-             return await updateJobprofile.save();
-} catch (err) {
-    throw err;
-}
+        updateJobprofile.profile = jobprofileDTO.profile;
+        return await updateJobprofile.save();
+    } catch (err) {
+        throw err;
+    }
 }
 
 export const findByUserId = async (userId) => {
