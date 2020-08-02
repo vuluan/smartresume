@@ -10,4 +10,7 @@ const JobprofileSchema = new mongoose.Schema({
             type:String,
             required:true
         }, 
-})
+});
+
+export const JobprofileEntity = databaseUtilities.getEntity(mongoDBEntityNames.jobprofileCollection, JobprofileSchema);
+

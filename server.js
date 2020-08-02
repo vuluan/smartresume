@@ -5,6 +5,9 @@ import profileRoutes from './routes/profileRoutes';
 import languageRoutes from './routes/languageRoutes';
 import coverLetterRoutes from './routes/coverLetterRoutes';
 import basicInfoRoutes from './routes/basicInfoRoutes';
+
+import educationRoutes from './routes/educationRoutes';
+
 import { logger } from './shared/utils/loggerUtilities';
 import * as jwtUtilities from './shared/utils/jsonWebTokenUtilities';
 import 'dotenv/config';
@@ -83,6 +86,10 @@ languageRoutes(app);
 coverLetterRoutes(app);
 basicInfoRoutes(app);
 
-app.listen(process.env.PORT, () => {
-    console.log('Server started...');
+educationRoutes(app);
+
+
+const PORT = process.env.PORT || 5000
+app.listen(PORT, () => {
+    console.log(`Server listening on http://localhost:${PORT}`);
 });

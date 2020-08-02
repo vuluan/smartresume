@@ -13,4 +13,7 @@ const ResumeSchema = new mongoose.Schema({
             type:String,
             required:true
         }, 
-})
+});
+
+export const ResumeEntity = databaseUtilities.getEntity(mongoDBEntityNames.resumeCollection, ResumeSchema);
+

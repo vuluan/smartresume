@@ -10,4 +10,7 @@ const ObjectiveSchema = new mongoose.Schema({
             type:String,
             required:true
         }, 
-})
+});
+
+export const ObjectiveEntity = databaseUtilities.getEntity(mongoDBEntityNames.objectiveCollection, ObjectiveSchema);
+

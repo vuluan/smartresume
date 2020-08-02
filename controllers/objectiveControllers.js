@@ -35,7 +35,7 @@ export const add = async (req, res) => {
         }
 
         let data = req.body;
-        let objective = newObjectiveDTO(
+        let objective = new ObjectiveDTO(
           data.user_id,
               data.objective,
             
@@ -104,7 +104,7 @@ export const add = async (req, res) => {
             }
     
             let data = req.body;
-            let objective = newObjectiveDTO(
+            let objective = new ObjectiveDTO(
       data.user_id,
               data.objective,
             

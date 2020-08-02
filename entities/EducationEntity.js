@@ -22,4 +22,7 @@ const EducationSchema = new mongoose.Schema({
             type:String,
             required:true
         }, 
-})
+});
+
+export const EducationEntity = databaseUtilities.getEntity(mongoDBEntityNames.educationCollection, EducationSchema);
+
