@@ -1,14 +1,14 @@
-import { ObjectiveEntity} from '../entities/ObjectiveEntity';
+import { ObjectiveEntity } from '../entities/ObjectiveEntity';
 
 export const add = async (objectiveDTO) => {
     try {
-        let newObjective = new ObjectiveEntity();newObjective.user_id = objectiveDTO.user_id; 
-        newObjective.objective = objectiveDTO.objective; 
+        let newObjective = new ObjectiveEntity(); newObjective.user_id = objectiveDTO.user_id;
+        newObjective.objective = objectiveDTO.objective;
         const createdObjective = await newObjective.save();
-    return createdObjective;
-} catch (err) {
-    throw err;
-}
+        return createdObjective;
+    } catch (err) {
+        throw err;
+    }
 }
 
 export const detail = async (id) => {
@@ -32,11 +32,11 @@ export const deleteById = async (id) => {
 export const updateById = async (id, objectiveDTO) => {
     try {
         let updateObjective = await ObjectiveEntity.findById(id);
-updateObjective.objective = objectiveDTO.objective; 
-             return await updateObjective.save();
-} catch (err) {
-    throw err;
-}
+        updateObjective.objective = objectiveDTO.objective;
+        return await updateObjective.save();
+    } catch (err) {
+        throw err;
+    }
 }
 
 export const findByUserId = async (userId) => {

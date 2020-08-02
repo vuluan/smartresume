@@ -1,30 +1,27 @@
-
-    import * as resumeServices from '../services/resumeServices';
+import * as resumeServices from '../services/resumeServices';
 import { logger } from '../shared/utils/loggerUtilities';
-import {  ResumeDTO } from '../dto/ResumeDTO';
+import { ResumeDTO } from '../dto/ResumeDTO';
 import HttpResponseResult from '../shared/models/HttpResponseResult';
 import { check, validationResult } from 'express-validator';
-    
-
 
 export const validate = (method) => {
     switch (method) {
         case 'createResume': {
             return [
-  check('user_id', 'user_id is empty').not().isEmpty(),  check('title', 'title is empty').not().isEmpty(),  check('description', 'description is empty').not().isEmpty(), ]
-}
-case 'deleteResume': {
-    return [
-        check('id', 'id is empty').not().isEmpty(),
-    ]
-}
-case 'updateResume': {
-    return [
-        check('id', 'id is empty').not().isEmpty(),
-  check('user_id', 'user_id is empty').not().isEmpty(),  check('title', 'title is empty').not().isEmpty(),  check('description', 'description is empty').not().isEmpty(),
-]
-}
-}
+                check('user_id', 'user_id is empty').not().isEmpty(), check('title', 'title is empty').not().isEmpty(), check('description', 'description is empty').not().isEmpty(),]
+        }
+        case 'deleteResume': {
+            return [
+                check('id', 'id is empty').not().isEmpty(),
+            ]
+        }
+        case 'updateResume': {
+            return [
+                check('id', 'id is empty').not().isEmpty(),
+                check('user_id', 'user_id is empty').not().isEmpty(), check('title', 'title is empty').not().isEmpty(), check('description', 'description is empty').not().isEmpty(),
+            ]
+        }
+    }
 }
 
 export const add = async (req, res) => {
@@ -36,11 +33,11 @@ export const add = async (req, res) => {
 
         let data = req.body;
         let resume = new ResumeDTO(
-          data.user_id,
-              data.title,
-              data.description,
-            
-    );
+            data.user_id,
+            data.title,
+            data.description,
+
+        );
         let createdResume = await resumeServices.add(resume);
 
         return await res.status(200).send(new HttpResponseResult(true, "", createdResume));
@@ -54,8 +51,8 @@ export const add = async (req, res) => {
         return await res.status(err.code | 400).send(new HttpResponseResult(false, err, null));
     }
 };
-    
-    export const detail = async (req, res) => {
+
+export const detail = async (req, res) => {
     try {
         let resume = await resumeServices.detail(req.params.id);
 
@@ -75,42 +72,42 @@ export const add = async (req, res) => {
     }
 };
 
-    
-    export const deleteById = async (req, res) => {
-        try {
-            const errors = validationResult(req);
-            if (!errors.isEmpty()) {
-                return res.status(422).json({ errors: errors.array() });
-            }
-    
-            let resume = await resumeServices.deleteById(req.body.id);
-    
-            return await res.status(200).send(new HttpResponseResult(true, "", resume));
-    
-        } catch (err) {
-            if (err.isBusinessException) {
-                return await res.send(new HttpResponseResult(false, err.message, null));
-            }
-            logger.error(err);
-            console.log(err);
-            return await res.status(err.code | 400).send(new HttpResponseResult(false, err, null));
+
+export const deleteById = async (req, res) => {
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
         }
-    };
-    
-    export const updateById = async (req, res) => {
-        try {
-            const errors = validationResult(req);
-            if (!errors.isEmpty()) {
-                return res.status(422).json({ errors: errors.array() });
-            }
-    
-            let data = req.body;
-            let resume = new ResumeDTO(
-      data.user_id,
-              data.title,
-              data.description,
-            
-    );
+
+        let resume = await resumeServices.deleteById(req.body.id);
+
+        return await res.status(200).send(new HttpResponseResult(true, "", resume));
+
+    } catch (err) {
+        if (err.isBusinessException) {
+            return await res.send(new HttpResponseResult(false, err.message, null));
+        }
+        logger.error(err);
+        console.log(err);
+        return await res.status(err.code | 400).send(new HttpResponseResult(false, err, null));
+    }
+};
+
+export const updateById = async (req, res) => {
+    try {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+
+        let data = req.body;
+        let resume = new ResumeDTO(
+            data.user_id,
+            data.title,
+            data.description,
+
+        );
         let updatedResume = await resumeServices.updateById(data.id, resume);
 
         return await res.status(200).send(new HttpResponseResult(true, "", updatedResume));
@@ -124,18 +121,18 @@ export const add = async (req, res) => {
         return await res.status(err.code | 400).send(new HttpResponseResult(false, err, null));
     }
 };
-    export const findByUserId = async (req, res) => {
-        try {
-            let resume = await resumeServices.findByUserId(req.params.id);
-    
-            return await res.status(200).send(new HttpResponseResult(true, "", resume));
-    
-        } catch (err) {
-            if (err.isBusinessException) {
-                return await res.send(new HttpResponseResult(false, err.message, null));
-            }
-            logger.error(err);
-            console.log(err);
-            return await res.status(err.code | 400).send(new HttpResponseResult(false, err, null));
+export const findByUserId = async (req, res) => {
+    try {
+        let resume = await resumeServices.findByUserId(req.params.id);
+
+        return await res.status(200).send(new HttpResponseResult(true, "", resume));
+
+    } catch (err) {
+        if (err.isBusinessException) {
+            return await res.send(new HttpResponseResult(false, err.message, null));
         }
-    };
+        logger.error(err);
+        console.log(err);
+        return await res.status(err.code | 400).send(new HttpResponseResult(false, err, null));
+    }
+};

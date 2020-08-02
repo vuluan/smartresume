@@ -5,8 +5,6 @@ import { JobprofileDTO } from '../dto/JobprofileDTO';
 import HttpResponseResult from '../shared/models/HttpResponseResult';
 import { check, validationResult } from 'express-validator';
 
-
-
 export const validate = (method) => {
     switch (method) {
         case 'createJobprofile': {
