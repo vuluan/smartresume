@@ -1,4 +1,3 @@
-
 import * as jobprofileRepositories from '../repositories/jobprofileRepositories';
 
 export const add = async (jobprofileDTO) => {

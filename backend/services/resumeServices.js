@@ -1,4 +1,3 @@
-
 import * as resumeRepositories from '../repositories/resumeRepositories';
 
 export const add = async (resumeDTO) => {

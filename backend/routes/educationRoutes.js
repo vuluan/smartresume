@@ -1,5 +1,5 @@
 
-   import { add, detail, deleteById, updateById, findByUserId, validate } from '../controllers/educationControllers';
+import { add, detail, deleteById, updateById, findByUserId, validate } from '../controllers/educationControllers';
 import { authRequired } from '../controllers/userControllers';
 
 const routes = (app) => {
@@ -46,4 +46,3 @@ const routes = (app) => {
 
 
 export default routes;
-   

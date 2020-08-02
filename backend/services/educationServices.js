@@ -1,4 +1,3 @@
-
 import * as educationRepositories from '../repositories/educationRepositories';
 
 export const add = async (educationDTO) => {

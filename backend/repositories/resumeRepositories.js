@@ -1,15 +1,15 @@
-import { ResumeEntity} from '../entities/ResumeEntity';
+import { ResumeEntity } from '../entities/ResumeEntity';
 
 export const add = async (resumeDTO) => {
     try {
-        let newResume = new ResumeEntity();newResume.user_id = resumeDTO.user_id; 
-        newResume.title = resumeDTO.title; 
-        newResume.description = resumeDTO.description; 
+        let newResume = new ResumeEntity(); newResume.user_id = resumeDTO.user_id;
+        newResume.title = resumeDTO.title;
+        newResume.description = resumeDTO.description;
         const createdResume = await newResume.save();
-    return createdResume;
-} catch (err) {
-    throw err;
-}
+        return createdResume;
+    } catch (err) {
+        throw err;
+    }
 }
 
 export const detail = async (id) => {
@@ -33,12 +33,12 @@ export const deleteById = async (id) => {
 export const updateById = async (id, resumeDTO) => {
     try {
         let updateResume = await ResumeEntity.findById(id);
-updateResume.title = resumeDTO.title; 
-            updateResume.description = resumeDTO.description; 
-             return await updateResume.save();
-} catch (err) {
-    throw err;
-}
+        updateResume.title = resumeDTO.title;
+        updateResume.description = resumeDTO.description;
+        return await updateResume.save();
+    } catch (err) {
+        throw err;
+    }
 }
 
 export const findByUserId = async (userId) => {

@@ -1,4 +1,3 @@
-
 import * as objectiveRepositories from '../repositories/objectiveRepositories';
 
 export const add = async (objectiveDTO) => {
