@@ -35,7 +35,7 @@ export const add = async (req, res) => {
         }
 
         let data = req.body;
-        let resume = newResumeDTO(
+        let resume = new ResumeDTO(
           data.user_id,
               data.title,
               data.description,
@@ -105,7 +105,7 @@ export const add = async (req, res) => {
             }
     
             let data = req.body;
-            let resume = newResumeDTO(
+            let resume = new ResumeDTO(
       data.user_id,
               data.title,
               data.description,

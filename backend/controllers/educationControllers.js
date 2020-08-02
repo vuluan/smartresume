@@ -35,7 +35,7 @@ export const add = async (req, res) => {
         }
 
         let data = req.body;
-        let education = newEducationDTO(
+        let education = new EducationDTO(
           data.user_id,
               data.school,
               data.degree,
@@ -108,7 +108,7 @@ export const add = async (req, res) => {
             }
     
             let data = req.body;
-            let education = newEducationDTO(
+            let education = new EducationDTO(
       data.user_id,
               data.school,
               data.degree,

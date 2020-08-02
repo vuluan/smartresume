@@ -35,7 +35,7 @@ export const add = async (req, res) => {
         }
 
         let data = req.body;
-        let jobprofile = newJobprofileDTO(
+        let jobprofile = new JobprofileDTO(
           data.user_id,
               data.profile,
             
@@ -104,7 +104,7 @@ export const add = async (req, res) => {
             }
     
             let data = req.body;
-            let jobprofile = newJobprofileDTO(
+            let jobprofile = new JobprofileDTO(
       data.user_id,
               data.profile,
             
