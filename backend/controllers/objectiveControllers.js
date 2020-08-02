@@ -124,7 +124,7 @@ export const add = async (req, res) => {
 };
     export const findByUserId = async (req, res) => {
         try {
-            let objective = await objectiveervices.findByUserId(req.params.id);
+            let objective = await objectiveServices.findByUserId(req.params.id);
     
             return await res.status(200).send(new HttpResponseResult(true, "", objective));
     

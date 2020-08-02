@@ -132,7 +132,7 @@ export const add = async (req, res) => {
 };
     export const findByUserId = async (req, res) => {
         try {
-            let education = await educationervices.findByUserId(req.params.id);
+            let education = await educationServices.findByUserId(req.params.id);
     
             return await res.status(200).send(new HttpResponseResult(true, "", education));
     

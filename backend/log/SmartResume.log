@@ -53,3 +53,6 @@ OverwriteModelError: Cannot overwrite `coverLetters` model once compiled.
     at Module._extensions..js (internal/modules/cjs/loader.js:1221:10)
     at Object.newLoader [as .js] (C:\MERN\smartresume\backend\node_modules\pirates\lib\index.js:104:7)
 2020-08-02T07:22:16.973Z error : undefined : newEducationDTO is not defined
+2020-08-02T16:40:20.027Z error : undefined : educationervices is not defined
+2020-08-02T16:49:42.345Z error : undefined : newEducation is not defined
+2020-08-02T17:06:31.032Z error : undefined : Cannot set property 'profile' of null

@@ -7,6 +7,9 @@ import coverLetterRoutes from './routes/coverLetterRoutes';
 import basicInfoRoutes from './routes/basicInfoRoutes';
 
 import educationRoutes from './routes/educationRoutes';
+import jobprofileRoutes from './routes/jobprofileRoutes';
+import objectiveRoutes from './routes/objectiveRoutes';
+import resumeRoutes from './routes/resumeRoutes';
 
 import { logger } from './shared/utils/loggerUtilities';
 import * as jwtUtilities from './shared/utils/jsonWebTokenUtilities';
@@ -87,6 +90,9 @@ coverLetterRoutes(app);
 basicInfoRoutes(app);
 
 educationRoutes(app);
+jobprofileRoutes(app);
+objectiveRoutes(app);
+resumeRoutes(app);
 
 
 const PORT = process.env.PORT || 5000
