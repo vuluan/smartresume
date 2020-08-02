@@ -21,4 +21,4 @@ const CoverLetterSchema = new mongoose.Schema({
     }
 });
 
-export const CoverLetterEntity = databaseUtilities.getEntity(mongoDBEntityNames.coverletterCollection, CoverLetterSchema);
+export const CoverLetterEntity = databaseUtilities.getEntity(mongoDBEntityNames.coverLetterCollection, CoverLetterSchema);
