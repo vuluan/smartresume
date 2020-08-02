@@ -1,10 +1,12 @@
 2020-08-02T06:03:39.283Z error : undefined : uncaughtException: Cannot read property 'toLowerCase' of undefined
+2020-08-02T07:14:46.469Z error : undefined : uncaughtException: Cannot read property 'toLowerCase' of undefined
 TypeError: Cannot read property 'toLowerCase' of undefined
     at pluralize (C:\MERN\smartresume\backend\node_modules\mongoose-legacy-pluralize\index.js:85:13)
     at Object.exports.toCollectionName (C:\MERN\smartresume\backend\node_modules\mongoose\lib\utils.js:44:12)
     at Mongoose.model (C:\MERN\smartresume\backend\node_modules\mongoose\lib\index.js:554:13)
     at Object.getEntity (C:\MERN\smartresume\backend\shared\utils\/databaseUtilities.js:4:21)
     at Object.<anonymous> (C:\MERN\smartresume\backend\entities\/CoverLetterEntity.js:24:52)
+    at Object.<anonymous> (C:\MERN\smartresume\backend\entities\/EducationEntity.js:27:50)
     at Module._compile (internal/modules/cjs/loader.js:1201:30)
     at Module._compile (C:\MERN\smartresume\backend\node_modules\pirates\lib\index.js:99:24)
     at Module._extensions..js (internal/modules/cjs/loader.js:1221:10)
@@ -17,12 +19,17 @@ TypeError: Cannot read property 'toLowerCase' of undefined
     at Module._compile (internal/modules/cjs/loader.js:1201:30)
     at Module._compile (C:\MERN\smartresume\backend\node_modules\pirates\lib\index.js:99:24)
 2020-08-02T06:05:50.939Z error : undefined : uncaughtException: Cannot read property 'toLowerCase' of undefined
+    at Object.<anonymous> (C:\MERN\smartresume\backend\repositories\/educationRepositories.js:1:1)
+    at Module._compile (internal/modules/cjs/loader.js:1201:30)
+    at Module._compile (C:\MERN\smartresume\backend\node_modules\pirates\lib\index.js:99:24)
+2020-08-02T07:15:53.896Z error : undefined : uncaughtException: Cannot read property 'toLowerCase' of undefined
 TypeError: Cannot read property 'toLowerCase' of undefined
     at pluralize (C:\MERN\smartresume\backend\node_modules\mongoose-legacy-pluralize\index.js:85:13)
     at Object.exports.toCollectionName (C:\MERN\smartresume\backend\node_modules\mongoose\lib\utils.js:44:12)
     at Mongoose.model (C:\MERN\smartresume\backend\node_modules\mongoose\lib\index.js:554:13)
     at Object.getEntity (C:\MERN\smartresume\backend\shared\utils\/databaseUtilities.js:4:21)
     at Object.<anonymous> (C:\MERN\smartresume\backend\entities\/CoverLetterEntity.js:24:52)
+    at Object.<anonymous> (C:\MERN\smartresume\backend\entities\/EducationEntity.js:27:50)
     at Module._compile (internal/modules/cjs/loader.js:1201:30)
     at Module._compile (C:\MERN\smartresume\backend\node_modules\pirates\lib\index.js:99:24)
     at Module._extensions..js (internal/modules/cjs/loader.js:1221:10)
@@ -37,6 +44,14 @@ TypeError: Cannot read property 'toLowerCase' of undefined
 2020-08-02T06:22:51.417Z error : undefined : uncaughtException: coverLetterRoutes is not defined
 ReferenceError: coverLetterRoutes is not defined
     at Object.<anonymous> (C:\MERN\smartresume\backend\/server.js:83:1)
+    at Object.<anonymous> (C:\MERN\smartresume\backend\repositories\/educationRepositories.js:1:1)
+    at Module._compile (internal/modules/cjs/loader.js:1201:30)
+    at Module._compile (C:\MERN\smartresume\backend\node_modules\pirates\lib\index.js:99:24)
+2020-08-02T07:21:05.979Z error : undefined : uncaughtException: Cannot overwrite `coverLetters` model once compiled.
+OverwriteModelError: Cannot overwrite `coverLetters` model once compiled.
+    at Mongoose.model (C:\MERN\smartresume\backend\node_modules\mongoose\lib\index.js:524:13)
+    at Object.getEntity (C:\MERN\smartresume\backend\shared\utils\/databaseUtilities.js:4:21)
+    at Object.<anonymous> (C:\MERN\smartresume\backend\entities\/EducationEntity.js:27:50)
     at Module._compile (internal/modules/cjs/loader.js:1201:30)
     at Module._compile (C:\MERN\smartresume\backend\node_modules\pirates\lib\index.js:99:24)
     at Module._extensions..js (internal/modules/cjs/loader.js:1221:10)
@@ -51,3 +66,14 @@ ReferenceError: coverLetterRoutes is not defined
     at Function.Module._load (internal/modules/cjs/loader.js:938:14)
     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
     at internal/main/run_main_module.js:17:47
+    at Module.require (internal/modules/cjs/loader.js:1090:19)
+    at require (internal/modules/cjs/helpers.js:75:18)
+    at Object.<anonymous> (C:\MERN\smartresume\backend\repositories\/educationRepositories.js:1:1)
+    at Module._compile (internal/modules/cjs/loader.js:1201:30)
+    at Module._compile (C:\MERN\smartresume\backend\node_modules\pirates\lib\index.js:99:24)
+    at Module._extensions..js (internal/modules/cjs/loader.js:1221:10)
+    at Object.newLoader [as .js] (C:\MERN\smartresume\backend\node_modules\pirates\lib\index.js:104:7)
+2020-08-02T07:22:16.973Z error : undefined : newEducationDTO is not defined
+2020-08-02T16:40:20.027Z error : undefined : educationervices is not defined
+2020-08-02T16:49:42.345Z error : undefined : newEducation is not defined
+2020-08-02T17:06:31.032Z error : undefined : Cannot set property 'profile' of null
