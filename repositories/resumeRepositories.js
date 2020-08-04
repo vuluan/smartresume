@@ -33,6 +33,11 @@ export const deleteById = async (id) => {
 export const updateById = async (id, resumeDTO) => {
     try {
         let updateResume = await ResumeEntity.findById(id);
+
+        if (isNullOrUndefined(updateResume))
+            return null;
+
+
         updateResume.title = resumeDTO.title;
         updateResume.description = resumeDTO.description;
         return await updateResume.save();

@@ -41,6 +41,10 @@ export const deleteById = async (id) => {
 export const updateById = async (id, basicInfoDTO) => {
     try {
         let updateBasicInfo = await BasicInfoEntity.findById(id);
+
+        if (isNullOrUndefined(updateSkill))
+            return null;
+
         newBasicInfo.firsName = basicInfoDTO.firstName;
         newBasicInfo.lastName = basicInfoDTO.lastName;
         newBasicInfo.email = basicInfoDTO.email;

@@ -34,6 +34,10 @@ export const deleteById = async (id) => {
 export const updateById = async (id, coverletterDTO) => {
     try {
         let updateCoverLetter = await CoverLetterEntity.findById(id);
+
+        if (isNullOrUndefined(updateCoverLetter))
+            return null;
+
         newCoverLetter.title = coverletterDTO.title;
         newCoverLetter.body = coverletterDTO.body;
         return await updateCoverLetter.save();

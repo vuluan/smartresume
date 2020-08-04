@@ -39,6 +39,10 @@ export const deleteById = async (id) => {
 export const updateById = async (id, experienceDTO) => {
     try {
         let updateExperience = await ExperienceEntity.findById(id);
+
+        if (isNullOrUndefined(updateExperience))
+            return null;
+
         updateExperience.title = experienceDTO.title;
         updateExperience.type = experienceDTO.type;
         updateExperience.company = experienceDTO.company;

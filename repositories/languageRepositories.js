@@ -34,6 +34,10 @@ export const deleteById = async (id) => {
 export const updateById = async (id, languageDTO) => {
     try {
         let updateLanguage = await LanguageEntity.findById(id);
+
+        if (isNullOrUndefined(updateLanguage))
+            return null;
+
         updateLanguage.language = languageDTO.language;
         updateLanguage.proficiency = languageDTO.proficiency;
         return await updateLanguage.save();

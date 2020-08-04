@@ -32,6 +32,10 @@ export const deleteById = async (id) => {
 export const updateById = async (id, objectiveDTO) => {
     try {
         let updateObjective = await ObjectiveEntity.findById(id);
+
+        if (isNullOrUndefined(updateObjective))
+            return null;
+
         updateObjective.objective = objectiveDTO.objective;
         return await updateObjective.save();
     } catch (err) {
