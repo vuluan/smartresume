@@ -4,9 +4,11 @@ import 'dotenv/config';
 
 const transport = new winston.transports.File({
     filename: process.env.LOG_PATH,
-    level: 'error',
+    level: 'info',
     handleExceptions: true
 });
+
+const transportConsole = new winston.transports.Console({ level: 'info' });
 
 const createLogFormatter = () => {
     const { combine, timestamp, printf } = winston.format;
@@ -22,5 +24,5 @@ const createLogFormatter = () => {
 
 export const logger = winston.createLogger({
     format: createLogFormatter(),
-    transports: transport
+    transports: transportConsole
 });
