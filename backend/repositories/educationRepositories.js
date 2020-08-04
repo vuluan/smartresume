@@ -36,6 +36,10 @@ export const deleteById = async (id) => {
 export const updateById = async (id, educationDTO) => {
     try {
         let updateEducation = await EducationEntity.findById(id);
+
+        if (isNullOrUndefined(updateEducation))
+            return null;
+
         updateEducation.school = educationDTO.school;
         updateEducation.degree = educationDTO.degree;
         updateEducation.field = educationDTO.field;

@@ -32,6 +32,10 @@ export const deleteById = async (id) => {
 export const updateById = async (id, jobprofileDTO) => {
     try {
         let updateJobprofile = await JobprofileEntity.findById(id);
+
+        if (isNullOrUndefined(updateJobprofile))
+            return null;
+
         updateJobprofile.profile = jobprofileDTO.profile;
         return await updateJobprofile.save();
     } catch (err) {

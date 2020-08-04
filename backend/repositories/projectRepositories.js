@@ -1,4 +1,5 @@
 import { ProjectEntity } from '../entities/ProjectEntity';
+import { isNullOrUndefined } from '../shared/utils/generalUtilities';
 
 export const add = async (projectDTO) => {
     try {
@@ -36,6 +37,9 @@ export const deleteById = async (id) => {
 export const updateById = async (id, projectDTO) => {
     try {
         let updateProject = await ProjectEntity.findById(id);
+        if (isNullOrUndefined(updateProject))
+            return null;
+
         updateProject.name = projectDTO.name;
         updateProject.description = projectDTO.description;
         updateProject.duties = projectDTO.duties;
