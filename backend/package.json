@@ -4,8 +4,9 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "web": "babel-node server.js",
-    "start": "nodemon --verbose --exec babel-node server.js",
+    "build": "babel src --out-dir dist",
+    "start": "node dist/server.js",
+    "local": "nodemon --verbose --exec babel-node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
