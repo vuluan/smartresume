@@ -4,7 +4,8 @@
 **Michael Anetor:** Contact Me Page, Basic Information Page, Cover Letter Page  
 **Roman Mbwasi:** Resume List (Home) Page, Profile Page, Job Objective Page, Education Page   
 
-# EndPoints
+## EndPoints
+## Education EndPoints
 **Add Education**
 
 Autherization Header Required:
