@@ -8,9 +8,9 @@
 ## Education EndPoints
 **Add Education**
 
-Autherization Header Required:
+Authorization Header Required:
 
-Autherization: Bearer {{AuthToken}}
+Authorization: Bearer {{AuthToken}}
 
 POST: {{BASE_URL}}/api/education/add
 
