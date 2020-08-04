@@ -3,6 +3,8 @@ export const languageCollection = "languages";
 export const experienceCollection = "experiences";
 export const basicInfoCollection = "basicInfos";
 export const coverLetterCollection = "coverLetters";
+export const projectCollection = "projects";
+export const skillCollection = "skills";
 
 export const educationCollection = "education";
 export const jobprofileCollection = "jobprofile";
