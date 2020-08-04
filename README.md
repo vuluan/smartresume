@@ -6,9 +6,13 @@
 
 # EndPoints
 **Add Education**
+
 Autherization Header Required:
+
 Autherization: Bearer {{AuthToken}}
+
 POST: {{BASE_URL}}/api/education/add
+
 ```javascript
 {
   "user_id": "5f29e49520781d0017b465b9",
