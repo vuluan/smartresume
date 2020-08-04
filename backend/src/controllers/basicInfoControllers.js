@@ -1,4 +1,4 @@
-import * as basicinfoServices from '../services/basicinfoServices';
+import * as basicInfoServices from '../services/basicInfoServices';
 import { logger } from '../shared/utils/loggerUtilities';
 import { BasicInfoDTO } from '../dto/BasicInfoDTO';
 import HttpResponseResult from '../shared/models/HttpResponseResult';
@@ -47,7 +47,7 @@ export const add = async (req, res) => {
         }
 
         let data = req.body;
-        let basicinfo = new BasicInfoDTO(data.user_id, 
+        let basicinfo = new BasicInfoDTO(data.user_id,
             data.firstName,
             data.lastName,
             data.email,
@@ -57,7 +57,7 @@ export const add = async (req, res) => {
             data.region,
             data.gitHub,
             data.linkedin);
-        let createdBasicInfo = await basicinfoServices.add(basicinfo);
+        let createdBasicInfo = await basicInfoServices.add(basicinfo);
 
         return await res.status(200).send(new HttpResponseResult(true, "", createdBasicInfo));
 
@@ -73,7 +73,7 @@ export const add = async (req, res) => {
 
 export const detail = async (req, res) => {
     try {
-        let basicinfo = await basicinfoServices.detail(req.params.id);
+        let basicinfo = await basicInfoServices.detail(req.params.id);
 
         if (!basicinfo) {
             return res.status(404).send(new HttpResponseResult(false, "BasicInfo not found", null));
@@ -98,7 +98,7 @@ export const deleteById = async (req, res) => {
             return res.status(422).json({ errors: errors.array() });
         }
 
-        let basicinfo = await basicinfoServices.deleteById(req.body.id);
+        let basicinfo = await basicInfoServices.deleteById(req.body.id);
 
         return await res.status(200).send(new HttpResponseResult(true, "", basicinfo));
 
@@ -120,7 +120,7 @@ export const updateById = async (req, res) => {
         }
 
         let data = req.body;
-        let basicinfo = new BasicInfoDTO(data.user_id, 
+        let basicinfo = new BasicInfoDTO(data.user_id,
             data.firstName,
             data.lastName,
             data.email,
@@ -130,7 +130,7 @@ export const updateById = async (req, res) => {
             data.region,
             data.gitHub,
             data.linkedin);
-        let updatedBasicInfo = await basicinfoServices.updateById(data.id, basicinfo);
+        let updatedBasicInfo = await basicInfoServices.updateById(data.id, basicinfo);
 
         return await res.status(200).send(new HttpResponseResult(true, "", updatedBasicInfo));
 
@@ -146,7 +146,7 @@ export const updateById = async (req, res) => {
 
 export const findByUserId = async (req, res) => {
     try {
-        let basicinfos = await basicinfoServices.findByUserId(req.params.id);
+        let basicinfos = await basicInfoServices.findByUserId(req.params.id);
 
         return await res.status(200).send(new HttpResponseResult(true, "", basicinfos));
 

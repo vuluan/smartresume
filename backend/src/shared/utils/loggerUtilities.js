@@ -10,6 +10,8 @@ const transport = new winston.transports.File({
 
 const transportConsole = new winston.transports.Console({ level: 'info' });
 
+
+
 const createLogFormatter = () => {
     const { combine, timestamp, printf } = winston.format;
 
