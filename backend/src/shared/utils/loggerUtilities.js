@@ -26,5 +26,5 @@ const createLogFormatter = () => {
 
 export const logger = winston.createLogger({
     format: createLogFormatter(),
-    transports: [transport, transportConsole]
+    transports: transportConsole
 });
