@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "build": "babel src --out-dir dist",
+    "build": "babel ./ --out-dir dist --ignore node_modules",
     "start": "node dist/server.js",
     "local": "nodemon --verbose --exec babel-node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
