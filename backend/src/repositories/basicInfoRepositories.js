@@ -42,7 +42,7 @@ export const updateById = async (id, basicInfoDTO) => {
     try {
         let updateBasicInfo = await BasicInfoEntity.findById(id);
 
-        if (isNullOrUndefined(updateSkill))
+        if (isNullOrUndefined(updateBasicInfo))
             return null;
 
             updateBasicInfo.firsName = basicInfoDTO.firstName;
