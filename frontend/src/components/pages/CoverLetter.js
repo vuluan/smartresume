@@ -5,8 +5,8 @@ import axios from 'axios';
 function CoverLetter(props) {
 
   const [formData, setFormData] = useState({
-    title: props.data.title || '',
-    body: props.data.body || '',
+    title: '', // || props.data.title,
+    body: '' // || props.data.body,
   });
 
   const { title, body } = formData;

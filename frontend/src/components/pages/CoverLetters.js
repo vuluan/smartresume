@@ -68,7 +68,7 @@ const formAction = function(e){
   } */
 }
 
-const [formData, setFormData] = useState({
+/*const [formData, setFormData] = useState({
   user_id: '',
   title: '',
   body: '',
@@ -85,7 +85,7 @@ useEffect(() => {
     // handle error
     console.log(error);
   });
-});
+});*/
 
 function CoverLetters() {
   return (
