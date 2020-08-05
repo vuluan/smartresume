@@ -1,4 +1,5 @@
 import { JobprofileEntity } from '../entities/JobprofileEntity';
+import { isNullOrUndefined } from '../shared/utils/generalUtilities';
 
 export const add = async (jobprofileDTO) => {
     try {
