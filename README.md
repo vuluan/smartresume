@@ -5,15 +5,14 @@
 **Roman Mbwasi:** Resume List (Home) Page, Profile Page, Job Objective Page, Education Page   
 
 ## EndPoints
-## Education EndPoints
+## Education EndPoints (Roman)
 **Add Education**
 
 Authorization Header Required:
+Authorization: Bearer TokenString_DSFSDFSD452345AF8SDJF87FUD8D
 
-Authorization: Bearer {{AuthToken}}
-
-POST: {{BASE_URL}}/api/education/add
-
+POST: https://smartresumebuild.herokuapp.com/api/education/add
+Response:
 ```javascript
 {
   "user_id": "5f29e49520781d0017b465b9",
@@ -22,6 +21,30 @@ POST: {{BASE_URL}}/api/education/add
   "field": "IT",
   "start": "2000",
   "finish": "2010"
+}
+```
+**Get Education By Id**
+
+Authorization Header Required:
+
+Authorization: Bearer TokenString_DSFSDFSD452345AF8SDJF87FUD8D
+
+GET: https://smartresumebuild.herokuapp.com/api/education/5f29e5ee20781d0017b465ba
+
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "_id": "5f29e5ee20781d0017b465ba",
+        "user_id": "5f29e49520781d0017b465b9",
+        "school": "Humber College",
+        "degree": "Masters",
+        "field": "IT",
+        "start": "2000",
+        "finish": "2010",
+        "__v": 0
+    }
 }
 ```
 
