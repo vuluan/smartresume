@@ -1,4 +1,3 @@
-
 import { add, detail, deleteById, updateById, findByUserId, validate } from '../controllers/educationControllers';
 import { authRequired } from '../controllers/userControllers';
 

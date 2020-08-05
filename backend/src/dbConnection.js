@@ -1,4 +1,7 @@
 const mongoose = require('mongoose');
+import { logger } from './shared/utils/loggerUtilities';
+mongoose.set('debug', true);
+
 
 const connectDB = async () => {
   try {
@@ -7,6 +10,9 @@ const connectDB = async () => {
       useUnifiedTopology: true,
     });
     console.log('Database connected!!!');
+    mongoose.set("debug", (collectionName, method, query, doc) => {
+      console.log(`${collectionName}.${method}`, JSON.stringify(query), doc);
+    });
   } catch (err) {
     console.log('Unable to connect!!!: ' + err);
     process.on('exit', function (code) {

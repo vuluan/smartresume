@@ -1,5 +1,5 @@
 import { ResumeEntity } from '../entities/ResumeEntity';
-
+import { isNullOrUndefined } from '../shared/utils/generalUtilities';
 export const add = async (resumeDTO) => {
     try {
         let newResume = new ResumeEntity(); newResume.user_id = resumeDTO.user_id;

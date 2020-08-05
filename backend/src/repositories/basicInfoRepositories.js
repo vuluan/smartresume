@@ -1,5 +1,5 @@
 import { BasicInfoEntity } from '../entities/BasicInfoEntity';
-
+import { isNullOrUndefined } from '../shared/utils/generalUtilities';
 export const add = async (basicInfoDTO) => {
     try {
         let newBasicInfo = new BasicInfoEntity();

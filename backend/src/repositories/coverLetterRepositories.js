@@ -1,4 +1,5 @@
 import { CoverLetterEntity } from '../entities/CoverLetterEntity';
+import { isNullOrUndefined } from '../shared/utils/generalUtilities';
 
 export const add = async (coverletterDTO) => {
     try {
