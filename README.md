@@ -4,13 +4,14 @@
 **Michael Anetor:** Contact Me Page, Basic Information Page, Cover Letter Page  
 **Roman Mbwasi:** Resume List (Home) Page, Profile Page, Job Objective Page, Education Page   
 
+## Note if running locally use 'npm run local' to start the backend.
 ## EndPoints
 ## Education EndPoints (Roman)
 **Add Education**
 
 Authorization Header Required:
 
-Authorization: Bearer TokenString_DSFSDFSD452345AF8SDJF87FUD8D
+Authorization: Bearer UserAuthTokenHere
 
 POST: https://smartresumebuild.herokuapp.com/api/education/add
 
@@ -46,7 +47,7 @@ Response:
 
 Authorization Header Required:
 
-Authorization: Bearer TokenString_DSFSDFSD452345AF8SDJF87FUD8D
+Authorization: Bearer UserAuthTokenHere
 
 GET: https://smartresumebuild.herokuapp.com/api/education/5f29e5ee20781d0017b465ba
 
@@ -72,9 +73,9 @@ Response:
 
 Authorization Header Required:
 
-Authorization: Bearer TokenString_DSFSDFSD452345AF8SDJF87FUD8D
+Authorization: Bearer UserAuthTokenHere
 
-GET: {{BASE_URL}}/api/education/list/5f29e49520781d0017b465b9
+GET: https://smartresumebuild.herokuapp.com/api/education/list/5f29e49520781d0017b465b9
 
 Response:
 ```javascript
@@ -110,9 +111,9 @@ Response:
 
 Authorization Header Required:
 
-Authorization: Bearer TokenString_DSFSDFSD452345AF8SDJF87FUD8D
+Authorization: Bearer UserAuthTokenHere
 
-DELETE: {{BASE_URL}}/api/education
+DELETE: https://smartresumebuild.herokuapp.com/api/education
 
 Request:
 ```javascript
@@ -143,20 +144,20 @@ Response:
 
 Authorization Header Required:
 
-Authorization: Bearer TokenString_DSFSDFSD452345AF8SDJF87FUD8D
+Authorization: Bearer UserAuthTokenHere
 
-PUT: {{BASE_URL}}/api/education
+PUT: https://smartresumebuild.herokuapp.com/api/education
 
 Request:
 ```javascript
 {
-   "id": "5f266a3b1a073c3f900b6e10",
-  "user_id": "5f2661a29ee13a46dc8edf4f",
+   "id": "5f2b041753e6352e9403850f",
+  "user_id": "5f2b03ba53e6352e9403850e",
   "school": "University of Cape Town",
   "degree": "Masters",
   "field": "IT",
   "start": "2000",
-  "finish": "2010"
+  "finish": "2005"
 }
 ```
 Response:
@@ -165,13 +166,13 @@ Response:
     "isSuccess": true,
     "message": "",
     "data": {
-        "_id": "5f29e5ee20781d0017b465ba",
-        "user_id": "5f29e49520781d0017b465b9",
-        "school": "Humber College",
+        "_id": "5f2b041753e6352e9403850f",
+        "user_id": "5f2b03ba53e6352e9403850e",
+        "school": "University of Cape Town",
         "degree": "Masters",
         "field": "IT",
         "start": "2000",
-        "finish": "2010",
+        "finish": "2005",
         "__v": 0
     }
 }
@@ -217,7 +218,7 @@ npm install
 ## Usage
 
 ```python
-npm start
+npm run local
 ```
 
 
