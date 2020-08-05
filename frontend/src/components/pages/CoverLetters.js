@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Breadcrumbs from '../layouts/Breadcrumbs';
 import { Button, Pagination, Card, Form, Col} from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
@@ -27,6 +27,65 @@ for (let number = 1; number <= 5; number++) {
   );
 }
 
+const formAction = function(e){
+   // let token = localStorage.getItem('token');
+    // let config = {
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'x-auth-token': token,
+    //   },
+    // };
+
+    /* if(e.name === 'save'){
+    let data = {
+      title,
+      body,
+    };
+    try {
+      const response = await axios.put(
+        'http://localhost:5000/api/coverLetter'+{id},
+        data,
+        config
+      );
+
+      console.log('Cover Letter Updated');
+    } catch (e) {
+      console.log(e.response.data.errors);
+    }
+  }
+  else if(e.name === 'delete'){
+    try {
+      const response = await axios.delete(
+        'http://localhost:5000/api/coverLetter/'+{id},
+        data,
+        config
+      );
+
+      console.log('Cover Letter Deleted');
+    } catch (e) {
+      console.log(e.response.data.errors);
+    }
+  } */
+}
+
+const [formData, setFormData] = useState({
+  user_id: '',
+  title: '',
+  body: '',
+  _id: '',
+});
+
+useEffect(() => {
+  axios.get('http://localhost:5000/api/coverLetter')
+  .then(function (response) {
+    setFormData(response.data);
+    console.log(formData);
+  })
+  .catch(function (error) {
+    // handle error
+    console.log(error);
+  });
+});
 
 function CoverLetters() {
   return (
@@ -43,9 +102,9 @@ function CoverLetters() {
           <Card.Title>Cover Letters</Card.Title>
           <CoverLetter/>
           <CoverLetter/>
-          {/* {data.map(
+          {/* {formData.map(
     (cl)=>(
-      <CoverLetter data ={cl}/>
+      <CoverLetter data ={cl} formAction={formAction} key={cl._id} />
     )
   )} */}
           <div class='float-left'>Showing 1 to 10 of 100 entries</div>

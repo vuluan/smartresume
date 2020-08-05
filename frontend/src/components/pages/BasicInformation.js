@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Breadcrumbs from '../layouts/Breadcrumbs';
 import { Form, Container, Pagination, Jumbotron, Accordion, Card, Button, Col} from 'react-bootstrap';
 import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
@@ -20,6 +20,10 @@ gitHub : '',
 linkedin : '',
   });
 
+  const [userState, setUserState] = useState({
+    isNew : true,
+  });
+
   const { firstName,
     lastName,
     email,
@@ -30,20 +34,23 @@ linkedin : '',
     gitHub,
     linkedin, } = formData;
 
-    const onLoad = async (e) => {
-      /* try {
-        const response = await axios.get(
-          'http://localhost:5000/api/basicinfo',
-          data,
-          config
-        );
-  
-        console.log('Basic Info Updated');
-      } catch (e) {
-        console.log(e.response.data.errors);
-      }
-      setFormData({ ...formData, [e.target.name]: e.target.value }); */
-    }
+    useEffect(() => {
+      axios.get('http://localhost:5000/api/basicinformation')
+      .then(function (response) {
+        console.log('response',response.data);
+
+        if(Array.isArray(response.data) && response.data.length){
+        setFormData(response.data);
+        setUserState({ isNew : false });
+        console.log('formdata',formData);
+        }
+
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
+    });
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -71,11 +78,20 @@ gitHub,
 linkedin,
     };
     try {
+      if(userState.isNew){
       const response = await axios.post(
         'http://localhost:5000/api/basicinfo',
         data,
         config
       );
+      }
+      else{
+      const response = await axios.put(
+        'http://localhost:5000/api/basicinfo',
+        data,
+        config
+      );        
+      }
 
       console.log('Basic Info Updated');
     } catch (e) {

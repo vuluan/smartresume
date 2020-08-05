@@ -5,8 +5,8 @@ import axios from 'axios';
 function CoverLetter(props) {
 
   const [formData, setFormData] = useState({
-    title: '',
-    body: '',
+    title: props.data.title || '',
+    body: props.data.body || '',
   });
 
   const { title, body } = formData;
@@ -15,6 +15,9 @@ function CoverLetter(props) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    //props.formAction(e);
+
+
 
     // let token = localStorage.getItem('token');
     // let config = {
