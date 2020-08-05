@@ -39,8 +39,8 @@ export const updateById = async (id, coverletterDTO) => {
         if (isNullOrUndefined(updateCoverLetter))
             return null;
 
-        newCoverLetter.title = coverletterDTO.title;
-        newCoverLetter.body = coverletterDTO.body;
+        updateCoverLetter.title = coverletterDTO.title;
+        updateCoverLetter.body = coverletterDTO.body;
         return await updateCoverLetter.save();
     } catch (err) {
         throw err;
