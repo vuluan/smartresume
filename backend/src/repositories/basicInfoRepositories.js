@@ -4,7 +4,7 @@ export const add = async (basicInfoDTO) => {
     try {
         let newBasicInfo = new BasicInfoEntity();
         newBasicInfo.user_id = basicInfoDTO.user_id;
-        newBasicInfo.firsName = basicInfoDTO.firstName;
+        newBasicInfo.firstName = basicInfoDTO.firstName;
         newBasicInfo.lastName = basicInfoDTO.lastName;
         newBasicInfo.email = basicInfoDTO.email;
         newBasicInfo.phone = basicInfoDTO.phone;
