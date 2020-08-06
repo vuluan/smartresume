@@ -9,6 +9,8 @@ function BasicInformation() {
 
 
   const [formData, setFormData] = useState({
+    id : '',
+    user_id : '',
     firstName : '',
 lastName : '',
 email : '',
@@ -34,13 +36,21 @@ linkedin : '',
     gitHub,
     linkedin, } = formData;
 
-    useEffect(() => {
-      axios.get('http://localhost:5000/api/basicinformation')
-      .then(function (response) {
-        console.log('response',response.data);
+    // let token = localStorage.getItem('token');
+     let config = {
+       headers: {
+         'Content-Type': 'application/json',
+         'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibWljaGVsbGFuZXRAZ21haWwuY29tIiwiX2lkIjoiNWYyNzhkMjhjZjE1NDUzMDE0N2JjZjk1In0sImlhdCI6MTU5NjY2OTgwMH0.xZVahKf4ZWOuOKZtqc-Wksi7DYSkm0QzW6Af0BGgkFI',
+       },
+     };
 
-        if(Array.isArray(response.data) && response.data.length){
-        setFormData(response.data);
+    useEffect(() => {
+      axios.get('http://localhost:5000/api/basicinfo/list/5f278d28cf154530147bcf95', config)
+      .then(function (response) {
+        console.log('response',response.data.data[0]);
+
+        if(Array.isArray(response.data.data) && response.data.data.length){
+        setFormData(response.data.data[0]);
         setUserState({ isNew : false });
         console.log('formdata',formData);
         }
@@ -50,7 +60,7 @@ linkedin : '',
         // handle error
         console.log(error);
       });
-    });
+    }, []);
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -58,13 +68,7 @@ linkedin : '',
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    // let token = localStorage.getItem('token');
-    // let config = {
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'x-auth-token': token,
-    //   },
-    // };
+    
 
     /* let data = {
       firstName,
@@ -150,6 +154,7 @@ linkedin,
     <Form.Group as={Col} controlId="firstName">
       <Form.Label>First Name</Form.Label>
       <Form.Control 
+      name="firstName"
                 value={firstName}
                 onChange={(e) => onChange(e)} 
                 type="text" placeholder="Enter First Name" required />
@@ -158,6 +163,7 @@ linkedin,
     <Form.Group as={Col} controlId="lastName">
       <Form.Label>Last Name</Form.Label>
       <Form.Control 
+      name="lastName"
                 value={lastName}
                 onChange={(e) => onChange(e)}
                 type="text" placeholder="Enter Last Name" required />
@@ -168,6 +174,7 @@ linkedin,
     <Form.Group as={Col} controlId="email">
       <Form.Label>Email</Form.Label>
       <Form.Control 
+      name="email"
                 value={email}
                 onChange={(e) => onChange(e)}
                 type="email" placeholder="Enter email" required />
@@ -176,6 +183,7 @@ linkedin,
     <Form.Group as={Col} controlId="phone">
       <Form.Label>Phone</Form.Label>
       <Form.Control 
+      name="phone"
                 value={phone}
                 onChange={(e) => onChange(e)} 
                 type="tel" placeholder="Phone Number" required />
@@ -185,6 +193,7 @@ linkedin,
   <Form.Group controlId="address">
     <Form.Label>Address</Form.Label>
     <Form.Control 
+      name="address"
                 value={address}
                 onChange={(e) => onChange(e)} 
                 placeholder="1234 Main St E" required />
@@ -194,6 +203,7 @@ linkedin,
             <Form.Group as={Col} controlId="country">
               <Form.Label>Country</Form.Label>
               <CountryDropdown
+      name="country"
                 className='form-control'
                 value={country} 
                 onChange={(val) => selectCountry(val)} 
@@ -203,6 +213,7 @@ linkedin,
             <Form.Group as={Col} controlId="region">
               <Form.Label>Region</Form.Label>
               <RegionDropdown
+      name="region"
                 className='form-control'
                 country={country}
                 value={region}
@@ -215,6 +226,7 @@ linkedin,
     <Form.Group as={Col} controlId="gitHub">
       <Form.Label>GitHub Link</Form.Label>
       <Form.Control 
+      name="gitHub"
                 value={gitHub}
                 onChange={(e) => onChange(e)} 
                 type="text" placeholder="Type github link.." />
@@ -223,6 +235,7 @@ linkedin,
     <Form.Group as={Col} controlId="linkedin">
       <Form.Label>LinkedIn</Form.Label>
       <Form.Control 
+      name="linkedin"
                 value={linkedin}
                 onChange={(e) => onChange(e)} 
                 type="text" placeholder="Type linkedin link" />
