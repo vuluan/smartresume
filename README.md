@@ -359,6 +359,166 @@ Response:
 }
 ```
 
+## Experience EndPoints (Luan)
+**Add Experience**
+Authorization Header Required:
+Authorization: Bearer UserAuthTokenHere
+POST: https://smartresumebuild.herokuapp.com/api/experience/add
+
+Request:
+```javascript
+{
+    "user_id": "5f2b72ef54af050017dd4223",
+    "title": "Front-end developer",
+    "type": "Part-time",
+    "company": "IGNITE",
+    "location": "Toronto",
+    "start_date": "08/15/2019",
+    "end_date": "08/15/2020",
+    "description": "test"
+}
+```
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "_id": "5f2b897fcaf53c0017ead0b7",
+        "start_date": "2019-08-15T00:00:00.000Z",
+        "end_date": "2020-08-15T00:00:00.000Z",
+        "user_id": "5f2b72ef54af050017dd4223",
+        "title": "Front-end developer",
+        "type": "Part-time",
+        "company": "IGNITE",
+        "location": "Toronto",
+        "description": "test",
+        "__v": 0
+    }
+}
+```
+**Get Experience By Id**
+Authorization Header Required:
+Authorization: Bearer UserAuthTokenHere
+GET: https://smartresumebuild.herokuapp.com/api/experience/{experience-id}
+
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "_id": "5f2b85b4a1276e67f5156bbe",
+        "start_date": "2019-08-06T00:00:00.000Z",
+        "end_date": "2020-08-06T00:00:00.000Z",
+        "user_id": "5f0a819684a234361cf9421c",
+        "title": "Front-end developer",
+        "type": "Part-time",
+        "company": "IGNITE",
+        "location": "Toronto",
+        "description": "test",
+        "__v": 0
+    }
+}
+```
+
+**Get Experience List By UserId**
+Authorization Header Required:
+Authorization: Bearer UserAuthTokenHere
+GET: https://smartresumebuild.herokuapp.com/api/experience/list/{user-id}
+
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": [
+        {
+            "_id": "5f2b897fcaf53c0017ead0b7",
+            "start_date": "2019-08-15T00:00:00.000Z",
+            "end_date": "2020-08-15T00:00:00.000Z",
+            "user_id": "5f2b72ef54af050017dd4223",
+            "title": "Front-end developer",
+            "type": "Part-time",
+            "company": "IGNITE",
+            "location": "Toronto",
+            "description": "test",
+            "__v": 0
+        }
+    ]
+}
+```
+
+**Delete Language**
+Authorization Header Required:
+Authorization: Bearer UserAuthTokenHere
+DELETE: https://smartresumebuild.herokuapp.com/api/experience
+
+Request:
+```javascript
+{
+    "id": "{experience-id}"
+}
+```
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "_id": "5f2b897fcaf53c0017ead0b7",
+        "start_date": "2019-08-15T00:00:00.000Z",
+        "end_date": "2020-08-15T00:00:00.000Z",
+        "user_id": "5f2b72ef54af050017dd4223",
+        "title": "Front-end developer",
+        "type": "Part-time",
+        "company": "IGNITE",
+        "location": "Toronto",
+        "description": "test",
+        "__v": 0
+    }
+}
+```
+
+**Update Experience**
+Authorization Header Required:
+Authorization: Bearer UserAuthTokenHere
+PUT: https://smartresumebuild.herokuapp.com/api/experience
+
+Request:
+```javascript
+{
+    "id": "5f2b8b60caf53c0017ead0b8",
+    "user_id": "5f2b72ef54af050017dd4223",
+    "title": "Front-end developer 2",
+    "type": "Part-time",
+    "company": "IGNITE",
+    "location": "Toronto",
+    "start_date": "08/15/2019",
+    "end_date": "08/15/2020",
+    "description": "test"
+}
+```
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "_id": "5f2b8b60caf53c0017ead0b8",
+        "start_date": "2019-08-15T00:00:00.000Z",
+        "end_date": "2020-08-15T00:00:00.000Z",
+        "user_id": "5f2b72ef54af050017dd4223",
+        "title": "Front-end developer 2",
+        "type": "Part-time",
+        "company": "IGNITE",
+        "location": "Toronto",
+        "description": "test",
+        "__v": 0
+    }
+}
+```
+
 ## CoverLetter EndPoints (Michael)
 **Add CoverLetter**
 
