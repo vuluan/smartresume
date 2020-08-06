@@ -10,6 +10,8 @@ import Experience from '../pages/Experience/Experience';
 import AddExperience from '../pages/Experience/AddExperience';
 import Skill from '../pages/Skill';
 import Language from '../pages/Language/Language';
+import AddLanguage from '../pages/Language/AddLanguage';
+import EditLanguage from '../pages/Language/EditLanguage';
 import Award from '../pages/Award';
 import CoverLetters from '../pages/CoverLetters';
 import AddCoverLetter from '../pages/AddCoverLetter';
@@ -78,6 +80,8 @@ function DashboardContainer() {
             <Route path='/experience/add' exact component={AddExperience} />
             <Route path='/skill' exact component={Skill} />
             <Route path='/language' exact component={Language} />
+            <Route path='/language/add' exact component={AddLanguage} />
+            <Route path='/language/edit/:id' component={EditLanguage} />
             <Route path='/award' exact component={Award} />
             <Route path='/cover-letter' exact component={CoverLetters} />
             <Route path='/cover-letter/add' exact component={AddCoverLetter} />

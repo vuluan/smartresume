@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import Breadcrumbs from '../../layouts/Breadcrumbs';
-import { Table, Button, Pagination, Card, Form, Col } from 'react-bootstrap';
+import { Table, Button, Card, Form, Col } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { FaPenSquare, FaTrash } from 'react-icons/fa';
 import axios from 'axios';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
 const breadcrumbLinks = [
   {
@@ -23,22 +25,65 @@ class Language extends Component {
     languages: []
   }
 
-  componentDidMount() {
-
+  onLoadData() {
     let URL = '/api/language/list/5f0a819684a234361cf9421c';
     let USER_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibmd1eWVudnVsdWFuODlAZ21haWwuY29tIiwiX2lkIjoiNWYwYTgxOTY4NGEyMzQzNjFjZjk0MjFjIn0sImlhdCI6MTU5NjY4MDUxM30._YNjni5cbnNd69Ez8PhYKrXu_4DH6QOrVUBnCvI18V0';
 
     const AuthStr = 'Bearer '.concat(USER_TOKEN);
     axios.get(URL, { headers: { Authorization: AuthStr } })
-          .then(response => {
-            console.log(response.data);
-            this.setState({
-              languages: response.data.data
-            });
-          })
-          .catch((error) => {
-            console.log('error 3 ' + error);
+        .then(response => {
+          console.log(response.data);
+          this.setState({
+            languages: response.data.data
           });
+        })
+        .catch((error) => {
+          console.log('error 3 ' + error);
+        });
+  }
+
+  componentDidMount() {
+    this.onLoadData();
+    
+  }
+
+  onDeleteHandler = (id) => {
+    confirmAlert({
+      title: 'Confirm to delete',
+      message: 'Are you sure to do this.',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {
+            let URL = '/api/language';
+            let USER_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibmd1eWVudnVsdWFuODlAZ21haWwuY29tIiwiX2lkIjoiNWYwYTgxOTY4NGEyMzQzNjFjZjk0MjFjIn0sImlhdCI6MTU5NjczMTA4OX0.VdVmVDtS-zI_ZNRqirXRM_FKV02V_eU7qqvWAq8N4PE';
+            const AuthStr = 'Bearer '.concat(USER_TOKEN);
+            axios.delete(URL, 
+              { 
+                headers: { 
+                  Authorization: AuthStr 
+                },
+                data: {
+                  id: id
+                }
+              })
+              .then(response => {
+                console.log(response.data);
+                this.onLoadData();
+              })
+              .catch((error) => {
+                console.log('Delete language: ' + error);
+              });
+          }
+        },
+        {
+          label: 'No',
+          onClick: () => {
+
+          }
+        }
+      ]
+    });
   }
 
   render() {
@@ -80,13 +125,13 @@ class Language extends Component {
               <tbody>
                 {
                   this.state.languages.map((lang, index) => 
-                    <tr>
-                      <td>1</td>
+                    <tr key={index}>
+                      <td>{ index + 1 }</td>
                       <td>{ lang.language }</td>
                       <td>{ lang.proficiency }</td>
                       <td className='text-center'>
-                        <NavLink exact to='/language/edit' className='mr-3'><FaPenSquare className='text-warning' /></NavLink>
-                        <NavLink exact to='/language/delete'><FaTrash className='text-danger' /></NavLink>
+                        <NavLink exact to={'/language/edit/' + lang._id } className='mr-3'><FaPenSquare className='text-warning' /></NavLink>
+                        <NavLink exact to='#' className='mr-3'><FaTrash className='text-danger' onClick={() => this.onDeleteHandler(lang._id)}/></NavLink>
                       </td>
                     </tr>
                   )
@@ -94,14 +139,6 @@ class Language extends Component {
               </tbody>
             </Table>
           </Card.Body>
-          <Card.Footer>
-            <div className='float-left mt-1 mb-1'>Showing 1 to 10 of 100 entries</div>
-            <Pagination size='sm' className='float-right pagination-danger'>
-              <Pagination.Item key='1' active='true'>1</Pagination.Item>
-              <Pagination.Item key='2'>2</Pagination.Item>
-              <Pagination.Item key='3'>3</Pagination.Item>
-            </Pagination>
-          </Card.Footer>
         </Card>
       </div>
     );
