@@ -3,6 +3,8 @@ import { logger } from '../shared/utils/loggerUtilities';
 import { ProjectDTO } from '../dto/ProjectDTO';
 import HttpResponseResult from '../shared/models/HttpResponseResult';
 import { check, validationResult } from 'express-validator';
+import CustomException from '../shared/models/CustomException';
+import * as errorMessage from '../shared/constants/messages';
 
 export const validate = (method) => {
     switch (method) {
@@ -33,6 +35,10 @@ export const validate = (method) => {
 
 export const add = async (req, res) => {
     try {
+        if (req.userInfo && req.userInfo._id !== data.user_id) {
+            throw new CustomException(true, errorMessage.NOT_AUTHORIZED_TO_ACCESS_RESOURCE);
+        }
+
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(422).json({ errors: errors.array() });
