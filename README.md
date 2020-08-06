@@ -177,6 +177,140 @@ Response:
     }
 }
 ```
+
+## Language EndPoints (Luan)
+**Add Language**
+Authorization Header Required:
+Authorization: Bearer UserAuthTokenHere
+POST: https://smartresumebuild.herokuapp.com/api/language/add
+Request:
+```javascript
+{
+    "user_id": "5f0a819684a234361cf9421c",
+    "language": "English",
+    "proficiency": "Professional working proficiency"
+}
+```
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "_id": "5f29b94d01e7842412fd782c",
+        "created_date": "2020-08-04T19:38:53.531Z",
+        "user_id": "5f0a819684a234361cf9421c",
+        "language": "English2",
+        "proficiency": "Professional working proficiency",
+        "__v": 0
+    }
+}
+```
+**Get Language By Id**
+Authorization Header Required:
+Authorization: Bearer UserAuthTokenHere
+GET: https://smartresumebuild.herokuapp.com/api/language/5f29b94d01e7842412fd782c
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "_id": "5f0a8d1fa380783ef49936d8",
+        "created_date": "2020-07-12T04:10:07.029Z",
+        "user_id": "5f0a819684a234361cf9421c",
+        "language": "Vietnamese",
+        "proficiency": "Professional working proficiency",
+        "__v": 0
+    }
+}
+```
+
+**Get Language List By UserId**
+Authorization Header Required:
+Authorization: Bearer UserAuthTokenHere
+GET: https://smartresumebuild.herokuapp.com/api/language/list/5f0a819684a234361cf9421c
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": [
+        {
+            "_id": "5f0a8d1fa380783ef49936d8",
+            "created_date": "2020-07-12T04:10:07.029Z",
+            "user_id": "5f0a819684a234361cf9421c",
+            "language": "Vietnamese",
+            "proficiency": "Professional working proficiency",
+            "__v": 0
+        },
+        {
+            "_id": "5f0be5461ed6a85d2a744fbb",
+            "created_date": "2020-07-13T04:38:30.847Z",
+            "user_id": "5f0a819684a234361cf9421c",
+            "language": "English",
+            "proficiency": "Professional working proficiency",
+            "__v": 0
+        }
+    ]
+}
+```
+
+**Delete Language**
+Authorization Header Required:
+Authorization: Bearer UserAuthTokenHere
+DELETE: https://smartresumebuild.herokuapp.com/api/language
+Request:
+```javascript
+{
+    "id": "5f29b94d01e7842412fd782c"
+}
+```
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "_id": "5f29b94d01e7842412fd782c",
+        "created_date": "2020-08-04T19:38:53.531Z",
+        "user_id": "5f0a819684a234361cf9421c",
+        "language": "English2",
+        "proficiency": "Professional working proficiency",
+        "__v": 0
+    }
+}
+```
+
+**Update Language**
+Authorization Header Required:
+Authorization: Bearer UserAuthTokenHere
+PUT: https://smartresumebuild.herokuapp.com/api/language
+Request:
+```javascript
+{
+    "id": "5f0a8d1fa380783ef49936d8",
+    "user_id": "5f0a819684a234361cf9421c",
+    "language": "Vietnamese2",
+    "proficiency": "Professional working proficiency"
+}
+```
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "_id": "5f0a8d1fa380783ef49936d8",
+        "created_date": "2020-07-12T04:10:07.029Z",
+        "user_id": "5f0a819684a234361cf9421c",
+        "language": "Vietnamese2",
+        "proficiency": "Professional working proficiency",
+        "__v": 0
+    }
+}
+```
+
 # Front-End
 
 Front-End uses React
