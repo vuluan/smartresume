@@ -33,6 +33,9 @@ export const add = async (req, res) => {
         }
 
         let data = req.body;
+        if (data.user_id !== req.userInfo.user._id) {
+            return await res.status(403).send(new HttpResponseResult(false, "Forbidden", null));
+        }
         let jobprofile = new JobprofileDTO(
             data.user_id,
             data.profile,
@@ -59,6 +62,9 @@ export const detail = async (req, res) => {
         if (!jobprofile) {
             return res.status(404).send(new HttpResponseResult(false, "jobprofile not found", null));
         }
+        if (jobprofile.user_id !== req.userInfo.user._id) {
+            return await res.status(403).send(new HttpResponseResult(false, "Forbidden", null));
+        }
 
         return await res.status(200).send(new HttpResponseResult(true, "", jobprofile));
 
@@ -78,6 +84,12 @@ export const deleteById = async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(422).json({ errors: errors.array() });
+        }
+
+        let jobprofileCheck = await jobprofileServices.detail(req.body.id);
+
+        if (jobprofileCheck.user_id !== req.userInfo.user._id) {
+            return await res.status(403).send(new HttpResponseResult(false, "Forbidden", null));
         }
 
         let jobprofile = await jobprofileServices.deleteById(req.body.id);
@@ -102,13 +114,18 @@ export const updateById = async (req, res) => {
         }
 
         let data = req.body;
+
+        if (data.user_id !== req.userInfo.user._id) {
+            return await res.status(403).send(new HttpResponseResult(false, "Forbidden", null));
+        }
+
         let jobprofile = new JobprofileDTO(
             data.user_id,
             data.profile,
 
         );
         let updatedJobprofile = await jobprofileServices.updateById(data.id, jobprofile);
-
+        console.log(JSON.stringify(updatedJobprofile));
         return await res.status(200).send(new HttpResponseResult(true, "", updatedJobprofile));
 
     } catch (err) {
@@ -122,6 +139,10 @@ export const updateById = async (req, res) => {
 };
 export const findByUserId = async (req, res) => {
     try {
+        if (req.params.id !== req.userInfo.user._id) {
+            return await res.status(403).send(new HttpResponseResult(false, "Forbidden", null));
+        }
+
         let jobprofile = await jobprofileServices.findByUserId(req.params.id);
 
         return await res.status(200).send(new HttpResponseResult(true, "", jobprofile));

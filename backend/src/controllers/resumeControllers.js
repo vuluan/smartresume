@@ -32,6 +32,10 @@ export const add = async (req, res) => {
         }
 
         let data = req.body;
+        if (data.user_id !== req.userInfo.user._id) {
+            return await res.status(403).send(new HttpResponseResult(false, "Forbidden", null));
+        }
+
         let resume = new ResumeDTO(
             data.user_id,
             data.title,
@@ -59,6 +63,9 @@ export const detail = async (req, res) => {
         if (!resume) {
             return res.status(404).send(new HttpResponseResult(false, "resume not found", null));
         }
+        if (resume.user_id !== req.userInfo.user._id) {
+            return await res.status(403).send(new HttpResponseResult(false, "Forbidden", null));
+        }
 
         return await res.status(200).send(new HttpResponseResult(true, "", resume));
 
@@ -78,6 +85,11 @@ export const deleteById = async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(422).json({ errors: errors.array() });
+        }
+        let resumeCheck = await resumeServices.detail(req.body.id);
+
+        if (resumeCheck.user_id !== req.userInfo.user._id) {
+            return await res.status(403).send(new HttpResponseResult(false, "Forbidden", null));
         }
 
         let resume = await resumeServices.deleteById(req.body.id);
@@ -102,6 +114,11 @@ export const updateById = async (req, res) => {
         }
 
         let data = req.body;
+
+        if (data.user_id !== req.userInfo.user._id) {
+            return await res.status(403).send(new HttpResponseResult(false, "Forbidden", null));
+        }
+
         let resume = new ResumeDTO(
             data.user_id,
             data.title,
@@ -123,6 +140,10 @@ export const updateById = async (req, res) => {
 };
 export const findByUserId = async (req, res) => {
     try {
+        if (req.params.id !== req.userInfo.user._id) {
+            return await res.status(403).send(new HttpResponseResult(false, "Forbidden", null));
+        }
+
         let resume = await resumeServices.findByUserId(req.params.id);
 
         return await res.status(200).send(new HttpResponseResult(true, "", resume));
