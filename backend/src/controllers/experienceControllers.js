@@ -15,7 +15,6 @@ export const validate = (method) => {
                 check('location', 'location is empty').not().isEmpty(),
                 check('start_date', 'start_date is empty').not().isEmpty(),
                 check('end_date', 'end_date is empty').not().isEmpty(),
-                check('description', 'description is empty').not().isEmpty(),
             ]
         }
         case 'deleteExperience': {
@@ -33,7 +32,6 @@ export const validate = (method) => {
                 check('location', 'location is empty').not().isEmpty(),
                 check('start_date', 'start_date is empty').not().isEmpty(),
                 check('end_date', 'end_date is empty').not().isEmpty(),
-                check('description', 'description is empty').not().isEmpty(),
             ]
         }
     }
@@ -47,7 +45,7 @@ export const add = async (req, res) => {
         }
 
         let data = req.body;
-        let experience = new LanguageDTO(data.user_id, data.title, data.type, data.company, data.location, data.start_date, data.end_date, data.description);
+        let experience = new ExperienceDTO(data.user_id, data.title, data.type, data.company, data.location, data.start_date, data.end_date, data.description);
         let createdExperience = await experienceServices.add(experience);
 
         return await res.status(200).send(new HttpResponseResult(true, "", createdExperience));
@@ -111,7 +109,7 @@ export const updateById = async (req, res) => {
         }
 
         let data = req.body;
-        let experience = new LanguageDTO(data.user_id, data.title, data.type, data.company, data.location, data.start_date, data.end_date, data.description);
+        let experience = new ExperienceDTO(data.user_id, data.title, data.type, data.company, data.location, data.start_date, data.end_date, data.description);
         let updatedExperience = await experienceServices.updateById(data.id, experience);
 
         return await res.status(200).send(new HttpResponseResult(true, "", updatedExperience));
