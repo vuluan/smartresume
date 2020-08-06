@@ -11,6 +11,7 @@ import objectiveRoutes from './routes/objectiveRoutes';
 import resumeRoutes from './routes/resumeRoutes';
 import projectRoutes from './routes/projectRoutes';
 import skillRoutes from './routes/skillRoutes';
+import experienceRoutes from './routes/experienceRoutes';
 import { logger } from './shared/utils/loggerUtilities';
 import * as jwtUtilities from './shared/utils/jsonWebTokenUtilities';
 import 'dotenv/config';
@@ -95,6 +96,7 @@ objectiveRoutes(app);
 resumeRoutes(app);
 projectRoutes(app);
 skillRoutes(app);
+experienceRoutes(app);
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => {
