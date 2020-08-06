@@ -1,10 +1,10 @@
 import { BasicInfoEntity } from '../entities/BasicInfoEntity';
-
+import { isNullOrUndefined } from '../shared/utils/generalUtilities';
 export const add = async (basicInfoDTO) => {
     try {
         let newBasicInfo = new BasicInfoEntity();
         newBasicInfo.user_id = basicInfoDTO.user_id;
-        newBasicInfo.firsName = basicInfoDTO.firstName;
+        newBasicInfo.firstName = basicInfoDTO.firstName;
         newBasicInfo.lastName = basicInfoDTO.lastName;
         newBasicInfo.email = basicInfoDTO.email;
         newBasicInfo.phone = basicInfoDTO.phone;
@@ -42,18 +42,18 @@ export const updateById = async (id, basicInfoDTO) => {
     try {
         let updateBasicInfo = await BasicInfoEntity.findById(id);
 
-        if (isNullOrUndefined(updateSkill))
+        if (isNullOrUndefined(updateBasicInfo))
             return null;
 
-        newBasicInfo.firsName = basicInfoDTO.firstName;
-        newBasicInfo.lastName = basicInfoDTO.lastName;
-        newBasicInfo.email = basicInfoDTO.email;
-        newBasicInfo.phone = basicInfoDTO.phone;
-        newBasicInfo.address = basicInfoDTO.address;
-        newBasicInfo.country = basicInfoDTO.country;
-        newBasicInfo.region = basicInfoDTO.region;
-        newBasicInfo.gitHub = basicInfoDTO.gitHub;
-        newBasicInfo.linkedin = basicInfoDTO.linkedin;
+            updateBasicInfo.firsName = basicInfoDTO.firstName;
+            updateBasicInfo.lastName = basicInfoDTO.lastName;
+            updateBasicInfo.email = basicInfoDTO.email;
+            updateBasicInfo.phone = basicInfoDTO.phone;
+            updateBasicInfo.address = basicInfoDTO.address;
+            updateBasicInfo.country = basicInfoDTO.country;
+            updateBasicInfo.region = basicInfoDTO.region;
+            updateBasicInfo.gitHub = basicInfoDTO.gitHub;
+            updateBasicInfo.linkedin = basicInfoDTO.linkedin;
         return await updateBasicInfo.save();
     } catch (err) {
         throw err;

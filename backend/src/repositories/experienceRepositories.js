@@ -1,4 +1,5 @@
 import { ExperienceEntity } from '../entities/ExperienceEntity';
+import { isNullOrUndefined } from '../shared/utils/generalUtilities';
 
 export const add = async (experienceDTO) => {
     try {

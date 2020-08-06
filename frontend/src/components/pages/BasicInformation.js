@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Breadcrumbs from '../layouts/Breadcrumbs';
-import { Form, Container, Pagination, Jumbotron, Accordion, Card, Button, Col} from 'react-bootstrap';
-import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
+import { Form, Container, Pagination, Jumbotron, Card, Button, Col} from 'react-bootstrap';
+import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import axios from 'axios';
 
 
@@ -9,6 +9,8 @@ function BasicInformation() {
 
 
   const [formData, setFormData] = useState({
+    _id : '',
+    user_id : '5f278d28cf154530147bcf95',
     firstName : '',
 lastName : '',
 email : '',
@@ -20,7 +22,14 @@ gitHub : '',
 linkedin : '',
   });
 
-  const { firstName,
+  const [userState, setUserState] = useState({
+    isNew : true,
+  });
+
+  const { 
+    _id,
+    user_id,
+    firstName,
     lastName,
     email,
     phone,
@@ -30,36 +39,42 @@ linkedin : '',
     gitHub,
     linkedin, } = formData;
 
-    const onLoad = async (e) => {
-      /* try {
-        const response = await axios.get(
-          'http://localhost:5000/api/basicinfo',
-          data,
-          config
-        );
-  
-        console.log('Basic Info Updated');
-      } catch (e) {
-        console.log(e.response.data.errors);
-      }
-      setFormData({ ...formData, [e.target.name]: e.target.value }); */
-    }
+    // let token = localStorage.getItem('token');
+     let config = {
+       headers: {
+         'Content-Type': 'application/json',
+         'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibWljaGVsbGFuZXRAZ21haWwuY29tIiwiX2lkIjoiNWYyYjE4ZjhkMGE2MDYwMDE3MWFkODlkIn0sImlhdCI6MTU5Njc0MjAyN30.EozwN6Im9WJXYWe2p63JLFt7wymSQaWCG6_7yebcaTk',
+       },
+     };
+
+    useEffect(() => {
+      axios.get('http://smartresumebuild.herokuapp.com/api/basicinfo/list/5f278d28cf154530147bcf95'
+      , config)
+      .then(function (response) {
+        console.log('response',response.data.data[0]);
+
+        if(Array.isArray(response.data.data) && response.data.data.length){
+        setFormData(response.data.data[0]);
+        setUserState({ isNew : false });
+        console.log('formdata',formData);
+        }
+
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
+    }, []);
 
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault();   
 
-    // let token = localStorage.getItem('token');
-    // let config = {
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'x-auth-token': token,
-    //   },
-    // };
-
-    /* let data = {
+    let data = {
+    id : _id,
+    user_id,
       firstName,
 lastName,
 email,
@@ -71,24 +86,27 @@ gitHub,
 linkedin,
     };
     try {
+      if(userState.isNew){
       const response = await axios.post(
-        'http://localhost:5000/api/basicinfo',
+        'http://smartresumebuild.herokuapp.com/api/basicinfo/add',
         data,
         config
       );
+      }
+      else{
+      const response = await axios.put(
+        'http://smartresumebuild.herokuapp.com/api/basicinfo',
+        data,
+        config
+      );        
+      }
 
       console.log('Basic Info Updated');
     } catch (e) {
       console.log(e.response.data.errors);
-    } */
+    } 
   };
 
-
-
-
-
-  // const [country, setCountry] = useState(0);
-  // const [region, setRegion] = useState(0);
 
   function selectCountry (val) {
     setFormData({ ...formData, country: val });
@@ -129,11 +147,13 @@ linkedin,
         text='dark'
       ></Card>
     <Jumbotron>
+      <h5>Basic Information</h5>
     <Form className="mt-4 mb-4" onSubmit={(e) => onSubmit(e)}>
   <Form.Row>
     <Form.Group as={Col} controlId="firstName">
       <Form.Label>First Name</Form.Label>
       <Form.Control 
+      name="firstName"
                 value={firstName}
                 onChange={(e) => onChange(e)} 
                 type="text" placeholder="Enter First Name" required />
@@ -142,6 +162,7 @@ linkedin,
     <Form.Group as={Col} controlId="lastName">
       <Form.Label>Last Name</Form.Label>
       <Form.Control 
+      name="lastName"
                 value={lastName}
                 onChange={(e) => onChange(e)}
                 type="text" placeholder="Enter Last Name" required />
@@ -152,6 +173,7 @@ linkedin,
     <Form.Group as={Col} controlId="email">
       <Form.Label>Email</Form.Label>
       <Form.Control 
+      name="email"
                 value={email}
                 onChange={(e) => onChange(e)}
                 type="email" placeholder="Enter email" required />
@@ -160,6 +182,7 @@ linkedin,
     <Form.Group as={Col} controlId="phone">
       <Form.Label>Phone</Form.Label>
       <Form.Control 
+      name="phone"
                 value={phone}
                 onChange={(e) => onChange(e)} 
                 type="tel" placeholder="Phone Number" required />
@@ -169,6 +192,7 @@ linkedin,
   <Form.Group controlId="address">
     <Form.Label>Address</Form.Label>
     <Form.Control 
+      name="address"
                 value={address}
                 onChange={(e) => onChange(e)} 
                 placeholder="1234 Main St E" required />
@@ -178,6 +202,7 @@ linkedin,
             <Form.Group as={Col} controlId="country">
               <Form.Label>Country</Form.Label>
               <CountryDropdown
+      name="country"
                 className='form-control'
                 value={country} 
                 onChange={(val) => selectCountry(val)} 
@@ -187,6 +212,7 @@ linkedin,
             <Form.Group as={Col} controlId="region">
               <Form.Label>Region</Form.Label>
               <RegionDropdown
+      name="region"
                 className='form-control'
                 country={country}
                 value={region}
@@ -199,6 +225,7 @@ linkedin,
     <Form.Group as={Col} controlId="gitHub">
       <Form.Label>GitHub Link</Form.Label>
       <Form.Control 
+      name="gitHub"
                 value={gitHub}
                 onChange={(e) => onChange(e)} 
                 type="text" placeholder="Type github link.." />
@@ -207,6 +234,7 @@ linkedin,
     <Form.Group as={Col} controlId="linkedin">
       <Form.Label>LinkedIn</Form.Label>
       <Form.Control 
+      name="linkedin"
                 value={linkedin}
                 onChange={(e) => onChange(e)} 
                 type="text" placeholder="Type linkedin link" />

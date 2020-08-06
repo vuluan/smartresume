@@ -1,8 +1,10 @@
 import { EducationEntity } from '../entities/EducationEntity';
+import { isNullOrUndefined } from '../shared/utils/generalUtilities';
 
 export const add = async (educationDTO) => {
     try {
-        let newEducation = new EducationEntity(); newEducation.user_id = educationDTO.user_id;
+        let newEducation = new EducationEntity();
+        newEducation.user_id = educationDTO.user_id;
         newEducation.school = educationDTO.school;
         newEducation.degree = educationDTO.degree;
         newEducation.field = educationDTO.field;
@@ -26,6 +28,7 @@ export const detail = async (id) => {
 
 export const deleteById = async (id) => {
     try {
+
         let removedEducation = await EducationEntity.findByIdAndRemove(id);
         return removedEducation;
     } catch (err) {
