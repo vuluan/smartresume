@@ -32,7 +32,7 @@ const formAction = function(e){
     // let config = {
     //   headers: {
     //     'Content-Type': 'application/json',
-    //     'x-auth-token': token,
+    //     'Authorization': token,
     //   },
     // };
 

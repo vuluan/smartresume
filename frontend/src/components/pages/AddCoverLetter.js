@@ -50,6 +50,7 @@ function CoverLetter() {
   return (
     <Container>
     <Jumbotron>
+    <h5>Add Cover Letter</h5>
     <Form className="mt-4 mb-4" onSubmit={(e) => onSubmit(e)}>
   <Form.Group controlId="title">
     <Form.Control

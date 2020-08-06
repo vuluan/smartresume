@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Breadcrumbs from '../layouts/Breadcrumbs';
-import { Form, Container, Pagination, Jumbotron, Accordion, Card, Button, Col} from 'react-bootstrap';
-import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
+import { Form, Container, Pagination, Jumbotron, Card, Button, Col} from 'react-bootstrap';
+import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import axios from 'axios';
 
 
@@ -9,8 +9,8 @@ function BasicInformation() {
 
 
   const [formData, setFormData] = useState({
-    id : '',
-    user_id : '',
+    _id : '',
+    user_id : '5f278d28cf154530147bcf95',
     firstName : '',
 lastName : '',
 email : '',
@@ -26,7 +26,10 @@ linkedin : '',
     isNew : true,
   });
 
-  const { firstName,
+  const { 
+    _id,
+    user_id,
+    firstName,
     lastName,
     email,
     phone,
@@ -45,7 +48,8 @@ linkedin : '',
      };
 
     useEffect(() => {
-      axios.get('http://localhost:5000/api/basicinfo/list/5f278d28cf154530147bcf95', config)
+      axios.get('http://localhost:5000/api/basicinfo/list/5f278d28cf154530147bcf95'
+      , config)
       .then(function (response) {
         console.log('response',response.data.data[0]);
 
@@ -66,11 +70,11 @@ linkedin : '',
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault();   
 
-    
-
-    /* let data = {
+    let data = {
+    id : _id,
+    user_id,
       firstName,
 lastName,
 email,
@@ -84,7 +88,7 @@ linkedin,
     try {
       if(userState.isNew){
       const response = await axios.post(
-        'http://localhost:5000/api/basicinfo',
+        'http://localhost:5000/api/basicinfo/add',
         data,
         config
       );
@@ -100,15 +104,9 @@ linkedin,
       console.log('Basic Info Updated');
     } catch (e) {
       console.log(e.response.data.errors);
-    } */
+    } 
   };
 
-
-
-
-
-  // const [country, setCountry] = useState(0);
-  // const [region, setRegion] = useState(0);
 
   function selectCountry (val) {
     setFormData({ ...formData, country: val });
@@ -149,6 +147,7 @@ linkedin,
         text='dark'
       ></Card>
     <Jumbotron>
+      <h5>Basic Information</h5>
     <Form className="mt-4 mb-4" onSubmit={(e) => onSubmit(e)}>
   <Form.Row>
     <Form.Group as={Col} controlId="firstName">
