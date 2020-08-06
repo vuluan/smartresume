@@ -638,7 +638,244 @@ Response:
     "message": "",
     "data": {
         "email": "nguyenvuluan89@gmail.com",
-        "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibmd1eWVudnVsdWFuODlAZ21haWwuY29tIiwiX2lkIjoiNWYyYjcyZWY1NGFmMDUwMDE3ZGQ0MjIzIn0sImlhdCI6MTU5NjY4MzExMX0.2VjJh5WIfK9CeJxZwf9nIMD6thSmtJUtHp_QRheIMmU"
+        "accessToken": "{token}"
+    }
+}
+```
+
+## Skill EndPoints (Hung)
+**Add Skill**
+Authorization Header Required:
+Authorization: Bearer UserAuthTokenHere
+POST: https://smartresumebuild.herokuapp.com/api/skill/add
+
+Request:
+```javascript
+{
+    "user_id": "5f2b72ef54af050017dd4223",
+    "skill_name": "HTML",
+    "is_hard_skill": false
+}
+```
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "_id": "5f2be447f2864e0017f9f482",
+        "user_id": "5f2b72ef54af050017dd4223",
+        "skill_name": "HTML",
+        "is_hard_skill": false,
+        "__v": 0
+    }
+}
+```
+
+**Get Skill List By UserId**
+Authorization Header Required:
+Authorization: Bearer UserAuthTokenHere
+GET: https://smartresumebuild.herokuapp.com/api/skill/list/{user-id}
+
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": [
+        {
+            "_id": "5f2be447f2864e0017f9f482",
+            "user_id": "5f2b72ef54af050017dd4223",
+            "skill_name": "HTML",
+            "is_hard_skill": false,
+            "__v": 0
+        }
+    ]
+}
+```
+
+**Delete Skill**
+Authorization Header Required:
+Authorization: Bearer UserAuthTokenHere
+DELETE: https://smartresumebuild.herokuapp.com/api/skill
+
+Request:
+```javascript
+{
+    "id": "{skill_id}"
+}
+```
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "_id": "5f2be447f2864e0017f9f482",
+        "user_id": "5f2b72ef54af050017dd4223",
+        "skill_name": "HTML",
+        "is_hard_skill": false,
+        "__v": 0
+    }
+}
+```
+
+**Update Skill**
+Authorization Header Required:
+Authorization: Bearer UserAuthTokenHere
+PUT: https://smartresumebuild.herokuapp.com/api/skill
+
+Request:
+```javascript
+{
+    "id": "5f2be5e8f2864e0017f9f483",
+    "user_id": "5f2b72ef54af050017dd4223",
+    "skill_name": "CSS",
+    "is_hard_skill": false
+}
+```
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "_id": "5f2be5e8f2864e0017f9f483",
+        "user_id": "5f2b72ef54af050017dd4223",
+        "skill_name": "CSS",
+        "is_hard_skill": false,
+        "__v": 0
+    }
+}
+```
+
+## Project EndPoints (Hung)
+**Add Project**
+Authorization Header Required:
+Authorization: Bearer UserAuthTokenHere
+POST: https://smartresumebuild.herokuapp.com/api/project/add
+
+Request:
+```javascript
+{
+    "user_id": "5f2b72ef54af050017dd4223",
+    "name": "ABC",
+    "description": ".NET developer"
+}
+```
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "_id": "5f2be8e79a74fa71399dc24f",
+        "user_id": "5f2b72ef54af050017dd4223",
+        "name": "ABC",
+        "description": ".NET developer",
+        "__v": 0
+    }
+}
+```
+**Get Project By Id**
+Authorization Header Required:
+Authorization: Bearer UserAuthTokenHere
+GET: https://smartresumebuild.herokuapp.com/api/project/{project-id}
+
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "duties": [],
+        "skills": [],
+        "_id": "5f2be8e79a74fa71399dc24f",
+        "user_id": "5f2b72ef54af050017dd4223",
+        "name": "ABC",
+        "description": ".NET developer",
+        "__v": 0
+    }
+}
+```
+
+**Get Porject List By UserId**
+Authorization Header Required:
+Authorization: Bearer UserAuthTokenHere
+GET: https://smartresumebuild.herokuapp.com/api/project/list/{user-id}
+
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": [
+        {
+            "duties": [],
+            "skills": [],
+            "_id": "5f2be8e79a74fa71399dc24f",
+            "user_id": "5f2b72ef54af050017dd4223",
+            "name": "ABC",
+            "description": ".NET developer",
+            "__v": 0
+        }
+    ]
+}
+```
+
+**Delete Project**
+Authorization Header Required:
+Authorization: Bearer UserAuthTokenHere
+DELETE: https://smartresumebuild.herokuapp.com/api/project
+
+Request:
+```javascript
+{
+    "id": "{project_id}"
+}
+```
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "duties": [],
+        "skills": [],
+        "_id": "5f2be8e79a74fa71399dc24f",
+        "user_id": "5f2b72ef54af050017dd4223",
+        "name": "ABC",
+        "description": "Senior .NET developer",
+        "__v": 0
+    }
+}
+```
+
+**Update Project**
+Authorization Header Required:
+Authorization: Bearer UserAuthTokenHere
+PUT: https://smartresumebuild.herokuapp.com/api/project
+
+Request:
+```javascript
+{
+    "id": "5f2be8e79a74fa71399dc24f",
+    "user_id": "5f2b72ef54af050017dd4223",
+    "name": "ABC",
+    "description": "Senior .NET developer"
+}
+```
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "_id": "5f2be8e79a74fa71399dc24f",
+        "user_id": "5f2b72ef54af050017dd4223",
+        "name": "ABC",
+        "description": "Senior .NET developer",
+        "__v": 0
     }
 }
 ```
