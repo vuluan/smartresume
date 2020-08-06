@@ -638,7 +638,7 @@ Response:
     "message": "",
     "data": {
         "email": "nguyenvuluan89@gmail.com",
-        "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibmd1eWVudnVsdWFuODlAZ21haWwuY29tIiwiX2lkIjoiNWYyYjcyZWY1NGFmMDUwMDE3ZGQ0MjIzIn0sImlhdCI6MTU5NjY4MzExMX0.2VjJh5WIfK9CeJxZwf9nIMD6thSmtJUtHp_QRheIMmU"
+        "accessToken": "{token}"
     }
 }
 ```

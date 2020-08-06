@@ -11,8 +11,6 @@ export const validate = (method) => {
                 check('user_id', 'Userid is empty').not().isEmpty(),
                 check('name', 'Project name is empty').not().isEmpty(),
                 check('description', 'Project Description is empty').not().isEmpty(),
-                check('duties', 'Duties is empty').not().isEmpty(),
-                check('skills', 'Skills is empty').not().isEmpty(),
             ]
         }
         case 'deleteProject': {
@@ -24,8 +22,6 @@ export const validate = (method) => {
             return [
                 check('name', 'Project name is empty').not().isEmpty(),
                 check('description', 'Project Description is empty').not().isEmpty(),
-                check('duties', 'Duties is empty').not().isEmpty(),
-                check('skills', 'Skills is empty').not().isEmpty(),
             ]
         }
     }
