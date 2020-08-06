@@ -183,6 +183,7 @@ Response:
 Authorization Header Required:
 Authorization: Bearer UserAuthTokenHere
 POST: https://smartresumebuild.herokuapp.com/api/language/add
+
 Request:
 ```javascript
 {
@@ -210,6 +211,7 @@ Response:
 Authorization Header Required:
 Authorization: Bearer UserAuthTokenHere
 GET: https://smartresumebuild.herokuapp.com/api/language/5f29b94d01e7842412fd782c
+
 Response:
 ```javascript
 {
@@ -230,6 +232,7 @@ Response:
 Authorization Header Required:
 Authorization: Bearer UserAuthTokenHere
 GET: https://smartresumebuild.herokuapp.com/api/language/list/5f0a819684a234361cf9421c
+
 Response:
 ```javascript
 {
@@ -260,6 +263,7 @@ Response:
 Authorization Header Required:
 Authorization: Bearer UserAuthTokenHere
 DELETE: https://smartresumebuild.herokuapp.com/api/language
+
 Request:
 ```javascript
 {
@@ -286,6 +290,7 @@ Response:
 Authorization Header Required:
 Authorization: Bearer UserAuthTokenHere
 PUT: https://smartresumebuild.herokuapp.com/api/language
+
 Request:
 ```javascript
 {
