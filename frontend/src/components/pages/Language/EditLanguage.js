@@ -1,7 +1,7 @@
 import React from 'react';
 import Breadcrumbs from '../../layouts/Breadcrumbs';
-import { Button, Card, Form, Col } from 'react-bootstrap';
-import { NavLink, Redirect } from 'react-router-dom';
+import { Button, Card, Form, Col, Alert } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
 
@@ -28,20 +28,24 @@ class EditLanguage extends React.Component {
   constructor() {
     super();
     this.state = {
+      id: '',
       language: '',
-      proficiency: ''
+      proficiency: '',
+      messageVariant: 'success',
+      hasMessage: false,
+      messageInfo: ''
     };
   }
 
   componentDidMount() {
-    let id = this.props.match.params.id;
-    console.log(id);
-    let URL = '/api/language/' + id;
+    this.setState({
+      id: this.props.match.params.id
+    });
+    let URL = '/api/language/' + this.props.match.params.id;
     let USER_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibmd1eWVudnVsdWFuODlAZ21haWwuY29tIiwiX2lkIjoiNWYwYTgxOTY4NGEyMzQzNjFjZjk0MjFjIn0sImlhdCI6MTU5NjcxODEyNn0.bTPA7D8yPX0nzAPd4x4bzGCy9i1Bc6vf_KGNPm_OK5Y';
     const AuthStr = 'Bearer '.concat(USER_TOKEN);
     axios.get(URL, { headers: { Authorization: AuthStr } })
       .then(response => {
-          // If request is good...
           console.log(response.data);
           this.setState({ 
             language: response.data.data.language,
@@ -49,17 +53,26 @@ class EditLanguage extends React.Component {
           });
         })
       .catch((error) => {
-          console.log('error ' + error);
+        this.setState({
+          messageVariant: 'danger',
+          hasMessage: true,
+          messageInfo: 'Loading: ' + error
         });
+      });
   }
 
   saveHandler = (e) => {
+    this.setState({
+      hasMessage: false
+    });
+
     let USER_ID = '5f0a819684a234361cf9421c'
-    let URL = '/api/language/add';
+    let URL = '/api/language';
     let USER_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibmd1eWVudnVsdWFuODlAZ21haWwuY29tIiwiX2lkIjoiNWYwYTgxOTY4NGEyMzQzNjFjZjk0MjFjIn0sImlhdCI6MTU5NjcxODEyNn0.bTPA7D8yPX0nzAPd4x4bzGCy9i1Bc6vf_KGNPm_OK5Y';
     const AuthStr = 'Bearer '.concat(USER_TOKEN);
-    axios.post(URL, 
+    axios.put(URL, 
       {
+        id: this.state.id,
         user_id: USER_ID,
         language: this.state.language,
         proficiency: this.state.proficiency
@@ -68,11 +81,18 @@ class EditLanguage extends React.Component {
         headers: { Authorization: AuthStr } 
       })
       .then(response => {
-        console.log(response.data);
-        this.props.history.push('/language')
+        this.setState({
+          messageVariant: 'success',
+          hasMessage: true,
+          messageInfo: 'Update successfully!'
+        });
       })
       .catch((error) => {
-        console.log('error 3 ' + error);
+        this.setState({
+          messageVariant: 'danger',
+          hasMessage: true,
+          messageInfo: 'Saving: ' + error
+        });
       });
   }
 
@@ -84,6 +104,10 @@ class EditLanguage extends React.Component {
     return (
       <div>
         <Breadcrumbs links={breadcrumbLinks} />
+        {  
+          this.state.hasMessage ? <Alert variant={this.state.messageVariant}>{this.state.messageInfo}</Alert> : ''
+        }
+        
         <Card
           bg='light'
           text='dark'
@@ -99,13 +123,13 @@ class EditLanguage extends React.Component {
                   </Col>
                   <Col>
                     <Form.Label>Proficiency</Form.Label>
-                    <Form.Control onChange={this.handleValueChange} name='proficiency' size='sm' as="select">
+                    <Form.Control onChange={this.handleValueChange} value={this.state.proficiency} name='proficiency' size='sm' as="select">
                       <option value='' key='-1'>--- Please select proficiency ---</option>
                       {
                         Proficiencies.map((value, index) => (
-                          <option value={value} key={index} { this.state.proficiency } >{value}</option>
+                          <option value={value} key={index}>{value}</option>
                         ))
-                      }
+                      } 
                     </Form.Control>
                   </Col>
                 </Form.Row>
