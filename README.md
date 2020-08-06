@@ -359,6 +359,240 @@ Response:
 }
 ```
 
+## CoverLetter EndPoints (Michael)
+**Add CoverLetter**
+
+Authorization Header Required:
+
+Authorization: Bearer UserAuthToken Here
+
+POST: https://smartresumebuild.herokuapp.com/api/coverletter/add
+
+Request:
+```javascript
+        {
+            "user_id": "5f278d28cf154530147bcf95",
+            "title": "React JS Developer",
+            "body": "Working hard to do more"
+        }
+```
+**Get CoverLetter By Id**
+
+Authorization Header Required:
+
+Authorization: Bearer UserAuthToken Here
+
+GET: https://smartresumebuild.herokuapp.com/api/coverletter/5f279580cf154530147bcf97
+
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data":{
+	"_id":{"$oid":"5f279580cf154530147bcf97"},
+	"created_date":{"$date":{"$numberLong":"1596429696094"}},
+	"user_id":"5f278d28cf154530147bcf95",
+	"title":"Java Developer",
+	"body":"I'm the best I'm the best I'm the best fit for your Java dev team",
+	"__v":{"$numberInt":"0"}}
+}
+```
+
+**Get CoverLetter List By UserId**
+
+Authorization Header Required:
+
+Authorization: Bearer UserAuthToken Here
+
+GET: https://smartresumebuild.herokuapp.com/api/coverletter/list/5f278d28cf154530147bcf95
+
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": [        
+	{	"_id":{"$oid":"5f279580cf154530147bcf97"},
+	"created_date":{"$date":{"$numberLong":"1596429696094"}},
+	"user_id":"5f278d28cf154530147bcf95",
+	"title":"Java Developer",
+	"body":"I'm the best I'm the best I'm the best fit for your Java dev team",
+	"__v":{"$numberInt":"0"}
+	},	
+	{
+	"_id":{"$oid":"5f27966fcf154530147bcf98"},
+	"created_date":{"$date":{"$numberLong":"1596429935481"}},
+	"user_id":"5f278d28cf154530147bcf95",
+	"title":"FullStack Developer",
+	"body":" I'm the best for your backend stuff",
+	"__v":{"$numberInt":"0"}
+	},
+	{
+	"_id":{"$oid":"5f2b28536bfd18097898e156"},
+	"created_date":{"$date":{"$numberLong":"1596663891984"}},
+	"user_id":"5f278d28cf154530147bcf95",
+	"title":"React JS Developer",
+	"body":"Working hard to do more",
+	"__v":{"$numberInt":"0"}}
+    ]
+}
+```
+
+**Delete CoverLetter**
+
+Authorization Header Required:
+
+Authorization: Bearer UserAuthToken Here
+
+DELETE: https://smartresumebuild.herokuapp.com/api/coverletter
+
+Request:
+```javascript
+{
+    "id": "5f279580cf154530147bcf97"
+}
+```
+
+
+**Update CoverLetter**
+
+Authorization Header Required:
+
+Authorization: Bearer UserAuthToken Here
+
+PUT: https://smartresumebuild.herokuapp.com/api/coverletter
+
+Request:
+```javascript
+       {
+            "id": "5f2b28536bfd18097898e156",
+            "user_id": "5f278d28cf154530147bcf95",
+            "title": "React JS Developer",
+            "body": "Working hard to do better"
+        }
+```
+## BasicInfo EndPoints (Michael)
+**Add BasicInfo**
+
+Authorization Header Required:
+
+Authorization: Bearer UserAuthToken Here
+
+POST: https://smartresumebuild.herokuapp.com/api/basicinfo/add
+
+Request:
+```javascript
+        {
+    "user_id": "5f278d28cf154530147bcf95",
+    "firstName": "Michael",
+    "lastName": "Anetor",
+    "email": "michellanet@gmail.com",
+    "phone": "6120808080",
+    "address": "1 Main St E",
+    "country": "Canada",
+    "region": "Ontario",
+    "gitHub": "https://github.com/devBoy",
+    "linkedin": "https://www.linkedin.com/in/michael-anetor"
+}
+```
+**Get BasicInfo By Id**
+
+Authorization Header Required:
+
+Authorization: Bearer UserAuthToken Here
+
+GET: https://smartresumebuild.herokuapp.com/api/basicinfo/5f2b28cc6bfd18097898e157
+
+Response:
+```javascript
+{
+            "_id": "5f2b28cc6bfd18097898e157",
+            "created_date": "2020-08-05T21:46:52.650Z",
+            "user_id": "5f278d28cf154530147bcf95",
+            "firstName": "Michael",
+            "lastName": "Anetor",
+            "email": "michellanet@gmail.com",
+            "phone": "6120808080",
+            "address": "1 Main St E",
+            "country": "Canada",
+            "region": "Ontario",
+            "gitHub": "https://github.com/devBoy",
+            "linkedin": "https://www.linkedin.com/in/michael-anetor",
+            "__v": 0
+        }
+```
+
+**Get BasicInfo List By UserId**
+
+Authorization Header Required:
+
+Authorization: Bearer UserAuthToken Here
+
+GET: https://smartresumebuild.herokuapp.com/api/basicinfo/list/5f278d28cf154530147bcf95
+
+Response:
+```javascript
+{
+            "_id": "5f2b28cc6bfd18097898e157",
+            "created_date": "2020-08-05T21:46:52.650Z",
+            "user_id": "5f278d28cf154530147bcf95",
+            "firstName": "Michael",
+            "lastName": "Anetor",
+            "email": "michellanet@gmail.com",
+            "phone": "6120808080",
+            "address": "1 Main St E",
+            "country": "Canada",
+            "region": "Ontario",
+            "gitHub": "https://github.com/devBoy",
+            "linkedin": "https://www.linkedin.com/in/michael-anetor",
+            "__v": 0
+        }
+```
+
+**Delete BasicInfo**
+
+Authorization Header Required:
+
+Authorization: Bearer UserAuthToken Here
+
+DELETE: https://smartresumebuild.herokuapp.com/api/basicinfo
+
+Request:
+```javascript
+{
+    "id": "5f2b28cc6bfd18097898e157"
+}
+```
+
+
+**Update BasicInfo**
+
+Authorization Header Required:
+
+Authorization: Bearer UserAuthToken Here
+
+PUT: https://smartresumebuild.herokuapp.com/api/basicinfo
+
+Request:
+```javascript
+       {
+            "id": "5f2b28cc6bfd18097898e157",
+            "created_date": "2020-08-05T21:46:52.650Z",
+            "user_id": "5f278d28cf154530147bcf95",
+            "firstName": "Michael",
+            "lastName": "Anetor",
+            "email": "michellanet@gmail.com",
+            "phone": "6120808080",
+            "address": "1 Main St E",
+            "country": "Canada",
+            "region": "Ontario",
+            "gitHub": "https://github.com/devBoy",
+            "linkedin": "https://www.linkedin.com/in/michael-anetor",
+            "__v": 0
+        }
+```
+
 # Front-End
 
 Front-End uses React
