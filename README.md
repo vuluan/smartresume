@@ -643,6 +643,112 @@ Response:
 }
 ```
 
+## Skill EndPoints (Hung)
+**Add Skill**
+Authorization Header Required:
+Authorization: Bearer UserAuthTokenHere
+POST: https://smartresumebuild.herokuapp.com/api/skill/add
+
+Request:
+```javascript
+{
+    "user_id": "5f2b72ef54af050017dd4223",
+    "skill_name": "HTML",
+    "is_hard_skill": false
+}
+```
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "_id": "5f2be447f2864e0017f9f482",
+        "user_id": "5f2b72ef54af050017dd4223",
+        "skill_name": "HTML",
+        "is_hard_skill": false,
+        "__v": 0
+    }
+}
+```
+
+**Get Skill List By UserId**
+Authorization Header Required:
+Authorization: Bearer UserAuthTokenHere
+GET: https://smartresumebuild.herokuapp.com/api/skill/list/{user-id}
+
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": [
+        {
+            "_id": "5f2be447f2864e0017f9f482",
+            "user_id": "5f2b72ef54af050017dd4223",
+            "skill_name": "HTML",
+            "is_hard_skill": false,
+            "__v": 0
+        }
+    ]
+}
+```
+
+**Delete Skill**
+Authorization Header Required:
+Authorization: Bearer UserAuthTokenHere
+DELETE: https://smartresumebuild.herokuapp.com/api/language
+
+Request:
+```javascript
+{
+    "id": "{language_id}"
+}
+```
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "_id": "5f2be447f2864e0017f9f482",
+        "user_id": "5f2b72ef54af050017dd4223",
+        "skill_name": "HTML",
+        "is_hard_skill": false,
+        "__v": 0
+    }
+}
+```
+
+**Update Skill**
+Authorization Header Required:
+Authorization: Bearer UserAuthTokenHere
+PUT: https://smartresumebuild.herokuapp.com/api/skill
+
+Request:
+```javascript
+{
+    "id": "5f2be5e8f2864e0017f9f483",
+    "user_id": "5f2b72ef54af050017dd4223",
+    "skill_name": "CSS",
+    "is_hard_skill": false
+}
+```
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "_id": "5f2be5e8f2864e0017f9f483",
+        "user_id": "5f2b72ef54af050017dd4223",
+        "skill_name": "CSS",
+        "is_hard_skill": false,
+        "__v": 0
+    }
+}
+```
+
 
 ## Language EndPoints (Luan)
 **Add Language**
