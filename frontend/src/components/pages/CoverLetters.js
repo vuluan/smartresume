@@ -17,7 +17,7 @@ const breadcrumbLinks = [
   }
 ];
 
-let active = 2;
+let active = 1;
 let items = [];
 for (let number = 1; number <= 5; number++) {
   items.push(
@@ -27,67 +27,62 @@ for (let number = 1; number <= 5; number++) {
   );
 }
 
-const formAction = function(e){
-   // let token = localStorage.getItem('token');
-    // let config = {
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Authorization': token,
-    //   },
-    // };
 
-    /* if(e.name === 'save'){
-    let data = {
-      title,
-      body,
-    };
-    try {
-      const response = await axios.put(
-        'http://localhost:5000/api/coverLetter'+{id},
-        data,
-        config
-      );
-
-      console.log('Cover Letter Updated');
-    } catch (e) {
-      console.log(e.response.data.errors);
-    }
-  }
-  else if(e.name === 'delete'){
-    try {
-      const response = await axios.delete(
-        'http://localhost:5000/api/coverLetter/'+{id},
-        data,
-        config
-      );
-
-      console.log('Cover Letter Deleted');
-    } catch (e) {
-      console.log(e.response.data.errors);
-    }
-  } */
-}
-
-/*const [formData, setFormData] = useState({
-  user_id: '',
-  title: '',
-  body: '',
-  _id: '',
-});
-
-useEffect(() => {
-  axios.get('http://localhost:5000/api/coverLetter')
-  .then(function (response) {
-    setFormData(response.data);
-    console.log(formData);
-  })
-  .catch(function (error) {
-    // handle error
-    console.log(error);
-  });
-});*/
 
 function CoverLetters() {
+
+  let config = {
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibWljaGVsbGFuZXRAZ21haWwuY29tIiwiX2lkIjoiNWYyYjE4ZjhkMGE2MDYwMDE3MWFkODlkIn0sImlhdCI6MTU5Njc0MjAyN30.EozwN6Im9WJXYWe2p63JLFt7wymSQaWCG6_7yebcaTk',
+    },
+  };
+  
+  const formUpdate = function(letterData){
+      try {
+        const response = axios.put(
+          'http://smartresumebuild.herokuapp.com/api/coverletter',
+          letterData,
+          config
+        );
+  
+        console.log('Cover Letter Updated');
+      } catch (e) {
+        console.log(e.response.data.errors);
+      }
+  }
+
+  const formRemove = function(_id){
+      try {
+        const response = axios.delete(
+          'http://smartresumebuild.herokuapp.com/api/coverletter',
+          {id : _id},
+          config
+        );
+  
+        console.log('Cover Letter Deleted');
+      } catch (e) {
+        console.log(e.response.data.errors);
+      }
+  }
+  
+  const [formData, setFormData] = useState([]);
+  
+  useEffect(() => {
+    axios.get('http://smartresumebuild.herokuapp.com/api/coverletter/list/5f278d28cf154530147bcf95'
+    , config)
+    .then(function (response) {
+      setFormData(response.data.data);
+      console.log(response.data.data);
+    })
+    .catch(function (error) {
+      // handle error
+      console.log(error);
+    });
+  }, []);
+
+
+
   return (
     <div>
       <Breadcrumbs links={breadcrumbLinks} />
@@ -100,13 +95,11 @@ function CoverLetters() {
         </Card.Header>
         <Card.Body>
           <Card.Title>Cover Letters</Card.Title>
-          <CoverLetter/>
-          <CoverLetter/>
-          {/* {formData.map(
-    (cl)=>(
-      <CoverLetter data ={cl} formAction={formAction} key={cl._id} />
+          {formData.map(
+    (coverletter)=>(
+      <CoverLetter data ={coverletter} formUpdate={formUpdate} formRemove={formRemove} key={coverletter._id} />
     )
-  )} */}
+  )} 
           <div class='float-left'>Showing 1 to 10 of 100 entries</div>
           <Pagination className='float-right'>{items}</Pagination>
         </Card.Body>

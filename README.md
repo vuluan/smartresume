@@ -697,12 +697,12 @@ Response:
 **Delete Skill**
 Authorization Header Required:
 Authorization: Bearer UserAuthTokenHere
-DELETE: https://smartresumebuild.herokuapp.com/api/language
+DELETE: https://smartresumebuild.herokuapp.com/api/skill
 
 Request:
 ```javascript
 {
-    "id": "{language_id}"
+    "id": "{skill_id}"
 }
 ```
 Response:
@@ -744,6 +744,137 @@ Response:
         "user_id": "5f2b72ef54af050017dd4223",
         "skill_name": "CSS",
         "is_hard_skill": false,
+        "__v": 0
+    }
+}
+```
+
+## Project EndPoints (Hung)
+**Add Project**
+Authorization Header Required:
+Authorization: Bearer UserAuthTokenHere
+POST: https://smartresumebuild.herokuapp.com/api/project/add
+
+Request:
+```javascript
+{
+    "user_id": "5f2b72ef54af050017dd4223",
+    "name": "ABC",
+    "description": ".NET developer"
+}
+```
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "_id": "5f2be8e79a74fa71399dc24f",
+        "user_id": "5f2b72ef54af050017dd4223",
+        "name": "ABC",
+        "description": ".NET developer",
+        "__v": 0
+    }
+}
+```
+**Get Project By Id**
+Authorization Header Required:
+Authorization: Bearer UserAuthTokenHere
+GET: https://smartresumebuild.herokuapp.com/api/project/{project-id}
+
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "duties": [],
+        "skills": [],
+        "_id": "5f2be8e79a74fa71399dc24f",
+        "user_id": "5f2b72ef54af050017dd4223",
+        "name": "ABC",
+        "description": ".NET developer",
+        "__v": 0
+    }
+}
+```
+
+**Get Porject List By UserId**
+Authorization Header Required:
+Authorization: Bearer UserAuthTokenHere
+GET: https://smartresumebuild.herokuapp.com/api/project/list/{user-id}
+
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": [
+        {
+            "duties": [],
+            "skills": [],
+            "_id": "5f2be8e79a74fa71399dc24f",
+            "user_id": "5f2b72ef54af050017dd4223",
+            "name": "ABC",
+            "description": ".NET developer",
+            "__v": 0
+        }
+    ]
+}
+```
+
+**Delete Project**
+Authorization Header Required:
+Authorization: Bearer UserAuthTokenHere
+DELETE: https://smartresumebuild.herokuapp.com/api/project
+
+Request:
+```javascript
+{
+    "id": "{project_id}"
+}
+```
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "duties": [],
+        "skills": [],
+        "_id": "5f2be8e79a74fa71399dc24f",
+        "user_id": "5f2b72ef54af050017dd4223",
+        "name": "ABC",
+        "description": "Senior .NET developer",
+        "__v": 0
+    }
+}
+```
+
+**Update Project**
+Authorization Header Required:
+Authorization: Bearer UserAuthTokenHere
+PUT: https://smartresumebuild.herokuapp.com/api/project
+
+Request:
+```javascript
+{
+    "id": "5f2be8e79a74fa71399dc24f",
+    "user_id": "5f2b72ef54af050017dd4223",
+    "name": "ABC",
+    "description": "Senior .NET developer"
+}
+```
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "_id": "5f2be8e79a74fa71399dc24f",
+        "user_id": "5f2b72ef54af050017dd4223",
+        "name": "ABC",
+        "description": "Senior .NET developer",
         "__v": 0
     }
 }
@@ -1091,8 +1222,8 @@ Response:
     "isSuccess": true,
     "message": "",
     "data":{
-	"_id":{"$oid":"5f279580cf154530147bcf97"},
-	"created_date":{"$date":{"$numberLong":"1596429696094"}},
+	"_id":"5f279580cf154530147bcf97",
+	"created_date":"2020-08-03T04:41:36.094+00:00",
 	"user_id":"5f278d28cf154530147bcf95",
 	"title":"Java Developer",
 	"body":"I'm the best I'm the best I'm the best fit for your Java dev team",
@@ -1114,24 +1245,24 @@ Response:
     "isSuccess": true,
     "message": "",
     "data": [        
-	{	"_id":{"$oid":"5f279580cf154530147bcf97"},
-	"created_date":{"$date":{"$numberLong":"1596429696094"}},
+	{	"_id":"5f279580cf154530147bcf97",
+	"created_date":"2020-08-03T04:41:36.094+00:00",
 	"user_id":"5f278d28cf154530147bcf95",
 	"title":"Java Developer",
 	"body":"I'm the best I'm the best I'm the best fit for your Java dev team",
 	"__v":{"$numberInt":"0"}
 	},	
 	{
-	"_id":{"$oid":"5f27966fcf154530147bcf98"},
-	"created_date":{"$date":{"$numberLong":"1596429935481"}},
+	"_id":"5f27966fcf154530147bcf98",
+	"created_date":"2020-08-03T04:45:35.481+00:00",
 	"user_id":"5f278d28cf154530147bcf95",
 	"title":"FullStack Developer",
 	"body":" I'm the best for your backend stuff",
 	"__v":{"$numberInt":"0"}
 	},
 	{
-	"_id":{"$oid":"5f2b28536bfd18097898e156"},
-	"created_date":{"$date":{"$numberLong":"1596663891984"}},
+	"_id":"5f2b28536bfd18097898e156",
+	"created_date":"2020-08-05T21:44:51.984+00:00",
 	"user_id":"5f278d28cf154530147bcf95",
 	"title":"React JS Developer",
 	"body":"Working hard to do more",

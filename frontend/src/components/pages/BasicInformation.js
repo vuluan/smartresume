@@ -43,12 +43,12 @@ linkedin : '',
      let config = {
        headers: {
          'Content-Type': 'application/json',
-         'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibWljaGVsbGFuZXRAZ21haWwuY29tIiwiX2lkIjoiNWYyNzhkMjhjZjE1NDUzMDE0N2JjZjk1In0sImlhdCI6MTU5NjY2OTgwMH0.xZVahKf4ZWOuOKZtqc-Wksi7DYSkm0QzW6Af0BGgkFI',
+         'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibWljaGVsbGFuZXRAZ21haWwuY29tIiwiX2lkIjoiNWYyYjE4ZjhkMGE2MDYwMDE3MWFkODlkIn0sImlhdCI6MTU5Njc0MjAyN30.EozwN6Im9WJXYWe2p63JLFt7wymSQaWCG6_7yebcaTk',
        },
      };
 
     useEffect(() => {
-      axios.get('http://localhost:5000/api/basicinfo/list/5f278d28cf154530147bcf95'
+      axios.get('http://smartresumebuild.herokuapp.com/api/basicinfo/list/5f278d28cf154530147bcf95'
       , config)
       .then(function (response) {
         console.log('response',response.data.data[0]);
@@ -88,14 +88,14 @@ linkedin,
     try {
       if(userState.isNew){
       const response = await axios.post(
-        'http://localhost:5000/api/basicinfo/add',
+        'http://smartresumebuild.herokuapp.com/api/basicinfo/add',
         data,
         config
       );
       }
       else{
       const response = await axios.put(
-        'http://localhost:5000/api/basicinfo',
+        'http://smartresumebuild.herokuapp.com/api/basicinfo',
         data,
         config
       );        
