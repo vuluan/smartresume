@@ -6,6 +6,421 @@
 
 ## Note if running locally use 'npm run local' to start the backend.
 ## EndPoints
+
+## Resume EndPoints (Roman)
+**Add Resume**
+
+Authorization Header Required:
+
+Authorization: Bearer UserAuthTokenHere
+
+POST: https://smartresumebuild.herokuapp.com/api/resume/add
+
+Request:
+```javascript
+{
+  "user_id": "5f2661a29ee13a46dc8edf4f",
+  "title": "FullStack Dev Resume",
+  "description": "Resume sent to Shopify for FullStack Developer Position"
+}
+```
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "_id": "5f2b9e08d133e500171a210f",
+        "user_id": "5f2661a29ee13a46dc8edf4f",
+        "title": "FullStack Dev Resume",
+        "description": "Resume sent to Shopify for FullStack Developer Position",
+        "__v": 0
+    }
+}
+```
+**Get Resume By Id**
+
+Authorization Header Required:
+
+Authorization: Bearer UserAuthTokenHere
+
+GET: https://smartresumebuild.herokuapp.com/api/resume/5f2b9c7fd133e500171a210e
+
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "_id": "5f2b9e08d133e500171a210f",
+        "user_id": "5f2661a29ee13a46dc8edf4f",
+        "title": "FullStack Dev Resume",
+        "description": "Resume sent to Shopify for FullStack Developer Position",
+        "__v": 0
+    }
+}
+```
+
+**Get Resume List By UserId**
+
+Authorization Header Required:
+
+Authorization: Bearer UserAuthTokenHere
+
+GET: https://smartresumebuild.herokuapp.com/api/resume/list/5f2661a29ee13a46dc8edf4f
+
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": [
+        {
+            "_id": "5f2b9e08d133e500171a210f",
+            "user_id": "5f2661a29ee13a46dc8edf4f",
+            "title": "FullStack Dev Resume",
+            "description": "Resume sent to Shopify for FullStack Developer Position",
+            "__v": 0
+        },
+       ............
+    ]
+}
+```
+
+**Delete Resume**
+
+Authorization Header Required:
+
+Authorization: Bearer UserAuthTokenHere
+
+DELETE: https://smartresumebuild.herokuapp.com/api/resume
+
+Request:
+```javascript
+{
+    "id": "5f2b9c7fd133e500171a210e"
+}
+```
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "_id": "5f2b9eb7d133e500171a2110",
+        "user_id": "5f2661a29ee13a46dc8edf4f",
+        "title": "FullStack Dev Resume",
+        "description": "Resume sent to Shopify for FullStack Developer Position",
+        "__v": 0
+    }
+}
+```
+
+
+**Update Resume**
+
+Authorization Header Required:
+
+Authorization: Bearer UserAuthTokenHere
+
+PUT: https://smartresumebuild.herokuapp.com/api/resume
+
+Request:
+```javascript
+{
+  "id": "5f2b9e08d133e500171a210f",
+  "user_id": "5f2661a29ee13a46dc8edf4f",
+  "title": "Mobile Engineer Position",
+  "description": "Resume for Amazon Mobile Dev"  
+}
+```
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "_id": "5f2b9e08d133e500171a210f",
+        "user_id": "5f2661a29ee13a46dc8edf4f",
+        "title": "Mobile Engineer Position",
+        "description": "Resume for Amazon Mobile Dev",
+        "__v": 0
+    }
+}
+```
+
+## Job Profile EndPoints (Roman)
+**Add Job Profile**
+
+Authorization Header Required:
+
+Authorization: Bearer UserAuthTokenHere
+
+POST: https://smartresumebuild.herokuapp.com/api/jobprofile/add
+
+Request:
+```javascript
+{
+  "user_id": "5f2661a29ee13a46dc8edf4f",
+  "profile": "10 years of experience in every software ever created"
+}
+```
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "_id": "5f2b9c4ad133e500171a210d",
+        "user_id": "5f2661a29ee13a46dc8edf4f",
+        "profile": "10 years of experience in every software ever created",
+        "__v": 0
+    }
+}
+```
+**Get Job Profile By Id**
+
+Authorization Header Required:
+
+Authorization: Bearer UserAuthTokenHere
+
+GET: https://smartresumebuild.herokuapp.com/api/jobprofile/5f2b9c7fd133e500171a210e
+
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "_id": "5f2b9c7fd133e500171a210e",
+        "user_id": "5f2661a29ee13a46dc8edf4f",
+        "profile": "An expert at cross functional synergy",
+        "__v": 0
+    }
+}
+```
+
+**Get Job Profile List By UserId**
+
+Authorization Header Required:
+
+Authorization: Bearer UserAuthTokenHere
+
+GET: https://smartresumebuild.herokuapp.com/api/jobprofile/list/5f2661a29ee13a46dc8edf4f
+
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": [
+        {
+            "_id": "5f2b9c4ad133e500171a210d",
+            "user_id": "5f2661a29ee13a46dc8edf4f",
+            "profile": "10 years of experience in every software ever created",
+            "__v": 0
+        },
+        ..........
+    ]
+}
+```
+
+**Delete Job Profile**
+
+Authorization Header Required:
+
+Authorization: Bearer UserAuthTokenHere
+
+DELETE: https://smartresumebuild.herokuapp.com/api/jobprofile
+
+Request:
+```javascript
+{
+    "id": "5f2b9c7fd133e500171a210e"
+}
+```
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "_id": "5f2b9c7fd133e500171a210e",
+        "user_id": "5f2661a29ee13a46dc8edf4f",
+        "profile": "An expert at cross functional synergy",
+        "__v": 0
+    }
+}
+```
+
+
+**Update Job Profile**
+
+Authorization Header Required:
+
+Authorization: Bearer UserAuthTokenHere
+
+PUT: https://smartresumebuild.herokuapp.com/api/jobprofile
+
+Request:
+```javascript
+{
+   "id": "5f2b9c4ad133e500171a210d",
+  "user_id": "5f2661a29ee13a46dc8edf4f",
+  "profile": "Clearly the best man for the job"
+  
+  }
+```
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "_id": "5f2b9c4ad133e500171a210d",
+        "user_id": "5f2661a29ee13a46dc8edf4f",
+        "profile": "Clearly the best man for the job",
+        "__v": 0
+    }
+}
+```
+
+
+## Objective EndPoints (Roman)
+**Add Objective**
+
+Authorization Header Required:
+
+Authorization: Bearer UserAuthTokenHere
+
+POST: https://smartresumebuild.herokuapp.com/api/objective/add
+
+Request:
+```javascript
+{
+  "user_id": "5f2661a29ee13a46dc8edf4f",
+  "objective": "To put a roof over my head"
+}
+```
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "_id": "5f2b9569d133e500171a210b",
+        "user_id": "5f2661a29ee13a46dc8edf4f",
+        "objective": "To put a roof over my head",
+        "__v": 0
+    }
+}
+```
+**Get Objective By Id**
+
+Authorization Header Required:
+
+Authorization: Bearer UserAuthTokenHere
+
+GET: https://smartresumebuild.herokuapp.com/api/objective/5f2b9569d133e500171a210b
+
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "_id": "5f2b9569d133e500171a210b",
+        "user_id": "5f2661a29ee13a46dc8edf4f",
+        "objective": "To put a roof over my head",
+        "__v": 0
+    }
+}
+```
+
+**Get Objective List By UserId**
+
+Authorization Header Required:
+
+Authorization: Bearer UserAuthTokenHere
+
+GET: https://smartresumebuild.herokuapp.com/api/objective/list/5f2661a29ee13a46dc8edf4f
+
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": [
+        {
+            "_id": "5f2b9569d133e500171a210b",
+            "user_id": "5f2661a29ee13a46dc8edf4f",
+            "objective": "To put a roof over my head",
+            "__v": 0
+        }
+		.....
+    ]
+}
+```
+
+**Delete Objective**
+
+Authorization Header Required:
+
+Authorization: Bearer UserAuthTokenHere
+
+DELETE: https://smartresumebuild.herokuapp.com/api/objective
+
+Request:
+```javascript
+{
+    "id": "5f2b9698d133e500171a210c"
+}
+```
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "_id": "5f2b9698d133e500171a210c",
+        "user_id": "5f2661a29ee13a46dc8edf4f",
+        "objective": "Make more money than ever",
+        "__v": 0
+    }
+}
+```
+
+
+**Update Objective**
+
+Authorization Header Required:
+
+Authorization: Bearer UserAuthTokenHere
+
+PUT: https://smartresumebuild.herokuapp.com/api/objective
+
+Request:
+```javascript
+{
+   "id": "5f2b9569d133e500171a210b",
+  "user_id": "5f2661a29ee13a46dc8edf4f",
+  "objective": "To make the worls a better place."  
+}
+```
+Response:
+```javascript
+{
+    "isSuccess": true,
+    "message": "",
+    "data": {
+        "_id": "5f2b9569d133e500171a210b",
+        "user_id": "5f2661a29ee13a46dc8edf4f",
+        "objective": "To make the worls a better place.",
+        "__v": 0
+    }
+}
+```
+
 ## Education EndPoints (Roman)
 **Add Education**
 
@@ -232,7 +647,9 @@ Response:
 ## Language EndPoints (Luan)
 **Add Language**
 Authorization Header Required:
+
 Authorization: Bearer UserAuthTokenHere
+
 POST: https://smartresumebuild.herokuapp.com/api/language/add
 
 Request:
@@ -260,7 +677,9 @@ Response:
 ```
 **Get Language By Id**
 Authorization Header Required:
+
 Authorization: Bearer UserAuthTokenHere
+
 GET: https://smartresumebuild.herokuapp.com/api/language/{language-id}
 
 Response:
@@ -281,7 +700,9 @@ Response:
 
 **Get Language List By UserId**
 Authorization Header Required:
+
 Authorization: Bearer UserAuthTokenHere
+
 GET: https://smartresumebuild.herokuapp.com/api/language/list/{user-id}
 
 Response:
@@ -304,7 +725,9 @@ Response:
 
 **Delete Language**
 Authorization Header Required:
+
 Authorization: Bearer UserAuthTokenHere
+
 DELETE: https://smartresumebuild.herokuapp.com/api/language
 
 Request:
@@ -331,7 +754,9 @@ Response:
 
 **Update Language**
 Authorization Header Required:
+
 Authorization: Bearer UserAuthTokenHere
+
 PUT: https://smartresumebuild.herokuapp.com/api/language
 
 Request:
@@ -362,7 +787,9 @@ Response:
 ## Experience EndPoints (Luan)
 **Add Experience**
 Authorization Header Required:
+
 Authorization: Bearer UserAuthTokenHere
+
 POST: https://smartresumebuild.herokuapp.com/api/experience/add
 
 Request:
@@ -399,7 +826,9 @@ Response:
 ```
 **Get Experience By Id**
 Authorization Header Required:
+
 Authorization: Bearer UserAuthTokenHere
+
 GET: https://smartresumebuild.herokuapp.com/api/experience/{experience-id}
 
 Response:
@@ -424,7 +853,9 @@ Response:
 
 **Get Experience List By UserId**
 Authorization Header Required:
+
 Authorization: Bearer UserAuthTokenHere
+
 GET: https://smartresumebuild.herokuapp.com/api/experience/list/{user-id}
 
 Response:
@@ -451,7 +882,9 @@ Response:
 
 **Delete Language**
 Authorization Header Required:
+
 Authorization: Bearer UserAuthTokenHere
+
 DELETE: https://smartresumebuild.herokuapp.com/api/experience
 
 Request:
@@ -482,7 +915,9 @@ Response:
 
 **Update Experience**
 Authorization Header Required:
+
 Authorization: Bearer UserAuthTokenHere
+
 PUT: https://smartresumebuild.herokuapp.com/api/experience
 
 Request:
