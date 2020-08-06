@@ -5,63 +5,27 @@ import axios from 'axios';
 function CoverLetter(props) {
 
   const [formData, setFormData] = useState({
-    title: '', // || props.data.title,
-    body: '' // || props.data.body,
+    id: props.data._id,
+    _id: props.data._id,
+    user_id: props.data.user_id,
+    title: props.data.title,
+    body: props.data.body,
   });
 
-  const { title, body } = formData;
+  const {id, title, body } = formData;
+
+  const remove = function(e){
+    e.preventDefault(); 
+    props.formRemove(id)
+  }
+
+  const update = function(e){
+    e.preventDefault(); 
+    props.formUpdate(formData)
+  }
+
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-
-  const onSubmit = async (e) => {
-    e.preventDefault();
-    //props.formAction(e);
-
-
-
-    // let token = localStorage.getItem('token');
-    // let config = {
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'x-auth-token': token,
-    //   },
-    // };
-
-    /* if(e.name === 'save'){
-    let data = {
-      title,
-      body,
-    };
-    try {
-      const response = await axios.put(
-        'http://localhost:5000/api/coverLetter'+{id},
-        data,
-        config
-      );
-
-      console.log('Cover Letter Updated');
-    } catch (e) {
-      console.log(e.response.data.errors);
-    }
-  }
-  else if(e.name === 'delete'){
-    try {
-      const response = await axios.delete(
-        'http://localhost:5000/api/coverLetter/'+{id},
-        data,
-        config
-      );
-
-      console.log('Cover Letter Deleted');
-    } catch (e) {
-      console.log(e.response.data.errors);
-    }
-  } */
-  };
-
-
-
-
 
   
   return (
@@ -70,28 +34,32 @@ function CoverLetter(props) {
   <Card>
     <Card.Header>
       <Accordion.Toggle as={Button} variant="primary" eventKey="0">
-        Cover Letter Title
+        {title}
       </Accordion.Toggle>     
     </Card.Header>
     <Accordion.Collapse eventKey="0">
     <Container>
-    <Form className="mt-4 mb-4" onSubmit={(e) => onSubmit(e)}>
+    <Form className="mt-4 mb-4" >
   <Form.Group controlId="title">
     <Form.Control 
+    name="title"
                 value={title}
                 onChange={(e) => onChange(e)} 
                 type="text" placeholder="Title" required />
   </Form.Group>
   <Form.Group controlId="body">
     <Form.Control
+    name="body"
                 value={body}
                 onChange={(e) => onChange(e)} 
                 as="textarea" rows="6" placeholder="Body.." required />
   </Form.Group>
-  <Button controlId="save" variant="success" type="submit">
+  <Button name="save" controlId="save" variant="success" type="submit"
+  onClick={update}>
     Save
   </Button>
-  <Button controlId="remove" variant="danger" className="ml-4" type="submit">
+  <Button name="remove" controlId="remove" variant="danger" className="ml-4" type="submit"
+  onClick={remove}>
     Remove
   </Button> 
 </Form>

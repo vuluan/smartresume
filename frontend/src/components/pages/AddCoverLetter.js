@@ -21,18 +21,18 @@ function CoverLetter() {
      let config = {
        headers: {
          'Content-Type': 'application/json',
-         'Authorization': ''//'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibWljaGVsbGFuZXRAZ21haWwuY29tIiwiX2lkIjoiNWYyNzhkMjhjZjE1NDUzMDE0N2JjZjk1In0sImlhdCI6MTU5NjY2NjIzNn0.zg4yRzkWvXoFf0cV1VUO6SqBBmkYnyFS0qByNRlOrVY',
+         'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibWljaGVsbGFuZXRAZ21haWwuY29tIiwiX2lkIjoiNWYyYjE4ZjhkMGE2MDYwMDE3MWFkODlkIn0sImlhdCI6MTU5Njc0MjAyN30.EozwN6Im9WJXYWe2p63JLFt7wymSQaWCG6_7yebcaTk',
        },
      };
 
      let data = {
-      //user_id : '5f278d28cf154530147bcf95',
+      user_id : '5f278d28cf154530147bcf95',
       title,
       body,
     };
     try {
       const response = await axios.post(
-        'http://localhost:5000/api/coverletter/add',
+        'http://smartresumebuild.herokuapp.com/api/coverletter/add',
         data,
         config
       );
