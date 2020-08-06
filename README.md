@@ -985,8 +985,8 @@ Response:
     "isSuccess": true,
     "message": "",
     "data":{
-	"_id":{"$oid":"5f279580cf154530147bcf97"},
-	"created_date":{"$date":{"$numberLong":"1596429696094"}},
+	"_id":"5f279580cf154530147bcf97",
+	"created_date":"2020-08-03T04:41:36.094+00:00",
 	"user_id":"5f278d28cf154530147bcf95",
 	"title":"Java Developer",
 	"body":"I'm the best I'm the best I'm the best fit for your Java dev team",
@@ -1008,24 +1008,24 @@ Response:
     "isSuccess": true,
     "message": "",
     "data": [        
-	{	"_id":{"$oid":"5f279580cf154530147bcf97"},
-	"created_date":{"$date":{"$numberLong":"1596429696094"}},
+	{	"_id":"5f279580cf154530147bcf97",
+	"created_date":"2020-08-03T04:41:36.094+00:00",
 	"user_id":"5f278d28cf154530147bcf95",
 	"title":"Java Developer",
 	"body":"I'm the best I'm the best I'm the best fit for your Java dev team",
 	"__v":{"$numberInt":"0"}
 	},	
 	{
-	"_id":{"$oid":"5f27966fcf154530147bcf98"},
-	"created_date":{"$date":{"$numberLong":"1596429935481"}},
+	"_id":"5f27966fcf154530147bcf98",
+	"created_date":"2020-08-03T04:45:35.481+00:00",
 	"user_id":"5f278d28cf154530147bcf95",
 	"title":"FullStack Developer",
 	"body":" I'm the best for your backend stuff",
 	"__v":{"$numberInt":"0"}
 	},
 	{
-	"_id":{"$oid":"5f2b28536bfd18097898e156"},
-	"created_date":{"$date":{"$numberLong":"1596663891984"}},
+	"_id":"5f2b28536bfd18097898e156",
+	"created_date":"2020-08-05T21:44:51.984+00:00",
 	"user_id":"5f278d28cf154530147bcf95",
 	"title":"React JS Developer",
 	"body":"Working hard to do more",
