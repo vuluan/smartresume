@@ -1,7 +1,7 @@
 import React from 'react';
 import Breadcrumbs from '../../layouts/Breadcrumbs';
-import { Button, Card, Form, Col } from 'react-bootstrap';
-import { NavLink, Redirect } from 'react-router-dom';
+import { Button, Card, Form, Col, Alert } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
 
@@ -28,9 +28,16 @@ class AddLanguage extends React.Component {
 
   constructor() {
     super();
+
+    this.state = {
+      messageVariant: 'danger',
+      hasMessage: false,
+      messageInfo: ''
+    };
   }
 
   saveHandler = (e) => {
+
     let USER_ID = '5f0a819684a234361cf9421c'
     let URL = '/api/language/add';
     let USER_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibmd1eWVudnVsdWFuODlAZ21haWwuY29tIiwiX2lkIjoiNWYwYTgxOTY4NGEyMzQzNjFjZjk0MjFjIn0sImlhdCI6MTU5NjcxODEyNn0.bTPA7D8yPX0nzAPd4x4bzGCy9i1Bc6vf_KGNPm_OK5Y';
@@ -49,7 +56,11 @@ class AddLanguage extends React.Component {
         this.props.history.push('/language')
       })
       .catch((error) => {
-        console.log('error 3 ' + error);
+        this.setState({
+          messageVariant: 'danger',
+          hasMessage: true,
+          messageInfo: error.response.data.errors[0].msg
+        });
       });
   }
 
@@ -61,6 +72,9 @@ class AddLanguage extends React.Component {
     return (
       <div>
         <Breadcrumbs links={breadcrumbLinks} />
+        {  
+          this.state.hasMessage ? <Alert variant={this.state.messageVariant}>{this.state.messageInfo}</Alert> : ''
+        }
         <Card
           bg='light'
           text='dark'
