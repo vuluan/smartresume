@@ -22,7 +22,8 @@ const breadcrumbLinks = [
 class Language extends Component {
 
   state = {
-    languages: []
+    languages: [],
+    searchKeyword: ''
   }
 
   onLoadData() {
@@ -44,8 +45,11 @@ class Language extends Component {
 
   componentDidMount() {
     this.onLoadData();
-    
   }
+
+  handleValueChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
   onDeleteHandler = (id) => {
     confirmAlert({
@@ -105,6 +109,8 @@ class Language extends Component {
                     className="mb-4"
                     id="inlineFormInput"
                     placeholder="Language"
+                    name="searchKeyword"
+                    onChange={this.handleValueChange}
                   />
                 </Col>
                 <Col xs="auto">
@@ -125,6 +131,7 @@ class Language extends Component {
               <tbody>
                 {
                   this.state.languages.map((lang, index) => 
+                    lang.language.toLowerCase().includes(this.state.searchKeyword.toLowerCase()) ? 
                     <tr key={index}>
                       <td>{ index + 1 }</td>
                       <td>{ lang.language }</td>
@@ -133,7 +140,7 @@ class Language extends Component {
                         <NavLink exact to={'/language/edit/' + lang._id } className='mr-3'><FaPenSquare className='text-warning' /></NavLink>
                         <NavLink exact to='#' className='mr-3'><FaTrash className='text-danger' onClick={() => this.onDeleteHandler(lang._id)}/></NavLink>
                       </td>
-                    </tr>
+                    </tr> : ''
                   )
                 }
               </tbody>
