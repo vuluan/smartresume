@@ -33,7 +33,7 @@ function CoverLetter(props) {
         <Card>
           <Card.Header>
             <Accordion.Toggle as={Button} variant="primary" eventKey="0">
-              {title}
+              {title} 
             </Accordion.Toggle>
           </Card.Header>
           <Accordion.Collapse eventKey="0">

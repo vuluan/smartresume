@@ -92,6 +92,7 @@ function BasicInformation() {
           data,
           config
         );
+        alert('Basic Information Created');
       }
       else {
         const response = await axios.put(
@@ -99,6 +100,7 @@ function BasicInformation() {
           data,
           config
         );
+        alert('Basic Information Updated');
       }
 
       console.log('Basic Info Updated');

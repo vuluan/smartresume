@@ -37,7 +37,7 @@ function CoverLetter() {
         config
       );
 
-      console.log('Cover Letter Added');
+      alert('Cover Letter Added');
     } catch (e) {
       console.log(e.response.data.errors);
     }

@@ -48,7 +48,7 @@ function CoverLetters() {
         config
       );
 
-      console.log('Cover Letter Updated');
+      alert('Cover Letter Updated');
     } catch (e) {
       console.log(e.response.data.errors);
     }
@@ -69,7 +69,7 @@ function CoverLetters() {
                 config
               );
         
-              console.log('Cover Letter Deleted');
+              alert('Cover Letter Deleted');
             } catch (e) {
               console.log(e.response.data.errors);
             }
