@@ -3,7 +3,6 @@ import Breadcrumbs from '../../layouts/Breadcrumbs';
 import { Table, Button, Card, Form, Col } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { FaPenSquare, FaTrash } from 'react-icons/fa';
-import axios from 'axios';
 import * as languageServices from './../../../services/languageServices';
 import LocalStorageService from './../../../utils/localStorage';
 import { confirmAlert } from 'react-confirm-alert'; // Import
@@ -40,23 +39,6 @@ class Language extends Component {
         });
       }
     });
-
-    /*
-    let URL = '/api/language/list/5f0a819684a234361cf9421c';
-    let USER_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibmd1eWVudnVsdWFuODlAZ21haWwuY29tIiwiX2lkIjoiNWYwYTgxOTY4NGEyMzQzNjFjZjk0MjFjIn0sImlhdCI6MTU5NjY4MDUxM30._YNjni5cbnNd69Ez8PhYKrXu_4DH6QOrVUBnCvI18V0';
-
-    const AuthStr = 'Bearer '.concat(USER_TOKEN);
-    axios.get(URL, { headers: { Authorization: AuthStr } })
-      .then(response => {
-        console.log(response.data);
-        this.setState({
-          languages: response.data.data
-        });
-      })
-      .catch((error) => {
-        console.log('error 3 ' + error);
-      });
-      */
   }
 
   componentDidMount() {
@@ -75,32 +57,17 @@ class Language extends Component {
         {
           label: 'Yes',
           onClick: () => {
-            let URL = '/api/language';
-            let USER_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibmd1eWVudnVsdWFuODlAZ21haWwuY29tIiwiX2lkIjoiNWYwYTgxOTY4NGEyMzQzNjFjZjk0MjFjIn0sImlhdCI6MTU5NjczMTA4OX0.VdVmVDtS-zI_ZNRqirXRM_FKV02V_eU7qqvWAq8N4PE';
-            const AuthStr = 'Bearer '.concat(USER_TOKEN);
-            axios.delete(URL,
-              {
-                headers: {
-                  Authorization: AuthStr
-                },
-                data: {
-                  id: id
-                }
-              })
-              .then(response => {
-                console.log(response.data);
-                this.onLoadData();
-              })
-              .catch((error) => {
-                console.log('Delete language: ' + error);
-              });
+            languageServices.deleteLanguage(id).then(response => {
+                  console.log(response.data);
+                  this.onLoadData();
+                })
+                .catch((error) => {
+                  console.log('Delete language: ' + error);
+                });
           }
         },
         {
-          label: 'No',
-          onClick: () => {
-
-          }
+          label: 'No'
         }
       ]
     });
