@@ -8,6 +8,7 @@ import JobObjective from '../pages/JobObjective/JobObjective';
 import Education from '../pages/Education/Education';
 import Experience from '../pages/Experience/Experience';
 import AddExperience from '../pages/Experience/AddExperience';
+import EditExperience from '../pages/Experience/EditExperience';
 import Skill from '../pages/Skill';
 import Language from '../pages/Language/Language';
 import AddLanguage from '../pages/Language/AddLanguage';
@@ -79,6 +80,7 @@ function DashboardContainer() {
             <PrivateRoute path='/education' exact component={Education} />
             <PrivateRoute path='/experience' exact component={Experience} />
             <PrivateRoute path='/experience/add' exact component={AddExperience} />
+            <PrivateRoute path='/experience/edit/:id' exact component={EditExperience} />
             <PrivateRoute path='/skill' exact component={Skill} />
             <PrivateRoute path='/language' exact component={Language} />
             <PrivateRoute path='/language/add' exact component={AddLanguage} />

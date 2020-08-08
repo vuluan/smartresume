@@ -32,6 +32,11 @@ export const add = async (req, res) => {
         }
 
         let data = req.body;
+
+        if (data.user_id !== req.userInfo.user._id) {
+            return await res.status(403).send(new HttpResponseResult(false, "Forbidden", null));
+        }
+
         let objective = new ObjectiveDTO(
             data.user_id,
             data.objective,
@@ -58,6 +63,9 @@ export const detail = async (req, res) => {
         if (!objective) {
             return res.status(404).send(new HttpResponseResult(false, "objective not found", null));
         }
+        if (objective.user_id !== req.userInfo.user._id) {
+            return await res.status(403).send(new HttpResponseResult(false, "Forbidden", null));
+        }
 
         return await res.status(200).send(new HttpResponseResult(true, "", objective));
 
@@ -77,6 +85,11 @@ export const deleteById = async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(422).json({ errors: errors.array() });
+        }
+        let objectiveCheck = await objectiveServices.detail(req.body.id);
+
+        if (objectiveCheck.user_id !== req.userInfo.user._id) {
+            return await res.status(403).send(new HttpResponseResult(false, "Forbidden", null));
         }
 
         let objective = await objectiveServices.deleteById(req.body.id);
@@ -101,11 +114,16 @@ export const updateById = async (req, res) => {
         }
 
         let data = req.body;
+
+        if (data.user_id !== req.userInfo.user._id) {
+            return await res.status(403).send(new HttpResponseResult(false, "Forbidden", null));
+        }
+
         let objective = new ObjectiveDTO(
             data.user_id,
             data.objective,
-
         );
+
         let updatedObjective = await objectiveServices.updateById(data.id, objective);
 
         return await res.status(200).send(new HttpResponseResult(true, "", updatedObjective));
@@ -121,6 +139,10 @@ export const updateById = async (req, res) => {
 };
 export const findByUserId = async (req, res) => {
     try {
+        if (req.params.id !== req.userInfo.user._id) {
+            return await res.status(403).send(new HttpResponseResult(false, "Forbidden", null));
+        }
+
         let objective = await objectiveServices.findByUserId(req.params.id);
 
         return await res.status(200).send(new HttpResponseResult(true, "", objective));

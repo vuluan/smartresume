@@ -56,7 +56,7 @@ class EditLanguage extends React.Component {
         this.setState({
           messageVariant: 'danger',
           hasMessage: true,
-          messageInfo: 'Loading: ' + error
+          messageInfo: error.response.data.errors[0].msg
         });
       });
   }
@@ -91,7 +91,7 @@ class EditLanguage extends React.Component {
         this.setState({
           messageVariant: 'danger',
           hasMessage: true,
-          messageInfo: 'Saving: ' + error
+          messageInfo: error.response.data.errors[0].msg
         });
       });
   }

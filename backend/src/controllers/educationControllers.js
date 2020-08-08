@@ -35,6 +35,10 @@ export const add = async (req, res) => {
         }
 
         let data = req.body;
+        if (data.user_id !== req.userInfo.user._id) {
+            return await res.status(403).send(new HttpResponseResult(false, "Forbidden", null));
+        }
+
         let education = new EducationDTO(
             data.user_id,
             data.school,
@@ -63,7 +67,11 @@ export const detail = async (req, res) => {
         let education = await educationServices.detail(req.params.id);
 
         if (!education) {
-            return res.status(404).send(new HttpResponseResult(false, "education not found", null));
+            return res.status(404).send(new HttpResponseResult(false, "Education not found", null));
+        }
+        // console.log(JSON.stringify(education));
+        if (education.user_id !== req.userInfo.user._id) {
+            return await res.status(403).send(new HttpResponseResult(false, "Forbidden", null));
         }
 
         return await res.status(200).send(new HttpResponseResult(true, "", education));
@@ -84,6 +92,12 @@ export const deleteById = async (req, res) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(422).json({ errors: errors.array() });
+        }
+        let educationCheck = await educationServices.detail(req.body.id);
+
+        console.log(JSON.stringify(educationCheck));
+        if (educationCheck.user_id !== req.userInfo.user._id) {
+            return await res.status(403).send(new HttpResponseResult(false, "Forbidden", null));
         }
 
         let education = await educationServices.deleteById(req.body.id);
@@ -108,6 +122,11 @@ export const updateById = async (req, res) => {
         }
 
         let data = req.body;
+
+        if (data.user_id !== req.userInfo.user._id) {
+            return await res.status(403).send(new HttpResponseResult(false, "Forbidden", null));
+        }
+
         let education = new EducationDTO(
             data.user_id,
             data.school,
@@ -132,6 +151,9 @@ export const updateById = async (req, res) => {
 };
 export const findByUserId = async (req, res) => {
     try {
+        if (req.params.id !== req.userInfo.user._id) {
+            return await res.status(403).send(new HttpResponseResult(false, "Forbidden", null));
+        }
         let education = await educationServices.findByUserId(req.params.id);
 
         return await res.status(200).send(new HttpResponseResult(true, "", education));
