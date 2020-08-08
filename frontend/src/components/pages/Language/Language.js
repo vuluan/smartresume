@@ -4,6 +4,8 @@ import { Table, Button, Card, Form, Col } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { FaPenSquare, FaTrash } from 'react-icons/fa';
 import axios from 'axios';
+import * as languageServices from './../../../services/languageServices';
+import LocalStorageService from './../../../utils/localStorage';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 
@@ -27,20 +29,34 @@ class Language extends Component {
   }
 
   onLoadData() {
+    const userInfo = LocalStorageService.getUserInfo();
+    const payload = { userId: userInfo.userId };
+
+    languageServices.getAllLanguages(payload).then(res => {
+      if (res.status == 200) {
+        console.log(res.data);
+        this.setState({
+          languages: res.data.data
+        });
+      }
+    });
+
+    /*
     let URL = '/api/language/list/5f0a819684a234361cf9421c';
     let USER_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibmd1eWVudnVsdWFuODlAZ21haWwuY29tIiwiX2lkIjoiNWYwYTgxOTY4NGEyMzQzNjFjZjk0MjFjIn0sImlhdCI6MTU5NjY4MDUxM30._YNjni5cbnNd69Ez8PhYKrXu_4DH6QOrVUBnCvI18V0';
 
     const AuthStr = 'Bearer '.concat(USER_TOKEN);
     axios.get(URL, { headers: { Authorization: AuthStr } })
-        .then(response => {
-          console.log(response.data);
-          this.setState({
-            languages: response.data.data
-          });
-        })
-        .catch((error) => {
-          console.log('error 3 ' + error);
+      .then(response => {
+        console.log(response.data);
+        this.setState({
+          languages: response.data.data
         });
+      })
+      .catch((error) => {
+        console.log('error 3 ' + error);
+      });
+      */
   }
 
   componentDidMount() {
@@ -62,10 +78,10 @@ class Language extends Component {
             let URL = '/api/language';
             let USER_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibmd1eWVudnVsdWFuODlAZ21haWwuY29tIiwiX2lkIjoiNWYwYTgxOTY4NGEyMzQzNjFjZjk0MjFjIn0sImlhdCI6MTU5NjczMTA4OX0.VdVmVDtS-zI_ZNRqirXRM_FKV02V_eU7qqvWAq8N4PE';
             const AuthStr = 'Bearer '.concat(USER_TOKEN);
-            axios.delete(URL, 
-              { 
-                headers: { 
-                  Authorization: AuthStr 
+            axios.delete(URL,
+              {
+                headers: {
+                  Authorization: AuthStr
                 },
                 data: {
                   id: id
@@ -130,17 +146,17 @@ class Language extends Component {
               </thead>
               <tbody>
                 {
-                  this.state.languages.map((lang, index) => 
-                    lang.language.toLowerCase().includes(this.state.searchKeyword.toLowerCase()) ? 
-                    <tr key={index}>
-                      <td>{ index + 1 }</td>
-                      <td>{ lang.language }</td>
-                      <td>{ lang.proficiency }</td>
-                      <td className='text-center'>
-                        <NavLink exact to={'/language/edit/' + lang._id } className='mr-3'><FaPenSquare className='text-warning' /></NavLink>
-                        <NavLink exact to='#' className='mr-3'><FaTrash className='text-danger' onClick={() => this.onDeleteHandler(lang._id)}/></NavLink>
-                      </td>
-                    </tr> : ''
+                  this.state.languages.map((lang, index) =>
+                    lang.language.toLowerCase().includes(this.state.searchKeyword.toLowerCase()) ?
+                      <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td>{lang.language}</td>
+                        <td>{lang.proficiency}</td>
+                        <td className='text-center'>
+                          <NavLink exact to={'/language/edit/' + lang._id} className='mr-3'><FaPenSquare className='text-warning' /></NavLink>
+                          <NavLink exact to='#' className='mr-3'><FaTrash className='text-danger' onClick={() => this.onDeleteHandler(lang._id)} /></NavLink>
+                        </td>
+                      </tr> : ''
                   )
                 }
               </tbody>
@@ -150,7 +166,7 @@ class Language extends Component {
       </div>
     );
   }
-  
+
 }
 
 export default Language;
