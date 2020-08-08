@@ -29,15 +29,15 @@ export const register = async (userDto) => {
 
 export const login = async (email, password) => {
     try {
-        let createdUser = await userRepositories.login(email, password);
+        let loggingUser = await userRepositories.login(email, password);
 
-        if (isNullOrUndefined(createdUser)) throw new CustomException(true, errorMessage.INVALID_USERNAME_PASSWORD);
+        if (isNullOrUndefined(loggingUser)) throw new CustomException(true, errorMessage.INVALID_USERNAME_PASSWORD);
 
-        if (!createdUser.comparePassword(password, createdUser.password)) throw new CustomException(true, errorMessage.INVALID_USERNAME_PASSWORD);
+        if (!loggingUser.comparePassword(password, loggingUser.password)) throw new CustomException(true, errorMessage.INVALID_USERNAME_PASSWORD);
 
-        let access_token = await jwtUtilities.createToken(email, createdUser.id);
+        let access_token = await jwtUtilities.createToken(email, loggingUser.id);
 
-        return await new AuthenticatedUser(email, access_token);
+        return await new AuthenticatedUser(loggingUser.id, email, access_token);
     } catch (err) {
         throw err;
     }
