@@ -19,24 +19,30 @@ const breadcrumbLinks = [
     path: '/experience',
   },
   {
-    label: 'New experience',
-    path: '/experience/add',
+    label: 'Edit experience',
     active: true
   }
 ];
 
-class AddExperience extends React.Component {
+class EditExperience extends React.Component {
 
   constructor() {
     super();
 
     this.state = {
+      title: '',
+      type: '',
+      company: '',
+      location: '',
+      description: '',
       startDate: new Date(),
       endDate: new Date(),
       messageVariant: 'danger',
       hasMessage: false,
       messageInfo: ''
     };
+
+    console.log(this.state.startDate  );
   }
 
   handleChangeStartDate = date => {
@@ -51,13 +57,46 @@ class AddExperience extends React.Component {
     });
   };
 
-  saveHandler = (e) => {
-
-    let USER_ID = '5f0a819684a234361cf9421c'
-    let URL = '/api/experience/add';
+  componentDidMount() {
+    this.setState({
+      id: this.props.match.params.id
+    });
+    let URL = '/api/experience/' + this.props.match.params.id;
     let USER_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibmd1eWVudnVsdWFuODlAZ21haWwuY29tIiwiX2lkIjoiNWYwYTgxOTY4NGEyMzQzNjFjZjk0MjFjIn0sImlhdCI6MTU5NjcxODEyNn0.bTPA7D8yPX0nzAPd4x4bzGCy9i1Bc6vf_KGNPm_OK5Y';
     const AuthStr = 'Bearer '.concat(USER_TOKEN);
-    axios.post(URL, 
+    axios.get(URL, { headers: { Authorization: AuthStr } })
+      .then(response => {
+          console.log(response.data);
+          this.setState({ 
+            title: response.data.data.title,
+            type: response.data.data.type,
+            company: response.data.data.company,
+            location: response.data.data.location,
+            startDate: new Date(response.data.data.start_date),
+            endDate: new Date(response.data.data.end_date),
+            description: response.data.data.description,
+          });
+        })
+      .catch((error) => {
+        // this.setState({
+        //   messageVariant: 'danger',
+        //   hasMessage: true,
+        //   messageInfo: error.response.data.errors[0].msg
+        // });
+      });
+  }
+
+  saveHandler = (e) => {
+
+    this.setState({
+      hasMessage: false
+    });
+
+    let USER_ID = '5f0a819684a234361cf9421c'
+    let URL = '/api/experience';
+    let USER_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibmd1eWVudnVsdWFuODlAZ21haWwuY29tIiwiX2lkIjoiNWYwYTgxOTY4NGEyMzQzNjFjZjk0MjFjIn0sImlhdCI6MTU5NjcxODEyNn0.bTPA7D8yPX0nzAPd4x4bzGCy9i1Bc6vf_KGNPm_OK5Y';
+    const AuthStr = 'Bearer '.concat(USER_TOKEN);
+    axios.put(URL, 
       {
         user_id: USER_ID,
         title: this.state.title,
@@ -72,8 +111,11 @@ class AddExperience extends React.Component {
         headers: { Authorization: AuthStr } 
       })
       .then(response => {
-        console.log(response.data);
-        this.props.history.push('/experience')
+        this.setState({
+          messageVariant: 'success',
+          hasMessage: true,
+          messageInfo: 'Update successfully!'
+        });
       })
       .catch((error) => {
         this.setState({
@@ -99,18 +141,18 @@ class AddExperience extends React.Component {
           bg='light'
           text='dark'
         >
-          <Card.Header>New Experience</Card.Header>
+          <Card.Header>Edit Experience</Card.Header>
           <Card.Body>
             <Form>
               <Form.Group>
                 <Form.Row>
                   <Col>
                     <Form.Label>Title</Form.Label>
-                    <Form.Control size='sm' type="text" name='title' placeholder="Enter title" onChange={this.handleValueChange}/>
+                    <Form.Control onChange={this.handleValueChange} value={this.state.title} size='sm' type="text" name='title' placeholder="Enter title" />
                   </Col>
                   <Col>
                     <Form.Label>Employment Type</Form.Label>
-                    <Form.Control size='sm' as="select" name='type' onChange={this.handleValueChange}>
+                    <Form.Control size='sm' as="select" name='type' value={this.state.type}  onChange={this.handleValueChange}>
                       <option value='' key='-1'>--- Please select employment Type ---</option>
                       {
                         employmentType.map((value, index) => (
@@ -123,13 +165,13 @@ class AddExperience extends React.Component {
               </Form.Group>
               <Form.Group>
                 <Form.Label>Company Name</Form.Label>
-                <Form.Control size='sm' type="text" name='company' placeholder="Enter company name" onChange={this.handleValueChange} />
+                <Form.Control size='sm' type="text" name='company' value={this.state.company} placeholder="Enter company name" onChange={this.handleValueChange} />
               </Form.Group>
               <Form.Group>
                 <Form.Row>
                   <Col>
                     <Form.Label>Location</Form.Label>
-                    <Form.Control size='sm' type="text" name='location' placeholder="Enter location" onChange={this.handleValueChange} />
+                    <Form.Control size='sm' type="text" name='location' value={this.state.location} placeholder="Enter location" onChange={this.handleValueChange} />
                   </Col>
                   <Col>
                     <Form.Label>Start Date</Form.Label>
@@ -151,7 +193,7 @@ class AddExperience extends React.Component {
               </Form.Group>
               <Form.Group>
                 <Form.Label>Description</Form.Label>
-                <Form.Control size='sm' as="textarea" rows="8" name='description' onChange={this.handleValueChange} />
+                <Form.Control size='sm' as="textarea" rows="8" name='description' value={this.state.description} onChange={this.handleValueChange} />
               </Form.Group>
             </Form>
           </Card.Body>
@@ -166,4 +208,4 @@ class AddExperience extends React.Component {
 
 }
 
-export default AddExperience;
+export default EditExperience;

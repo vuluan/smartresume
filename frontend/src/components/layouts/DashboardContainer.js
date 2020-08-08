@@ -8,6 +8,7 @@ import JobObjective from '../pages/JobObjective/JobObjective';
 import Education from '../pages/Education/Education';
 import Experience from '../pages/Experience/Experience';
 import AddExperience from '../pages/Experience/AddExperience';
+import EditExperience from '../pages/Experience/EditExperience';
 import Skill from '../pages/Skill';
 import Language from '../pages/Language/Language';
 import AddLanguage from '../pages/Language/AddLanguage';
@@ -78,6 +79,7 @@ function DashboardContainer() {
             <Route path='/education' exact component={Education} />
             <Route path='/experience' exact component={Experience} />
             <Route path='/experience/add' exact component={AddExperience} />
+            <Route path='/experience/edit/:id' exact component={EditExperience} />
             <Route path='/skill' exact component={Skill} />
             <Route path='/language' exact component={Language} />
             <Route path='/language/add' exact component={AddLanguage} />
