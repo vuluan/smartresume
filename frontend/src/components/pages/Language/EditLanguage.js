@@ -4,6 +4,8 @@ import { Button, Card, Form, Col, Alert } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
+import * as languageServices from './../../../services/languageServices';
+import LocalStorageService from './../../../utils/localStorage';
 
 const Proficiencies = ['Elementary proficiency', 'Limited working proficiency', 'Professional working proficiency',
   'Full professional proficiency', 'Native or bilingual proficiency'];
@@ -41,24 +43,15 @@ class EditLanguage extends React.Component {
     this.setState({
       id: this.props.match.params.id
     });
-    let URL = '/api/language/' + this.props.match.params.id;
-    let USER_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibmd1eWVudnVsdWFuODlAZ21haWwuY29tIiwiX2lkIjoiNWYwYTgxOTY4NGEyMzQzNjFjZjk0MjFjIn0sImlhdCI6MTU5NjcxODEyNn0.bTPA7D8yPX0nzAPd4x4bzGCy9i1Bc6vf_KGNPm_OK5Y';
-    const AuthStr = 'Bearer '.concat(USER_TOKEN);
-    axios.get(URL, { headers: { Authorization: AuthStr } })
-      .then(response => {
-          console.log(response.data);
-          this.setState({ 
-            language: response.data.data.language,
-            proficiency: response.data.data.proficiency,
-          });
-        })
-      .catch((error) => {
-        this.setState({
-          messageVariant: 'danger',
-          hasMessage: true,
-          messageInfo: error.response.data.errors[0].msg
+    languageServices.detailLanguage(this.props.match.params.id).then(res => {
+      if (res.status == 200) {
+        console.log(res.data);
+        this.setState({ 
+            language: res.data.data.language,
+            proficiency: res.data.data.proficiency,
         });
-      });
+      }
+    });
   }
 
   saveHandler = (e) => {
@@ -66,20 +59,15 @@ class EditLanguage extends React.Component {
       hasMessage: false
     });
 
-    let USER_ID = '5f0a819684a234361cf9421c'
-    let URL = '/api/language';
-    let USER_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibmd1eWVudnVsdWFuODlAZ21haWwuY29tIiwiX2lkIjoiNWYwYTgxOTY4NGEyMzQzNjFjZjk0MjFjIn0sImlhdCI6MTU5NjcxODEyNn0.bTPA7D8yPX0nzAPd4x4bzGCy9i1Bc6vf_KGNPm_OK5Y';
-    const AuthStr = 'Bearer '.concat(USER_TOKEN);
-    axios.put(URL, 
-      {
-        id: this.state.id,
-        user_id: USER_ID,
-        language: this.state.language,
-        proficiency: this.state.proficiency
-      },
-      { 
-        headers: { Authorization: AuthStr } 
-      })
+    const userInfo = LocalStorageService.getUserInfo();
+    const payload = { 
+      id: this.state.id,
+      user_id: userInfo.userId,
+      language: this.state.language,
+      proficiency: this.state.proficiency
+    };
+
+    languageServices.updateLanguage(payload)
       .then(response => {
         this.setState({
           messageVariant: 'success',

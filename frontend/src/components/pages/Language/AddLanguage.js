@@ -4,6 +4,8 @@ import { Button, Card, Form, Col, Alert } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from 'axios';
+import * as languageServices from './../../../services/languageServices';
+import LocalStorageService from './../../../utils/localStorage';
 
 const Proficiencies = ['Elementary proficiency', 'Limited working proficiency', 'Professional working proficiency',
   'Full professional proficiency', 'Native or bilingual proficiency'];
@@ -37,20 +39,14 @@ class AddLanguage extends React.Component {
   }
 
   saveHandler = (e) => {
+    const userInfo = LocalStorageService.getUserInfo();
+    const payload = { 
+      user_id: userInfo.userId,
+      language: this.state.language,
+      proficiency: this.state.proficiency
+    };
 
-    let USER_ID = '5f0a819684a234361cf9421c'
-    let URL = '/api/language/add';
-    let USER_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibmd1eWVudnVsdWFuODlAZ21haWwuY29tIiwiX2lkIjoiNWYwYTgxOTY4NGEyMzQzNjFjZjk0MjFjIn0sImlhdCI6MTU5NjcxODEyNn0.bTPA7D8yPX0nzAPd4x4bzGCy9i1Bc6vf_KGNPm_OK5Y';
-    const AuthStr = 'Bearer '.concat(USER_TOKEN);
-    axios.post(URL, 
-      {
-        user_id: USER_ID,
-        language: this.state.language,
-        proficiency: this.state.proficiency
-      },
-      { 
-        headers: { Authorization: AuthStr } 
-      })
+    languageServices.addLanguage(payload)
       .then(response => {
         console.log(response.data);
         this.props.history.push('/language')
@@ -59,7 +55,7 @@ class AddLanguage extends React.Component {
         this.setState({
           messageVariant: 'danger',
           hasMessage: true,
-          messageInfo: error.response.data.errors[0].msg
+          messageInfo: error.errors[0].msg
         });
       });
   }
