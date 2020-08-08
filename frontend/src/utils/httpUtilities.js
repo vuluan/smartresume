@@ -1,13 +1,16 @@
 import axios from "axios";
 import LocalStorageService from './localStorage';
+import 'dotenv/config';
 import { createBrowserHistory } from "history";
+
+export const HOST = process.env.REACT_APP_API_HOST || 'http://localhost:5000/api'
+
 
 const axios_auth = axios.create();
 const history = createBrowserHistory();
 
 axios_auth.interceptors.request.use(
     config => {
-        alert('interceptor request triggered');
         const token = LocalStorageService.getAccessToken();
         if (token) {
             config.headers["Authorization"] = `Bearer ${token}`;
