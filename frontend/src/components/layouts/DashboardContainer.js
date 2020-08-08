@@ -23,6 +23,7 @@ import {
   FaHouseDamage, FaInfo, FaUser, FaBullseye, FaUniversity, FaBuilding, FaTools,
   FaGlobe, FaAward, FaEnvelopeOpenText, FaIdCard
 } from 'react-icons/fa';
+import PrivateRoute from './PrivateRoute';
 
 
 function DashboardContainer() {
@@ -71,22 +72,22 @@ function DashboardContainer() {
             </div>
           </nav>
           <main role='main' className='col-md-9 ml-sm-auto col-lg-10 px-md-4'>
-            <Route path='/' exact component={Home} />
-            <Route path='/basic-information' exact component={BasicInformation} />
-            <Route path='/profile' exact component={Profile} />
-            <Route path='/job-objective' exact component={JobObjective} />
-            <Route path='/education' exact component={Education} />
-            <Route path='/experience' exact component={Experience} />
-            <Route path='/experience/add' exact component={AddExperience} />
-            <Route path='/skill' exact component={Skill} />
-            <Route path='/language' exact component={Language} />
-            <Route path='/language/add' exact component={AddLanguage} />
-            <Route path='/language/edit/:id' component={EditLanguage} />
-            <Route path='/award' exact component={Award} />
-            <Route path='/cover-letter' exact component={CoverLetters} />
-            <Route path='/cover-letter/add' exact component={AddCoverLetter} />
-            <Route path='/contact-me' exact component={ContactMe} />
-            <Route path='/resume/create' exact component={CreateResume} />
+            <PrivateRoute path='/' exact component={Home} />
+            <PrivateRoute path='/basic-information' exact component={BasicInformation} />
+            <PrivateRoute path='/profile' exact component={Profile} />
+            <PrivateRoute path='/job-objective' exact component={JobObjective} />
+            <PrivateRoute path='/education' exact component={Education} />
+            <PrivateRoute path='/experience' exact component={Experience} />
+            <PrivateRoute path='/experience/add' exact component={AddExperience} />
+            <PrivateRoute path='/skill' exact component={Skill} />
+            <PrivateRoute path='/language' exact component={Language} />
+            <PrivateRoute path='/language/add' exact component={AddLanguage} />
+            <PrivateRoute path='/language/edit/:id' component={EditLanguage} />
+            <PrivateRoute path='/award' exact component={Award} />
+            <PrivateRoute path='/cover-letter' exact component={CoverLetters} />
+            <PrivateRoute path='/cover-letter/add' exact component={AddCoverLetter} />
+            <PrivateRoute path='/contact-me' exact component={ContactMe} />
+            <PrivateRoute path='/resume/create' exact component={CreateResume} />
           </main>
         </Row>
       </Container>
