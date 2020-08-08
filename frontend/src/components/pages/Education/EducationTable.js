@@ -1,15 +1,15 @@
 import React from 'react'
 import { Table, Button } from 'react-bootstrap';
 
-const TableRow = ({ row, onEdit, onDelete }) => (
+const TableRow = ({ position, row, onEdit, onDelete }) => (
     <tr>
         <td >{row.school}</td>
         <td>{row.degree}</td>
         <td>{row.field}</td>
         <td >{row.start}</td>
         <td>{row.finish}</td>
-        <td><Button value={row.id} onClick={onEdit}>Edit</Button></td>
-        <td><Button variant="danger" value={row.id} onClick={() => onDelete(row.id)}>Delete</Button></td>
+        <td><Button value={row.id} onClick={() => onEdit(position)}>Edit</Button></td>
+        <td><Button variant="danger" value={row._id} onClick={() => onDelete(row._id)}>Delete</Button></td>
     </tr>
 )
 
@@ -29,8 +29,8 @@ function EducationTable({ education, onEdit, onDelete }) {
                 </thead>
                 <tbody>
 
-                    {education.map(row => (
-                        <TableRow key={row._id} row={row} onEdit={onEdit} onDelete={onDelete} />
+                    {education.map((row, index) => (
+                        <TableRow position={index} key={row._id} row={row} onEdit={onEdit} onDelete={onDelete} />
                     ))}
 
                 </tbody>

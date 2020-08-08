@@ -21,7 +21,7 @@ import CreateResume from '../pages/Home/ResumeCreate';
 import { Container } from 'react-bootstrap';
 import {
   FaHouseDamage, FaInfo, FaUser, FaBullseye, FaUniversity, FaBuilding, FaTools,
-  FaGlobe, FaAward, FaEnvelopeOpenText, FaIdCard
+  FaGlobe, FaAward, FaEnvelopeOpenText, FaIdCard, FaHome
 } from 'react-icons/fa';
 
 
@@ -35,7 +35,7 @@ function DashboardContainer() {
             <div className="sidebar-sticky pt-3">
               <ul className="nav flex-column">
                 <li>
-                  <NavLink exact to='/' className='nav-link'><i><FaHouseDamage /></i>Home</NavLink>
+                  <NavLink exact to='/' className='nav-link'><i><FaHome /></i>Home</NavLink>
                 </li>
                 <li>
                   <NavLink to='/basic-information' className='nav-link'><i><FaInfo /></i>Basic Information</NavLink>
