@@ -35,10 +35,10 @@ function ContactMe() {
   let [message, setMessage] = useState('');
 
   const handleChange = (e) => {
-    if (e.target.name == "sender_name") { setSender_name(e.target.value) }
-    else if (e.target.name == "sender_email") { setSender_email(e.target.value) }
-    else if (e.target.name == "subject") { setSubject(e.target.value) }
-    else if (e.target.name == "message") { setMessage(e.target.value) }
+    if (e.target.name === "sender_name") { setSender_name(e.target.value) }
+    else if (e.target.name === "sender_email") { setSender_email(e.target.value) }
+    else if (e.target.name === "subject") { setSubject(e.target.value) }
+    else if (e.target.name === "message") { setMessage(e.target.value) }
   };
 
   const handleSubmit = (e) => {

@@ -25,37 +25,11 @@ function CoverLetter() {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-/*     // let token = localStorage.getItem('token');
-    let config = {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibWljaGVsbGFuZXRAZ21haWwuY29tIiwiX2lkIjoiNWYyYjE4ZjhkMGE2MDYwMDE3MWFkODlkIn0sImlhdCI6MTU5Njc0MjAyN30.EozwN6Im9WJXYWe2p63JLFt7wymSQaWCG6_7yebcaTk',
-      },
-    };
-
-    let data = {
-      user_id: '5f278d28cf154530147bcf95',
-      title,
-      body,
-    };
-    try {
-      const response = await axios.post(
-        'http://smartresumebuild.herokuapp.com/api/coverletter/add',
-        data,
-        config
-      );
-
-      alert('Cover Letter Added');
-    } catch (e) {
-      console.log(e.response.data.errors);
-    } */
-
-
     const userInfo = LocalStorageService.getUserInfo();
-    const payload = { 
-        user_id: userInfo.userId,
-        title,
-        body
+    const payload = {
+      user_id: userInfo.userId,
+      title,
+      body
     };
 
     coverLetterServices.addCoverLetter(payload)
@@ -65,9 +39,9 @@ function CoverLetter() {
       })
       .catch((error) => {
         console.log(error.response.data.errors);
-          setMessageVariant('danger');
-          setHasMessage(true);
-          setMessageInfo(error.response.data.errors[0].msg);
+        setMessageVariant('danger');
+        setHasMessage(true);
+        setMessageInfo(error.response.data.errors[0].msg);
       });
   };
 

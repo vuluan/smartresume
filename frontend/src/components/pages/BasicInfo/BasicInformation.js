@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 
 
 function BasicInformation() {
-  
+
   const history = useHistory();
   const [messageVariant, setMessageVariant] = useState('danger');
   const [hasMessage, setHasMessage] = useState(false);
@@ -17,7 +17,7 @@ function BasicInformation() {
 
   const [formData, setFormData] = useState({
     _id: '',
-    user_id: '5f278d28cf154530147bcf95',
+    user_id: '',
     firstName: '',
     lastName: '',
     email: '',
@@ -46,18 +46,10 @@ function BasicInformation() {
     gitHub,
     linkedin, } = formData;
 
-  /* // let token = localStorage.getItem('token');
-  let config = {
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibWljaGVsbGFuZXRAZ21haWwuY29tIiwiX2lkIjoiNWYyYjE4ZjhkMGE2MDYwMDE3MWFkODlkIn0sImlhdCI6MTU5Njc0MjAyN30.EozwN6Im9WJXYWe2p63JLFt7wymSQaWCG6_7yebcaTk',
-    },
-  }; */
-
   const userInfo = LocalStorageService.getUserInfo();
-    const payload = { 
-        user_id: userInfo.userId,
-        id: _id,
+  const payload = {
+    user_id: userInfo.userId,
+    id: _id,
     firstName,
     lastName,
     email,
@@ -67,41 +59,25 @@ function BasicInformation() {
     region,
     gitHub,
     linkedin,
-    };
+  };
 
   useEffect(() => {
-    /* axios.get('http://smartresumebuild.herokuapp.com/api/basicinfo/list/5f278d28cf154530147bcf95'
-      , config)
-      .then(function (response) {
-        console.log('response', response.data.data[0]);
+    const payload = {
+      userId: userInfo.userId
+    };
 
-        if (Array.isArray(response.data.data) && response.data.data.length) {
-          setFormData(response.data.data[0]);
+    basicInfoServices.getAllBasicInfos(payload).then(res => {
+      if (res.status === 200) {
+        console.log('response', res.data.data[0]);
+
+        if (Array.isArray(res.data.data) && res.data.data.length) {
+          setFormData(res.data.data[0]);
           setUserState({ isNew: false });
           console.log('formdata', formData);
         }
 
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      }); */
-      const payload = { 
-        userId: userInfo.userId
-    };
-
-      basicInfoServices.getAllBasicInfos(payload).then(res => {
-        if (res.status === 200) {
-          console.log('response', res.data.data[0]);
-
-          if (Array.isArray(res.data.data) && res.data.data.length) {
-            setFormData(res.data.data[0]);
-            setUserState({ isNew: false });
-            console.log('formdata', formData);
-          }
-  
-        }
-      });
+      }
+    });
   }, []);
 
   const onChange = (e) =>
@@ -132,40 +108,29 @@ function BasicInformation() {
         ); */
 
         basicInfoServices.addBasicInfo(payload)
-      .then(response => {
-        console.log(response.data);
-        history.push('/basic-information')
-      })
-      .catch((error) => {
-        console.log(error.response.data.errors);
-          setMessageVariant('danger');
-          setHasMessage(true);
-          setMessageInfo(error.response.data.errors[0].msg);
-      });
-
-        alert('Basic Information Created');
+          .then(response => {
+            console.log(response.data);
+            history.push('/basic-information')
+          })
+          .catch((error) => {
+            console.log(error.response.data.errors);
+            setMessageVariant('danger');
+            setHasMessage(true);
+            setMessageInfo(error.response.data.errors[0].msg);
+          });
       }
       else {
-        /* const response = await axios.put(
-          'http://smartresumebuild.herokuapp.com/api/basicinfo',
-          data,
-          config
-        ); */
-
         basicInfoServices.updateBasicInfo(payload)
-      .then(response => {
-        console.log(response.data);
-        history.push('/basic-information')
-      })
-      .catch((error) => {
-        console.log(error.response.data.errors);
-          setMessageVariant('danger');
-          setHasMessage(true);
-          setMessageInfo(error.response.data.errors[0].msg);
-      });
-
-        
-        alert('Basic Information Updated');
+          .then(response => {
+            console.log(response.data);
+            history.push('/basic-information')
+          })
+          .catch((error) => {
+            console.log(error.response.data.errors);
+            setMessageVariant('danger');
+            setHasMessage(true);
+            setMessageInfo(error.response.data.errors[0].msg);
+          });
       }
 
       console.log('Basic Info Updated');
