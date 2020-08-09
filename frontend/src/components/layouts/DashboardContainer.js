@@ -1,29 +1,30 @@
 import React from 'react';
-import { Route, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Row } from 'react-bootstrap';
 import Home from '../pages/Home/Home';
 import Profile from '../pages/Profile/Profile';
-import BasicInformation from '../pages/BasicInformation';
+import BasicInformation from '../pages/BasicInfo/BasicInformation';
 import JobObjective from '../pages/JobObjective/JobObjective';
 import Education from '../pages/Education/Education';
 import Experience from '../pages/Experience/Experience';
 import AddExperience from '../pages/Experience/AddExperience';
 import EditExperience from '../pages/Experience/EditExperience';
-import Skill from '../pages/Skill';
+import Skill from '../pages/Skill/Skill';
+import AddSkill from '../pages/Skill/AddSkill';
+import EditSkill from '../pages/Skill/EditSkill';
 import Language from '../pages/Language/Language';
 import AddLanguage from '../pages/Language/AddLanguage';
 import EditLanguage from '../pages/Language/EditLanguage';
-import Award from '../pages/Award';
-import CoverLetters from '../pages/CoverLetters';
-import AddCoverLetter from '../pages/AddCoverLetter';
-import ContactMe from '../pages/ContactMe';
+import Project from '../pages/Project/Project';
+import CoverLetters from '../pages/CoverLetter/CoverLetters';
+import AddCoverLetter from '../pages/CoverLetter/AddCoverLetter';
+import ContactMe from '../pages/ContactMe/ContactMe';
 import Header from './Header';
 import CreateResume from '../pages/Home/ResumeCreate';
 import RenderResume from '../pages/Home/RenderResume';
 import { Container } from 'react-bootstrap';
-import {
-  FaHouseDamage, FaInfo, FaUser, FaBullseye, FaUniversity, FaBuilding, FaTools,
-  FaGlobe, FaAward, FaEnvelopeOpenText, FaIdCard, FaHome
+import { FaInfo, FaUser, FaBullseye, FaUniversity, FaBuilding, FaTools,
+  FaGlobe, FaProductHunt, FaEnvelopeOpenText, FaIdCard, FaHome
 } from 'react-icons/fa';
 import PrivateRoute from './PrivateRoute';
 
@@ -62,7 +63,7 @@ function DashboardContainer() {
                   <NavLink to='/language' className='nav-link'><i><FaGlobe /></i>Language</NavLink>
                 </li>
                 <li>
-                  <NavLink to='/award' className='nav-link'><i><FaAward /></i>Award</NavLink>
+                  <NavLink to='/project' className='nav-link'><i><FaProductHunt /></i>Project</NavLink>
                 </li>
                 <li>
                   <NavLink to='/cover-letter' className='nav-link'><i><FaEnvelopeOpenText /></i>Cover Letters</NavLink>
@@ -83,10 +84,12 @@ function DashboardContainer() {
             <PrivateRoute path='/experience/add' exact component={AddExperience} />
             <PrivateRoute path='/experience/edit/:id' exact component={EditExperience} />
             <PrivateRoute path='/skill' exact component={Skill} />
+            <PrivateRoute path='/skill/add' exact component={AddSkill} />
+            <PrivateRoute path='/skill/edit/:id' exact component={EditSkill} />
             <PrivateRoute path='/language' exact component={Language} />
             <PrivateRoute path='/language/add' exact component={AddLanguage} />
             <PrivateRoute path='/language/edit/:id' component={EditLanguage} />
-            <PrivateRoute path='/award' exact component={Award} />
+            <PrivateRoute path='/project' exact component={Project} />
             <PrivateRoute path='/cover-letter' exact component={CoverLetters} />
             <PrivateRoute path='/cover-letter/add' exact component={AddCoverLetter} />
             <PrivateRoute path='/contact-me' exact component={ContactMe} />

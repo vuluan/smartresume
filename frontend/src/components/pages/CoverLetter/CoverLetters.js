@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import Breadcrumbs from '../layouts/Breadcrumbs';
+import Breadcrumbs from '../../layouts/Breadcrumbs';
 import { Pagination, Card } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import CoverLetter from './CoverLetter.js';
-import axios from 'axios';
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import * as coverLetterServices from './../../../services/coverLetterServices';
+import LocalStorageService from './../../../utils/localStorage';
+import { useHistory } from 'react-router-dom';
 
 const breadcrumbLinks = [
   {
@@ -33,25 +35,32 @@ for (let number = 1; number <= 5; number++) {
 
 function CoverLetters() {
 
-  let config = {
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibWljaGVsbGFuZXRAZ21haWwuY29tIiwiX2lkIjoiNWYyYjE4ZjhkMGE2MDYwMDE3MWFkODlkIn0sImlhdCI6MTU5Njc0MjAyN30.EozwN6Im9WJXYWe2p63JLFt7wymSQaWCG6_7yebcaTk',
-    },
-  };
-
+  const history = useHistory();
+  const [messageVariant, setMessageVariant] = useState('danger');
+  const [hasMessage, setHasMessage] = useState(false);
+  const [messageInfo, setMessageInfo] = useState('');
+  
   const formUpdate = function (letterData) {
-    try {
-      const response = axios.put(
-        'http://smartresumebuild.herokuapp.com/api/coverletter',
-        letterData,
-        config
-      );
-
-      alert('Cover Letter Updated');
-    } catch (e) {
-      console.log(e.response.data.errors);
-    }
+    
+    const payload = { 
+      user_id: userInfo.userId,
+      id: letterData.id,
+      title: letterData.title,
+      body: letterData.body
+  };
+    coverLetterServices.updateCoverLetter(payload)
+      .then(response => {
+        console.log(response);
+        setMessageVariant('success');
+          setHasMessage(true);
+          setMessageInfo('Update successful!');
+      })
+      .catch((error) => {
+       // console.log(error.response.data.errors[0].msg);
+          setMessageVariant('danger');
+          setHasMessage(true);
+          setMessageInfo(error.response.data.errors[0].msg);
+      });
   }
 
   const formRemove = function (_id) {
@@ -62,17 +71,25 @@ function CoverLetters() {
         {
           label: 'Yes',
           onClick: () => {
-            try {
-              const response = axios.delete(
-                'http://smartresumebuild.herokuapp.com/api/coverletter',
-                { id: _id },
-                config
-              );
+
+            coverLetterServices.deleteCoverLetter(_id).then(response => {
+              console.log(response.data);
+
+              const payload = { 
+                userId: userInfo.userId
+            };
         
-              alert('Cover Letter Deleted');
-            } catch (e) {
-              console.log(e.response.data.errors);
-            }
+              coverLetterServices.getAllCoverLetters(payload).then(res => {
+                if (res.status === 200) {
+                  setFormData(res.data.data);
+                console.log(res.data.data);
+                }
+              });
+            })
+            .catch((error) => {
+              console.log('Delete coverLetter: ' + error);
+            });
+
           }
         },
         {
@@ -87,17 +104,22 @@ function CoverLetters() {
 
   const [formData, setFormData] = useState([]);
 
+  const userInfo = LocalStorageService.getUserInfo();
+   
+
   useEffect(() => {
-    axios.get('http://smartresumebuild.herokuapp.com/api/coverletter/list/5f278d28cf154530147bcf95'
-      , config)
-      .then(function (response) {
-        setFormData(response.data.data);
-        console.log(response.data.data);
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
+
+      const payload = { 
+        userId: userInfo.userId
+    };
+
+      coverLetterServices.getAllCoverLetters(payload).then(res => {
+        if (res.status === 200) {
+          setFormData(res.data.data);
+        console.log(res.data.data);
+        }
       });
+
   }, []);
 
 

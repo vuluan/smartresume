@@ -3,10 +3,10 @@ import Breadcrumbs from '../../layouts/Breadcrumbs';
 import { Table, Button, Card, Form, Col } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { FaPenSquare, FaTrash } from 'react-icons/fa';
-import * as experienceServices from './../../../services/experienceServices';
+import * as skillServices from './../../../services/skillServices';
 import LocalStorageService from './../../../utils/localStorage';
-import { confirmAlert } from 'react-confirm-alert'; // Import
-import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import { confirmAlert } from 'react-confirm-alert'; 
+import 'react-confirm-alert/src/react-confirm-alert.css'; 
 
 const breadcrumbLinks = [
   {
@@ -14,16 +14,16 @@ const breadcrumbLinks = [
     path: '/'
   },
   {
-    label: 'Experience',
-    path: '/experience',
+    label: 'Skill',
+    path: '/skill',
     active: true
   }
 ];
 
-class Experience extends Component {
+class Skill extends Component {
 
   state = {
-    experiences: [],
+    skills: [],
     searchKeyword: ''
   }
 
@@ -31,17 +31,12 @@ class Experience extends Component {
     const userInfo = LocalStorageService.getUserInfo();
     const payload = { userId: userInfo.userId };
 
-    experienceServices.getAllExperiences(payload)
-    .then(res => {
+    skillServices.getAllSkills(payload).then(res => {
       if (res.status === 200) {
-        console.log(res.data);
         this.setState({
-          experiences: res.data.data
+          skills: res.data.data
         });
       }
-    })
-    .catch((error) => {
-      console.log('onLoadData ' + error);
     });
   }
 
@@ -61,12 +56,11 @@ class Experience extends Component {
         {
           label: 'Yes',
           onClick: () => {
-            experienceServices.deleteExperience(id).then(response => {
-                  console.log(response.data);
+            skillServices.deleteSkll(id).then(response => {
                   this.onLoadData();
                 })
                 .catch((error) => {
-                  console.log('Delete experience: ' + error);
+                  console.log('Delete skill: ' + error);
                 });
           }
         },
@@ -85,17 +79,17 @@ class Experience extends Component {
           bg='light'
           text='dark'
         >
-          <Card.Header>Experiences</Card.Header>
+          <Card.Header>Skills</Card.Header>
           <Card.Body>
             <Form className='float-left'>
               <Form.Row className="align-items-center">
                 <Col xs="auto">
-                  <Form.Label srOnly>Title</Form.Label>
+                  <Form.Label srOnly>Skill</Form.Label>
                   <Form.Control
                     size="sm"
                     className="mb-4"
                     id="inlineFormInput"
-                    placeholder="Title"
+                    placeholder="Skill"
                     name="searchKeyword"
                     onChange={this.handleValueChange}
                   />
@@ -105,33 +99,29 @@ class Experience extends Component {
                 </Col>
               </Form.Row>
             </Form>
-            <NavLink exact to='/experience/add' className='btn btn-sm btn-outline-secondary float-right'>New Experience</NavLink>
+            <NavLink exact to='/skill/add' className='btn btn-sm btn-outline-secondary float-right'>New Skill</NavLink>
             <Table bordered hover>
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>Title</th>
-                  <th>Employment Type</th>
-                  <th>Company</th>
-                  <th>Location</th>
+                  <th>Skill</th>
+                  <th>Hard Skill</th>
                   <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 {
-                  this.state.experiences.map((exp, index) => 
-                    exp.title.toLowerCase().includes(this.state.searchKeyword.toLowerCase()) ? 
-                    <tr key={index}>
-                      <td>{ index + 1 }</td>
-                      <td>{ exp.title }</td>
-                      <td>{ exp.type }</td>
-                      <td>{ exp.company }</td>
-                      <td>{ exp.location }</td>
-                      <td className='text-center'>
-                        <NavLink exact to={'/experience/edit/' + exp._id } className='mr-3'><FaPenSquare className='text-warning' /></NavLink>
-                        <NavLink exact to='#' className='mr-3'><FaTrash className='text-danger' onClick={() => this.onDeleteHandler(exp._id)}/></NavLink>
-                      </td>
-                    </tr> : ''
+                  this.state.skills.map((skill, index) =>
+                  skill.skill_name.toLowerCase().includes(this.state.searchKeyword.toLowerCase()) ?
+                      <tr key={index}>
+                        <td>{index + 1}</td>
+                        <td>{skill.skill_name}</td>
+                        <td>{skill.is_hard_skill ? 'Yes' : 'No'}</td>
+                        <td className='text-center'>
+                          <NavLink exact to={'/skill/edit/' + skill._id} className='mr-3'><FaPenSquare className='text-warning' /></NavLink>
+                          <NavLink exact to='#' className='mr-3'><FaTrash className='text-danger' onClick={() => this.onDeleteHandler(skill._id)} /></NavLink>
+                        </td>
+                      </tr> : ''
                   )
                 }
               </tbody>
@@ -141,6 +131,7 @@ class Experience extends Component {
       </div>
     );
   }
+
 }
 
-export default Experience;
+export default Skill;
