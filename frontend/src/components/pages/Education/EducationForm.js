@@ -13,7 +13,7 @@ const validationSchema = Yup.object().shape({
     .required("*Field of study is required"),
 });
 
-const EducationForm = ({ onSave, initValues, formValues }) => {
+const EducationForm = ({ onSave, formValues }) => {
   return (<div>
     <Formik
       enableReinitialize={true}

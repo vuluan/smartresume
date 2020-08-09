@@ -15,7 +15,7 @@ function Education() {
   const [isEditing, setIsEditing] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+
 
   useEffect(() => {
     getEducationList();
@@ -47,7 +47,6 @@ function Education() {
         }).catch((error) => {
           console.log(error);
         });
-
     }
   }
 
