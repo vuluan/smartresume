@@ -5,7 +5,6 @@ function CoverLetter(props) {
 
   const [formData, setFormData] = useState({
     id: props.data._id,
-    _id: props.data._id,
     user_id: props.data.user_id,
     title: props.data.title,
     body: props.data.body,

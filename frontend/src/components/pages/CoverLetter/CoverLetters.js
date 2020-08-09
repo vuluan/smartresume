@@ -61,19 +61,22 @@ function CoverLetters() {
       console.log(e.response.data.errors);
     } */
 
+    
     const payload = { 
       user_id: userInfo.userId,
+      id: letterData.id,
       title: letterData.title,
       body: letterData.body
   };
-
     coverLetterServices.updateCoverLetter(payload)
       .then(response => {
-        console.log(response.data);
-        history.push('/cover-letter')
+        console.log(response);
+        setMessageVariant('success');
+          setHasMessage(true);
+          setMessageInfo('Update successful!');
       })
       .catch((error) => {
-        console.log(error.response.data.errors);
+       // console.log(error.response.data.errors[0].msg);
           setMessageVariant('danger');
           setHasMessage(true);
           setMessageInfo(error.response.data.errors[0].msg);
@@ -102,7 +105,17 @@ function CoverLetters() {
 
             coverLetterServices.deleteCoverLetter(_id).then(response => {
               console.log(response.data);
-              this.onLoadData();
+
+              const payload = { 
+                userId: userInfo.userId
+            };
+        
+              coverLetterServices.getAllCoverLetters(payload).then(res => {
+                if (res.status === 200) {
+                  setFormData(res.data.data);
+                console.log(res.data.data);
+                }
+              });
             })
             .catch((error) => {
               console.log('Delete coverLetter: ' + error);
@@ -138,7 +151,7 @@ function CoverLetters() {
       }); */
 
       const payload = { 
-        user_id: userInfo.userId
+        userId: userInfo.userId
     };
 
       coverLetterServices.getAllCoverLetters(payload).then(res => {

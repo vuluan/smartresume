@@ -61,7 +61,7 @@ function CoverLetter() {
     coverLetterServices.addCoverLetter(payload)
       .then(response => {
         console.log(response.data);
-        history.push('/cover-letter')
+        history.push('/cover-letter');
       })
       .catch((error) => {
         console.log(error.response.data.errors);

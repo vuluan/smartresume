@@ -57,7 +57,7 @@ function BasicInformation() {
   const userInfo = LocalStorageService.getUserInfo();
     const payload = { 
         user_id: userInfo.userId,
-        _id,
+        id: _id,
     firstName,
     lastName,
     email,
@@ -86,7 +86,9 @@ function BasicInformation() {
         // handle error
         console.log(error);
       }); */
-
+      const payload = { 
+        userId: userInfo.userId
+    };
 
       basicInfoServices.getAllBasicInfos(payload).then(res => {
         if (res.status === 200) {
