@@ -33,7 +33,7 @@ class Experience extends Component {
 
     experienceServices.getAllExperiences(payload)
     .then(res => {
-      if (res.status == 200) {
+      if (res.status === 200) {
         console.log(res.data);
         this.setState({
           experiences: res.data.data

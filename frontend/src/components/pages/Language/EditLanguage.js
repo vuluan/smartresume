@@ -43,7 +43,7 @@ class EditLanguage extends React.Component {
       id: this.props.match.params.id
     });
     languageServices.detailLanguage(this.props.match.params.id).then(res => {
-      if (res.status == 200) {
+      if (res.status === 200) {
         console.log(res.data);
         this.setState({ 
             language: res.data.data.language,

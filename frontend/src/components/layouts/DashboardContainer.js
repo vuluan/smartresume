@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Row } from 'react-bootstrap';
 import Home from '../pages/Home/Home';
 import Profile from '../pages/Profile/Profile';
@@ -9,7 +9,7 @@ import Education from '../pages/Education/Education';
 import Experience from '../pages/Experience/Experience';
 import AddExperience from '../pages/Experience/AddExperience';
 import EditExperience from '../pages/Experience/EditExperience';
-import Skill from '../pages/Skill';
+import Skill from '../pages/Skill/Skill';
 import Language from '../pages/Language/Language';
 import AddLanguage from '../pages/Language/AddLanguage';
 import EditLanguage from '../pages/Language/EditLanguage';
@@ -20,8 +20,7 @@ import ContactMe from '../pages/ContactMe/ContactMe';
 import Header from './Header';
 import CreateResume from '../pages/Home/ResumeCreate';
 import { Container } from 'react-bootstrap';
-import {
-  FaHouseDamage, FaInfo, FaUser, FaBullseye, FaUniversity, FaBuilding, FaTools,
+import { FaInfo, FaUser, FaBullseye, FaUniversity, FaBuilding, FaTools,
   FaGlobe, FaAward, FaEnvelopeOpenText, FaIdCard, FaHome
 } from 'react-icons/fa';
 import PrivateRoute from './PrivateRoute';

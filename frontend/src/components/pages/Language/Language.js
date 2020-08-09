@@ -32,7 +32,7 @@ class Language extends Component {
     const payload = { userId: userInfo.userId };
 
     languageServices.getAllLanguages(payload).then(res => {
-      if (res.status == 200) {
+      if (res.status === 200) {
         console.log(res.data);
         this.setState({
           languages: res.data.data
