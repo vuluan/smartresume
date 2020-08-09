@@ -11,6 +11,7 @@ function Education() {
   const [education, setEducation] = useState([]);
   const [formValues, setFormValues] = useState({});
   const [show, setShow] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -47,16 +48,58 @@ function Education() {
     console.log(`Index: ${index}`);
     console.log(`Edit clicked: ${index}`);
     setFormValues(education[index]);
+    setIsEditing(true);
     setShow(currentSet => !currentSet);
   }
 
   const handleAddNew = () => {
     console.log(`Add New`);
     setFormValues({})
+    setIsEditing(false);
     setShow(currentSet => !currentSet);
   }
 
   const handleSave = (data) => {
+    console.log("Save clicked: " + JSON.stringify(data));
+    //data.id = education.length + 1;
+
+    if (isEditing) {
+      data.user_id = '5f2cd3762ee9db001728ed92'
+      data.id = formValues._id
+      axios.put('https://smartresumebuild.herokuapp.com/api/education', data, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token //the token is a variable which holds the token
+        }
+      }).then((response) => {
+        console.log(response.data.data);
+        setShow(false)
+        getEducationList();
+      }).catch((error) => {
+        console.log(error);
+      });
+    } else {
+      data.user_id = '5f2cd3762ee9db001728ed92'
+      axios.post('https://smartresumebuild.herokuapp.com/api/education/add', data, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token //the token is a variable which holds the token
+        }
+      }).then((response) => {
+        console.log(response.data.data);
+        setShow(false)
+        getEducationList();
+      }).catch((error) => {
+        console.log(error);
+      });
+
+    }
+
+
+
+  }
+
+  const handleSaveEdit = (data) => {
     console.log("Save clicked: " + JSON.stringify(data));
     //data.id = education.length + 1;
     data.user_id = '5f2cd3762ee9db001728ed92'
@@ -75,10 +118,11 @@ function Education() {
     });
   }
 
+
+
   const handleDelete = (id) => {
     console.log("Delete clicked:" + JSON.stringify({ id }));
     let deleteId = { id }
-
 
     axios.delete('https://smartresumebuild.herokuapp.com/api/education', {
       headers: {
@@ -118,7 +162,7 @@ function Education() {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Add Education</Modal.Title>
+          <Modal.Title>{(isEditing) ? 'Update Education' : 'Add Education'}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <EducationForm onSave={handleSave} formValues={formValues} />
