@@ -2,10 +2,17 @@ import React, { useState, useEffect } from 'react';
 import Breadcrumbs from '../../layouts/Breadcrumbs';
 import { Form, Container, Pagination, Jumbotron, Card, Button, Col } from 'react-bootstrap';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
-import axios from 'axios';
+import * as basicInfoServices from './../../../services/basicInfoServices';
+import LocalStorageService from './../../../utils/localStorage';
+import { useHistory } from 'react-router-dom';
 
 
 function BasicInformation() {
+  
+  const history = useHistory();
+  const [messageVariant, setMessageVariant] = useState('danger');
+  const [hasMessage, setHasMessage] = useState(false);
+  const [messageInfo, setMessageInfo] = useState('');
 
 
   const [formData, setFormData] = useState({
@@ -39,16 +46,31 @@ function BasicInformation() {
     gitHub,
     linkedin, } = formData;
 
-  // let token = localStorage.getItem('token');
+  /* // let token = localStorage.getItem('token');
   let config = {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibWljaGVsbGFuZXRAZ21haWwuY29tIiwiX2lkIjoiNWYyYjE4ZjhkMGE2MDYwMDE3MWFkODlkIn0sImlhdCI6MTU5Njc0MjAyN30.EozwN6Im9WJXYWe2p63JLFt7wymSQaWCG6_7yebcaTk',
     },
-  };
+  }; */
+
+  const userInfo = LocalStorageService.getUserInfo();
+    const payload = { 
+        user_id: userInfo.userId,
+        _id,
+    firstName,
+    lastName,
+    email,
+    phone,
+    address,
+    country,
+    region,
+    gitHub,
+    linkedin,
+    };
 
   useEffect(() => {
-    axios.get('http://smartresumebuild.herokuapp.com/api/basicinfo/list/5f278d28cf154530147bcf95'
+    /* axios.get('http://smartresumebuild.herokuapp.com/api/basicinfo/list/5f278d28cf154530147bcf95'
       , config)
       .then(function (response) {
         console.log('response', response.data.data[0]);
@@ -63,6 +85,20 @@ function BasicInformation() {
       .catch(function (error) {
         // handle error
         console.log(error);
+      }); */
+
+
+      basicInfoServices.getAllBasicInfos(payload).then(res => {
+        if (res.status === 200) {
+          console.log('response', res.data.data[0]);
+
+          if (Array.isArray(res.data.data) && res.data.data.length) {
+            setFormData(res.data.data[0]);
+            setUserState({ isNew: false });
+            console.log('formdata', formData);
+          }
+  
+        }
       });
   }, []);
 
@@ -87,19 +123,46 @@ function BasicInformation() {
     };
     try {
       if (userState.isNew) {
-        const response = await axios.post(
+        /* const response = await axios.post(
           'http://smartresumebuild.herokuapp.com/api/basicinfo/add',
           data,
           config
-        );
+        ); */
+
+        basicInfoServices.addBasicInfo(payload)
+      .then(response => {
+        console.log(response.data);
+        history.push('/basic-information')
+      })
+      .catch((error) => {
+        console.log(error.response.data.errors);
+          setMessageVariant('danger');
+          setHasMessage(true);
+          setMessageInfo(error.response.data.errors[0].msg);
+      });
+
         alert('Basic Information Created');
       }
       else {
-        const response = await axios.put(
+        /* const response = await axios.put(
           'http://smartresumebuild.herokuapp.com/api/basicinfo',
           data,
           config
-        );
+        ); */
+
+        basicInfoServices.updateBasicInfo(payload)
+      .then(response => {
+        console.log(response.data);
+        history.push('/basic-information')
+      })
+      .catch((error) => {
+        console.log(error.response.data.errors);
+          setMessageVariant('danger');
+          setHasMessage(true);
+          setMessageInfo(error.response.data.errors[0].msg);
+      });
+
+        
         alert('Basic Information Updated');
       }
 
