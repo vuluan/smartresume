@@ -40,6 +40,8 @@ export const add = async (req, res) => {
             data.user_id,
             data.title,
             data.description,
+            data.education,
+            data.experience
 
         );
         let createdResume = await resumeServices.add(resume);

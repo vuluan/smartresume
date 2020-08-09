@@ -5,6 +5,8 @@ export const add = async (resumeDTO) => {
         let newResume = new ResumeEntity(); newResume.user_id = resumeDTO.user_id;
         newResume.title = resumeDTO.title;
         newResume.description = resumeDTO.description;
+        newResume.education = resumeDTO.education;
+        newResume.experience = resumeDTO.experience;
         const createdResume = await newResume.save();
         return createdResume;
     } catch (err) {

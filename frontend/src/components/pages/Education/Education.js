@@ -7,7 +7,7 @@ import axios, { HOST } from '../../../utils/httpUtilities';
 import LocalStorageService from './../../../utils/localStorage';
 
 function Education() {
-  let BASE_URL = 'https://smartresumebuild.herokuapp.com/api';
+  let BASE_URL = HOST;
 
   const [education, setEducation] = useState([]);
   const [formValues, setFormValues] = useState({});
