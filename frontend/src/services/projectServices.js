@@ -8,18 +8,24 @@ export function getAllProjects(payload) {
     return axios.get(`${GET_PROJECTS_ENDPOINT}/${payload.userId}`);
 }
 
-export function getProjectDetailById(payload) {
-    return axios.get(`${PROJECT_DETAIL_ENDPOINT}/${payload.id}`);
+export function deleteProject(projectId) {
+    return axios.delete(`${PROJECT_DETAIL_ENDPOINT}`, { 
+        data: {
+            id: projectId
+        }
+    });
 }
 
 export function addProject(payload) {
     return axios.post(`${ADD_PROJECT_ENDPOINT}`, payload);
 }
 
+export function detailProject(projectId) {
+    return axios.get(`${PROJECT_DETAIL_ENDPOINT}/${projectId}`);
+}
+
 export function updateProject(payload) {
     return axios.put(`${PROJECT_DETAIL_ENDPOINT}`, payload);
 }
 
-export function deleteProject(payload) {
-    return axios.delete(`${PROJECT_DETAIL_ENDPOINT}`, payload);
-}
+

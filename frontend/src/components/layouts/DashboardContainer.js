@@ -15,7 +15,7 @@ import EditSkill from '../pages/Skill/EditSkill';
 import Language from '../pages/Language/Language';
 import AddLanguage from '../pages/Language/AddLanguage';
 import EditLanguage from '../pages/Language/EditLanguage';
-import Award from '../pages/Award';
+import Project from '../pages/Project/Project';
 import CoverLetters from '../pages/CoverLetter/CoverLetters';
 import AddCoverLetter from '../pages/CoverLetter/AddCoverLetter';
 import ContactMe from '../pages/ContactMe/ContactMe';
@@ -23,7 +23,7 @@ import Header from './Header';
 import CreateResume from '../pages/Home/ResumeCreate';
 import { Container } from 'react-bootstrap';
 import { FaInfo, FaUser, FaBullseye, FaUniversity, FaBuilding, FaTools,
-  FaGlobe, FaAward, FaEnvelopeOpenText, FaIdCard, FaHome
+  FaGlobe, FaProductHunt, FaEnvelopeOpenText, FaIdCard, FaHome
 } from 'react-icons/fa';
 import PrivateRoute from './PrivateRoute';
 
@@ -62,7 +62,7 @@ function DashboardContainer() {
                   <NavLink to='/language' className='nav-link'><i><FaGlobe /></i>Language</NavLink>
                 </li>
                 <li>
-                  <NavLink to='/award' className='nav-link'><i><FaAward /></i>Award</NavLink>
+                  <NavLink to='/project' className='nav-link'><i><FaProductHunt /></i>Project</NavLink>
                 </li>
                 <li>
                   <NavLink to='/cover-letter' className='nav-link'><i><FaEnvelopeOpenText /></i>Cover Letters</NavLink>
@@ -88,7 +88,7 @@ function DashboardContainer() {
             <PrivateRoute path='/language' exact component={Language} />
             <PrivateRoute path='/language/add' exact component={AddLanguage} />
             <PrivateRoute path='/language/edit/:id' component={EditLanguage} />
-            <PrivateRoute path='/award' exact component={Award} />
+            <PrivateRoute path='/project' exact component={Project} />
             <PrivateRoute path='/cover-letter' exact component={CoverLetters} />
             <PrivateRoute path='/cover-letter/add' exact component={AddCoverLetter} />
             <PrivateRoute path='/contact-me' exact component={ContactMe} />
