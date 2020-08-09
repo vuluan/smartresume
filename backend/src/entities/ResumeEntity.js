@@ -13,6 +13,45 @@ const ResumeSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    education: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: mongoDBEntityNames.educationCollection
+        }
+    ]
+    ,
+    experience: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: mongoDBEntityNames.experienceCollection
+        }
+    ],
+    skills: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: mongoDBEntityNames.skillCollection
+        }
+    ],
+    languages: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: mongoDBEntityNames.languageCollection
+        }
+    ],
+
+    profile: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: mongoDBEntityNames.jobprofileCollection
+    },
+    objective: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: mongoDBEntityNames.objectiveCollection
+    }
+    ,
+    coverLetter: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: mongoDBEntityNames.coverLetterCollection
+    }
 });
 
 export const ResumeEntity = databaseUtilities.getEntity(mongoDBEntityNames.resumeCollection, ResumeSchema);

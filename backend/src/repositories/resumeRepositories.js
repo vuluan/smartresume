@@ -2,9 +2,14 @@ import { ResumeEntity } from '../entities/ResumeEntity';
 import { isNullOrUndefined } from '../shared/utils/generalUtilities';
 export const add = async (resumeDTO) => {
     try {
-        let newResume = new ResumeEntity(); newResume.user_id = resumeDTO.user_id;
+        let newResume = new ResumeEntity();
+        newResume.user_id = resumeDTO.user_id;
         newResume.title = resumeDTO.title;
         newResume.description = resumeDTO.description;
+        newResume.education = resumeDTO.education;
+        newResume.experience = resumeDTO.experience;
+        newResume.profile = resumeDTO.profile;
+        newResume.objective = resumeDTO.objective;
         const createdResume = await newResume.save();
         return createdResume;
     } catch (err) {
@@ -14,7 +19,11 @@ export const add = async (resumeDTO) => {
 
 export const detail = async (id) => {
     try {
-        let detailResume = await ResumeEntity.findById(id);
+        let detailResume = await ResumeEntity.findById(id)
+            .populate("education")
+            .populate("profile")
+            .populate("objective")
+            .populate("experience");
         return detailResume;
     } catch (err) {
         throw err;

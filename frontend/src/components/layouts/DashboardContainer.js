@@ -21,6 +21,7 @@ import AddCoverLetter from '../pages/CoverLetter/AddCoverLetter';
 import ContactMe from '../pages/ContactMe/ContactMe';
 import Header from './Header';
 import CreateResume from '../pages/Home/ResumeCreate';
+import RenderResume from '../pages/Home/RenderResume';
 import { Container } from 'react-bootstrap';
 import { FaInfo, FaUser, FaBullseye, FaUniversity, FaBuilding, FaTools,
   FaGlobe, FaProductHunt, FaEnvelopeOpenText, FaIdCard, FaHome
@@ -93,6 +94,7 @@ function DashboardContainer() {
             <PrivateRoute path='/cover-letter/add' exact component={AddCoverLetter} />
             <PrivateRoute path='/contact-me' exact component={ContactMe} />
             <PrivateRoute path='/resume/create' exact component={CreateResume} />
+            <PrivateRoute path='/resume/render' exact component={RenderResume} />
           </main>
         </Row>
       </Container>

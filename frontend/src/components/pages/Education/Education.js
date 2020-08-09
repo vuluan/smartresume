@@ -7,7 +7,7 @@ import axios, { HOST } from '../../../utils/httpUtilities';
 import LocalStorageService from './../../../utils/localStorage';
 
 function Education() {
-  let BASE_URL = 'https://smartresumebuild.herokuapp.com/api';
+  let BASE_URL = HOST;
 
   const [education, setEducation] = useState([]);
   const [formValues, setFormValues] = useState({});
@@ -15,7 +15,7 @@ function Education() {
   const [isEditing, setIsEditing] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+
 
   useEffect(() => {
     getEducationList();
@@ -47,7 +47,6 @@ function Education() {
         }).catch((error) => {
           console.log(error);
         });
-
     }
   }
 

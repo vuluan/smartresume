@@ -1,43 +1,74 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import JobObjectiveForm from './JobObjectiveForm';
 import JobObjectiveTable from './JobObjectiveTable';
 import Breadcrumbs from '../../layouts/Breadcrumbs';
-
+import axios, { HOST } from '../../../utils/httpUtilities';
+import LocalStorageService from './../../../utils/localStorage';
+import { Modal, Button } from 'react-bootstrap';
 
 function JobObjective() {
-  const [objective, setObjective] = useState([
-    {
-      id: 1,
-      objective: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  let BASE_URL = 'https://smartresumebuild.herokuapp.com/api';
+  const [objective, setObjective] = useState([]);
 
-    },
-    {
-      id: 2,
-      objective: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  const [formValues, setFormValues] = useState({});
+  const [show, setShow] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const handleClose = () => setShow(false);
 
-    }, {
-      id: 3,
-      objective: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  useEffect(() => {
+    getObjectiveList();
+  }, [])
 
-    },
-  ]);
-
-  const handleEdit = () => {
-    console.log("Edit clicked");
+  const getObjectiveList = () => {
+    let userId = LocalStorageService.getUserInfo().userId;
+    axios.get(`${BASE_URL}/objective/list/${userId}`).then((response) => {
+      setObjective(response.data.data);
+    });
   }
 
   const handleSave = (data) => {
-
-    console.log("Save clicked: " + JSON.stringify(data));
-    data.id = objective.length + 1;
-    setObjective(prevObjective => [...prevObjective, data]);
+    if (isEditing) {
+      data.user_id = LocalStorageService.getUserInfo().userId;
+      data.id = formValues._id
+      axios.put(`${BASE_URL}/objective`, data).then((response) => {
+        setShow(false)
+        getObjectiveList();
+      }).catch((error) => {
+        console.log(error);
+      });
+    } else {
+      data.user_id = LocalStorageService.getUserInfo().userId;
+      axios.post(`${BASE_URL}/objective/add`, data)
+        .then((response) => {
+          setShow(false)
+          getObjectiveList();
+        }).catch((error) => {
+          console.log(error);
+        });
+    }
   }
 
   const handleDelete = (id) => {
-    console.log("Delete clicked:" + id);
+    let deleteId = { id }
+    axios.delete(`${BASE_URL}/objective`, {
+      data: deleteId
+    }).then((response) => {
+      getObjectiveList();
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
 
-    setObjective(prevObjective => prevObjective.filter((g) => g.id !== id))
+  const handleEdit = (index) => {
+    setFormValues(objective[index]);
+    setIsEditing(true);
+    setShow(currentSet => !currentSet);
+  }
 
+  const handleAddNew = () => {
+    setFormValues({})
+    setIsEditing(false);
+    setShow(currentSet => !currentSet);
   }
 
   const breadcrumbLinks = [
@@ -55,7 +86,31 @@ function JobObjective() {
   return (
     <>
       <Breadcrumbs links={breadcrumbLinks} />
-      <JobObjectiveForm onSave={handleSave} />
+
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>{(isEditing) ? 'Update Objective' : 'Add Objective'}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+
+          <JobObjectiveForm onSave={handleSave} formValues={formValues} />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+
+
+
+      <Button className='btn btn-success float-right' onClick={handleAddNew}>Add Objective</Button>
       <JobObjectiveTable objective={objective} onEdit={handleEdit} onDelete={handleDelete} />
     </>
   );

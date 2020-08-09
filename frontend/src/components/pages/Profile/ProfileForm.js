@@ -6,53 +6,54 @@ import * as Yup from 'yup';
 
 const validationSchema = Yup.object().shape({
   profile: Yup.string()
-  .required("*Profile is required"),
+    .required("*Profile is required"),
 
 });
 
-const ProfileForm = ({onSave}) => {
-  return(<div> 
+const ProfileForm = ({ onSave, formValues }) => {
+  return (<div>
     <Formik
-      initialValues={{ profile:""}}
+      enableReinitialize={true}
+      initialValues={formValues}
       validationSchema={validationSchema}
-      onSubmit={(values, {setSubmitting, resetForm}) => {
-          setSubmitting(true);
-          setTimeout(() => {
-           onSave(values);
-            resetForm();
-            setSubmitting(false);
-          }, 500);
+      onSubmit={(values, { setSubmitting, resetForm }) => {
+        setSubmitting(true);
+        setTimeout(() => {
+          onSave(values);
+          resetForm();
+          setSubmitting(false);
+        }, 500);
       }}
     >
-      {( {values,
-          errors,
-          touched,
-          handleChange,
-          handleBlur,
-          handleSubmit,
-          isSubmitting }) => (
-        <Form onSubmit={handleSubmit} className="mx-auto">
-          <Form.Group controlId="formProfile">
-            <Form.Label>Profile :</Form.Label>
-            <Form.Control
-              as="textarea" rows="3"
-              name="profile"
-              placeholder="Enter your profile here.."
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.profile}
+      {({ values,
+        errors,
+        touched,
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        isSubmitting }) => (
+          <Form onSubmit={handleSubmit} className="mx-auto">
+            <Form.Group controlId="formProfile">
+              <Form.Label>Profile :</Form.Label>
+              <Form.Control
+                as="textarea" rows="3"
+                name="profile"
+                placeholder="Enter your profile here.."
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.profile}
               />
               {touched.profile && errors.profile ? (
                 <div className="error-message">{errors.profile}</div>
-              ): null}
-          </Form.Group>     
-          <Button variant="primary" type="submit" disabled={isSubmitting} >
-            Save
+              ) : null}
+            </Form.Group>
+            <Button variant="primary" type="submit" disabled={isSubmitting} >
+              Save
           </Button>
-        </Form>
-      )}
+          </Form>
+        )}
     </Formik>
-    </div>
+  </div>
   );
 }
 
