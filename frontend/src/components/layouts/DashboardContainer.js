@@ -10,6 +10,8 @@ import Experience from '../pages/Experience/Experience';
 import AddExperience from '../pages/Experience/AddExperience';
 import EditExperience from '../pages/Experience/EditExperience';
 import Skill from '../pages/Skill/Skill';
+import AddSkill from '../pages/Skill/AddSkill';
+import EditSkill from '../pages/Skill/EditSkill';
 import Language from '../pages/Language/Language';
 import AddLanguage from '../pages/Language/AddLanguage';
 import EditLanguage from '../pages/Language/EditLanguage';
@@ -81,6 +83,8 @@ function DashboardContainer() {
             <PrivateRoute path='/experience/add' exact component={AddExperience} />
             <PrivateRoute path='/experience/edit/:id' exact component={EditExperience} />
             <PrivateRoute path='/skill' exact component={Skill} />
+            <PrivateRoute path='/skill/add' exact component={AddSkill} />
+            <PrivateRoute path='/skill/edit/:id' exact component={EditSkill} />
             <PrivateRoute path='/language' exact component={Language} />
             <PrivateRoute path='/language/add' exact component={AddLanguage} />
             <PrivateRoute path='/language/edit/:id' component={EditLanguage} />

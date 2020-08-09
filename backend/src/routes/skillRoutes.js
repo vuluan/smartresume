@@ -10,6 +10,14 @@ const routes = (app) => {
             next();
         }, authRequired, validate('createSkill'), add);
 
+    app.route('/api/skill/:id')
+        .get((req, res, next) => {
+            // middleware
+            console.log(`Request from: ${req.originalUrl}`)
+            console.log(`Request type: ${req.method}`)
+            next();
+        }, authRequired, detail);
+
     app.route('/api/skill/list/:id')
         .get((req, res, next) => {
             // middleware
