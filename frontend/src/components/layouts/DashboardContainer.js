@@ -9,7 +9,7 @@ import Education from '../pages/Education/Education';
 import Experience from '../pages/Experience/Experience';
 import AddExperience from '../pages/Experience/AddExperience';
 import EditExperience from '../pages/Experience/EditExperience';
-import Skill from '../pages/Skill';
+import Skill from '../pages/Skill/Skill';
 import Language from '../pages/Language/Language';
 import AddLanguage from '../pages/Language/AddLanguage';
 import EditLanguage from '../pages/Language/EditLanguage';

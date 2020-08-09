@@ -50,6 +50,26 @@ export const add = async (req, res) => {
     }
 };
 
+export const detail = async (req, res) => {
+    try {
+        let skill = await skillServices.detail(req.params.id);
+
+        if (!skill) {
+            return res.status(404).send(new HttpResponseResult(false, "Skill not found", null));
+        }
+
+        return await res.status(200).send(new HttpResponseResult(true, "", skill));
+
+    } catch (err) {
+        if (err.isBusinessException) {
+            return await res.send(new HttpResponseResult(false, err.message, null));
+        }
+        logger.error(err);
+        console.log(err);
+        return await res.status(err.code | 400).send(new HttpResponseResult(false, err, null));
+    }
+};
+
 export const deleteById = async (req, res) => {
     try {
         const errors = validationResult(req);

@@ -14,6 +14,14 @@ export const add = async (skillDTO) => {
     }
 }
 
+export const detail = async (id) => {
+    try {
+        let detailSkill = await SkillEntity.findById(id);
+        return detailSkill;
+    } catch (err) {
+        throw err;
+    }
+}
 
 export const deleteById = async (id) => {
     try {
