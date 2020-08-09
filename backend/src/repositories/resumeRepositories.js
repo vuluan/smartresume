@@ -8,6 +8,8 @@ export const add = async (resumeDTO) => {
         newResume.description = resumeDTO.description;
         newResume.education = resumeDTO.education;
         newResume.experience = resumeDTO.experience;
+        newResume.profile = resumeDTO.profile;
+        newResume.objective = resumeDTO.objective;
         const createdResume = await newResume.save();
         return createdResume;
     } catch (err) {
@@ -17,7 +19,11 @@ export const add = async (resumeDTO) => {
 
 export const detail = async (id) => {
     try {
-        let detailResume = await ResumeEntity.findById(id).populate("education").populate("experience");
+        let detailResume = await ResumeEntity.findById(id)
+            .populate("education")
+            .populate("profile")
+            .populate("objective")
+            .populate("experience");
         return detailResume;
     } catch (err) {
         throw err;
