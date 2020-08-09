@@ -4,7 +4,8 @@ import { Button, Card, Form, Col, Alert } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import axios from 'axios';
+import * as experienceServices from './../../../services/experienceServices';
+import LocalStorageService from './../../../utils/localStorage';
 
 const employmentType = ['Full-time', 'Part-time', 'Self-employed',
   'Freelance', 'Contract', 'Internship', 'Apprenticeship'];
@@ -61,29 +62,28 @@ class EditExperience extends React.Component {
     this.setState({
       id: this.props.match.params.id
     });
-    let URL = '/api/experience/' + this.props.match.params.id;
-    let USER_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibmd1eWVudnVsdWFuODlAZ21haWwuY29tIiwiX2lkIjoiNWYwYTgxOTY4NGEyMzQzNjFjZjk0MjFjIn0sImlhdCI6MTU5NjcxODEyNn0.bTPA7D8yPX0nzAPd4x4bzGCy9i1Bc6vf_KGNPm_OK5Y';
-    const AuthStr = 'Bearer '.concat(USER_TOKEN);
-    axios.get(URL, { headers: { Authorization: AuthStr } })
-      .then(response => {
-          console.log(response.data);
-          this.setState({ 
-            title: response.data.data.title,
-            type: response.data.data.type,
-            company: response.data.data.company,
-            location: response.data.data.location,
-            startDate: new Date(response.data.data.start_date),
-            endDate: new Date(response.data.data.end_date),
-            description: response.data.data.description,
-          });
-        })
-      .catch((error) => {
-        // this.setState({
-        //   messageVariant: 'danger',
-        //   hasMessage: true,
-        //   messageInfo: error.response.data.errors[0].msg
-        // });
+
+    experienceServices.detailExperience(this.props.match.params.id).then(response => {
+      if (response.status == 200) {
+        console.log(response.data);
+        this.setState({ 
+          title: response.data.data.title,
+          type: response.data.data.type,
+          company: response.data.data.company,
+          location: response.data.data.location,
+          startDate: new Date(response.data.data.start_date),
+          endDate: new Date(response.data.data.end_date),
+          description: response.data.data.description,
+        });
+      }
+    })
+    .catch((error) => {
+      this.setState({
+        messageVariant: 'danger',
+        hasMessage: true,
+        messageInfo: error.response.data.errors[0].msg
       });
+    });
   }
 
   saveHandler = (e) => {
@@ -92,24 +92,20 @@ class EditExperience extends React.Component {
       hasMessage: false
     });
 
-    let USER_ID = '5f0a819684a234361cf9421c'
-    let URL = '/api/experience';
-    let USER_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibmd1eWVudnVsdWFuODlAZ21haWwuY29tIiwiX2lkIjoiNWYwYTgxOTY4NGEyMzQzNjFjZjk0MjFjIn0sImlhdCI6MTU5NjcxODEyNn0.bTPA7D8yPX0nzAPd4x4bzGCy9i1Bc6vf_KGNPm_OK5Y';
-    const AuthStr = 'Bearer '.concat(USER_TOKEN);
-    axios.put(URL, 
-      {
-        user_id: USER_ID,
-        title: this.state.title,
-        type: this.state.type,
-        company: this.state.company,
-        location: this.state.location,
-        start_date: this.state.startDate,
-        end_date: this.state.endDate,
-        description: this.state.description,
-      },
-      { 
-        headers: { Authorization: AuthStr } 
-      })
+    const userInfo = LocalStorageService.getUserInfo();
+    const payload = { 
+      id: this.state.id,
+      user_id: userInfo.userId,
+      title: this.state.title,
+      type: this.state.type,
+      company: this.state.company,
+      location: this.state.location,
+      start_date: this.state.startDate,
+      end_date: this.state.endDate,
+      description: this.state.description,
+    };
+
+    experienceServices.updateExperience(payload)
       .then(response => {
         this.setState({
           messageVariant: 'success',

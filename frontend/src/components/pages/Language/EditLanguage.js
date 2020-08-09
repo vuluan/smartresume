@@ -3,7 +3,6 @@ import Breadcrumbs from '../../layouts/Breadcrumbs';
 import { Button, Card, Form, Col, Alert } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import "react-datepicker/dist/react-datepicker.css";
-import axios from 'axios';
 import * as languageServices from './../../../services/languageServices';
 import LocalStorageService from './../../../utils/localStorage';
 

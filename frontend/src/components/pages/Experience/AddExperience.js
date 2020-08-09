@@ -4,7 +4,8 @@ import { Button, Card, Form, Col, Alert } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import axios from 'axios';
+import * as experienceServices from './../../../services/experienceServices';
+import LocalStorageService from './../../../utils/localStorage';
 
 const employmentType = ['Full-time', 'Part-time', 'Self-employed',
   'Freelance', 'Contract', 'Internship', 'Apprenticeship'];
@@ -53,13 +54,9 @@ class AddExperience extends React.Component {
 
   saveHandler = (e) => {
 
-    let USER_ID = '5f0a819684a234361cf9421c'
-    let URL = '/api/experience/add';
-    let USER_TOKEN = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImVtYWlsIjoibmd1eWVudnVsdWFuODlAZ21haWwuY29tIiwiX2lkIjoiNWYwYTgxOTY4NGEyMzQzNjFjZjk0MjFjIn0sImlhdCI6MTU5NjcxODEyNn0.bTPA7D8yPX0nzAPd4x4bzGCy9i1Bc6vf_KGNPm_OK5Y';
-    const AuthStr = 'Bearer '.concat(USER_TOKEN);
-    axios.post(URL, 
-      {
-        user_id: USER_ID,
+    const userInfo = LocalStorageService.getUserInfo();
+    const payload = { 
+        user_id: userInfo.userId,
         title: this.state.title,
         type: this.state.type,
         company: this.state.company,
@@ -67,10 +64,9 @@ class AddExperience extends React.Component {
         start_date: this.state.startDate,
         end_date: this.state.endDate,
         description: this.state.description,
-      },
-      { 
-        headers: { Authorization: AuthStr } 
-      })
+    };
+
+    experienceServices.addExperience(payload)
       .then(response => {
         console.log(response.data);
         this.props.history.push('/experience')
