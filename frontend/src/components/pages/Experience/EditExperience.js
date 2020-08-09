@@ -64,7 +64,7 @@ class EditExperience extends React.Component {
     });
 
     experienceServices.detailExperience(this.props.match.params.id).then(response => {
-      if (response.status == 200) {
+      if (response.status === 200) {
         console.log(response.data);
         this.setState({ 
           title: response.data.data.title,
