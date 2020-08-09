@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Breadcrumbs from '../layouts/Breadcrumbs';
+import Breadcrumbs from '../../layouts/Breadcrumbs';
 import { Form, Container, Pagination, Jumbotron, Card, Button, Col } from 'react-bootstrap';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import axios from 'axios';

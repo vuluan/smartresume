@@ -1,8 +1,16 @@
 import React, { useState } from 'react';
 import { Form, Container, Jumbotron, Button } from 'react-bootstrap';
-import axios from 'axios';
+import * as coverLetterServices from './../../../services/coverLetterServices';
+import LocalStorageService from './../../../utils/localStorage';
+import { useHistory } from 'react-router-dom';
+
 
 function CoverLetter() {
+
+  const history = useHistory();
+  const [messageVariant, setMessageVariant] = useState('danger');
+  const [hasMessage, setHasMessage] = useState(false);
+  const [messageInfo, setMessageInfo] = useState('');
 
   const [formData, setFormData] = useState({
     title: '',
@@ -17,7 +25,7 @@ function CoverLetter() {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    // let token = localStorage.getItem('token');
+/*     // let token = localStorage.getItem('token');
     let config = {
       headers: {
         'Content-Type': 'application/json',
@@ -40,7 +48,27 @@ function CoverLetter() {
       alert('Cover Letter Added');
     } catch (e) {
       console.log(e.response.data.errors);
-    }
+    } */
+
+
+    const userInfo = LocalStorageService.getUserInfo();
+    const payload = { 
+        user_id: userInfo.userId,
+        title,
+        body
+    };
+
+    coverLetterServices.addCoverLetter(payload)
+      .then(response => {
+        console.log(response.data);
+        history.push('/cover-letter')
+      })
+      .catch((error) => {
+        console.log(error.response.data.errors);
+          setMessageVariant('danger');
+          setHasMessage(true);
+          setMessageInfo(error.response.data.errors[0].msg);
+      });
   };
 
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Breadcrumbs from '../layouts/Breadcrumbs';
+import Breadcrumbs from '../../layouts/Breadcrumbs';
 import { Pagination, Card } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import CoverLetter from './CoverLetter.js';
