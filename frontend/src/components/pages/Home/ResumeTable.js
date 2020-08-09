@@ -1,12 +1,13 @@
 import React from 'react'
 import { Table, Button } from 'react-bootstrap';
-
+import { NavLink } from 'react-router-dom';
 const TableRow = ({ row, onEdit, onDelete }) => (
     <tr>
         <td >{row.id}</td>
         <td >{row.title}</td>
         <td >{row.description}</td>
         <td >{row.date_created}</td>
+        <NavLink exact to='/resume/render' className='btn btn-success '>Show</NavLink>
         <td><Button value={row.id} onClick={onEdit}>Edit</Button></td>
         <td><Button variant="danger" value={row.id} onClick={() => onDelete(row.id)}>Delete</Button></td>
     </tr>

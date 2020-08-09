@@ -15,6 +15,9 @@ function ResumeCreate() {
         title: 'Test Title',
         description: 'Test description'
     });
+
+    const [profile, setProfile] = useState([]);
+    const [objective, setObjective] = useState([]);
     const [education, setEducation] = useState([]);
     const [experience, setExperience] = useState([]);
     const [skills, setSkills] = useState([]);
@@ -28,7 +31,19 @@ function ResumeCreate() {
         getSkillsList();
         getLanguagesList();
         getAwardsList();
+        getProfileList();
     }, [])
+
+    const getProfileList = () => {
+        let userId = LocalStorageService.getUserInfo().userId;
+        axios.get(`${BASE_URL}/jobprofile/list/${userId}`).then((response) => {
+            console.log(response);
+            setProfile(response.data.data.map((adu) => {
+                return { value: adu._id, label: `${adu.profile}` }
+            })
+            );
+        });
+    }
 
     const getEducationList = () => {
         let userId = LocalStorageService.getUserInfo().userId;
@@ -76,7 +91,6 @@ function ResumeCreate() {
                 );
             }
         });
-
     }
 
     useEffect(() => {
@@ -107,8 +121,25 @@ function ResumeCreate() {
         }));
     }
 
-    const handleSave = () => {
+    const profileChanged = (value) => {
+        console.log(value);
 
+        setResume((prevState, props) => ({
+            ...prevState,
+            profile: value.value
+        }));
+    }
+
+    const objectiveChanged = (value) => {
+        console.log(value);
+        let e = value.map((obj) => { return obj.value })
+        setResume((prevState, props) => ({
+            ...prevState,
+            profile: e
+        }));
+    }
+
+    const handleSave = () => {
         console.log('Handle Save');
         resume.user_id = LocalStorageService.getUserInfo().userId;
 
@@ -138,6 +169,22 @@ function ResumeCreate() {
         <div>
             <Breadcrumbs links={breadcrumbLinks} />
             <h1>Create New Resume</h1>
+
+            <label htmlFor="prof">Profile</label>
+            <Select options={profile}
+                onChange={profileChanged}
+                className="basic-multi-select"
+                classNamePrefix="select"
+                id='prof'
+            />
+
+            <label htmlFor="obj">Objective</label>
+            <Select options={objective}
+                onChange={objectiveChanged}
+                className="basic-multi-select"
+                classNamePrefix="select"
+                id='obj'
+            />
 
             <label htmlFor="edu">Education</label>
             <Select isMulti options={education}

@@ -8,7 +8,7 @@ import LocalStorageService from './../../../utils/localStorage';
 import { Modal, Button } from 'react-bootstrap';
 
 function Profile() {
-  let BASE_URL = 'https://smartresumebuild.herokuapp.com/api';
+  let BASE_URL = HOST;
 
   const [profile, setProfile] = useState([]);
   const [formValues, setFormValues] = useState({});
