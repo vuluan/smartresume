@@ -30,8 +30,6 @@ class AddProject extends React.Component {
       messageVariant: 'danger',
       hasMessage: false,
       messageInfo: '',
-      duties: '',
-      skills: ''
     };
   }
 

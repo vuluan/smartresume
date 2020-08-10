@@ -31,10 +31,6 @@ export const validate = (method) => {
 
 export const add = async (req, res) => {
     try {
-        if (req.userInfo && req.userInfo._id !== data.user_id) {
-            throw new CustomException(true, errorMessage.NOT_AUTHORIZED_TO_ACCESS_RESOURCE);
-        }
-
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(422).json({ errors: errors.array() });

@@ -14,8 +14,8 @@ const breadcrumbLinks = [
     path: '/'
   },
   {
-    label: 'Skill',
-    path: '/skill',
+    label: 'Project',
+    path: '/project',
     active: true
   }
 ];
@@ -99,7 +99,7 @@ class Project extends Component {
                 </Col>
               </Form.Row>
             </Form>
-            <NavLink exact to='/skill/add' className='btn btn-sm btn-outline-secondary float-right'>New Project</NavLink>
+            <NavLink exact to='/project/add' className='btn btn-sm btn-outline-secondary float-right'>New Project</NavLink>
             <Table bordered hover>
               <thead>
                 <tr>
