@@ -1,21 +1,46 @@
 
 import React, { useState, useEffect } from 'react';
 import ResumeTable from './ResumeTable';
-import ResumeSearch from './ResumeSearch';
 import { NavLink, useHistory } from 'react-router-dom';
 import Breadcrumbs from '../../layouts/Breadcrumbs';
 import axios, { HOST } from '../../../utils/httpUtilities';
 import LocalStorageService from './../../../utils/localStorage';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-function Home() {
+
+function Home(props) {
   let BASE_URL = HOST;
 
   const [resume, setResume] = useState([]);
   const history = useHistory();
 
+  let success = props.location.success
+  let message = props.location.message
+
+
+
   useEffect(() => {
     getResumeList();
   }, [])
+
+  const successToast = (msg) => {
+
+    toast.success(`😀 ${msg}`, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
+  }
+
+  if (success === true) {
+    successToast(message);
+  }
+
 
   const getResumeList = () => {
     let userId = LocalStorageService.getUserInfo().userId;
@@ -36,8 +61,7 @@ function Home() {
   }
 
   const handleEdit = (id) => {
-    console.log("Edit clicked");
-    console.log(id);
+
     history.push({
       pathname: '/resume/create',
       resumeId: id,
@@ -45,8 +69,7 @@ function Home() {
   }
 
   function handleShow(id) {
-    console.log(id);
-    // history.push("/resume/render");
+
     history.push({
       pathname: '/resume/render',
       resumeId: id,
@@ -67,7 +90,7 @@ function Home() {
   return (
     <>
       <Breadcrumbs links={breadcrumbLinks} />
-
+      <ToastContainer />
       <NavLink exact to='/resume/create' className='btn btn-success float-right'>New Resume</NavLink>
       <ResumeTable resume={resume} onEdit={handleEdit} onShow={handleShow} onDelete={handleDelete} />
     </>

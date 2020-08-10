@@ -45,15 +45,15 @@ export const updateById = async (id, basicInfoDTO) => {
         if (isNullOrUndefined(updateBasicInfo))
             return null;
 
-            updateBasicInfo.firsName = basicInfoDTO.firstName;
-            updateBasicInfo.lastName = basicInfoDTO.lastName;
-            updateBasicInfo.email = basicInfoDTO.email;
-            updateBasicInfo.phone = basicInfoDTO.phone;
-            updateBasicInfo.address = basicInfoDTO.address;
-            updateBasicInfo.country = basicInfoDTO.country;
-            updateBasicInfo.region = basicInfoDTO.region;
-            updateBasicInfo.gitHub = basicInfoDTO.gitHub;
-            updateBasicInfo.linkedin = basicInfoDTO.linkedin;
+        updateBasicInfo.firstName = basicInfoDTO.firstName;
+        updateBasicInfo.lastName = basicInfoDTO.lastName;
+        updateBasicInfo.email = basicInfoDTO.email;
+        updateBasicInfo.phone = basicInfoDTO.phone;
+        updateBasicInfo.address = basicInfoDTO.address;
+        updateBasicInfo.country = basicInfoDTO.country;
+        updateBasicInfo.region = basicInfoDTO.region;
+        updateBasicInfo.gitHub = basicInfoDTO.gitHub;
+        updateBasicInfo.linkedin = basicInfoDTO.linkedin;
         return await updateBasicInfo.save();
     } catch (err) {
         throw err;

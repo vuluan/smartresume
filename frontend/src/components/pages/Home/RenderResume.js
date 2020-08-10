@@ -8,8 +8,6 @@ function RenderResume(props) {
 
     let resumeId = props.location.resumeId
 
-    //console.log(`RESUME: ${JSON.stringify(props)}`);
-
     const [resume, setResume] = useState();
     const [basicInfo, setBasicInfo] = useState();
 
@@ -19,7 +17,7 @@ function RenderResume(props) {
     }, [])
 
     useEffect(() => {
-        //console.log(JSON.stringify(resume));
+        console.log(JSON.stringify(resume));
     }, [resume])
 
 
@@ -36,7 +34,6 @@ function RenderResume(props) {
 
     const getResume = () => {
         axios.get(`${BASE_URL}/resume/${resumeId}`).then((response) => {
-            console.log(JSON.stringify(response.data.data));
             setResume(response.data.data);
         }).catch(function (error) {
             console.log(error);
@@ -44,7 +41,6 @@ function RenderResume(props) {
     }
 
     if (resume && basicInfo) {
-        //  console.log(JSON.stringify(basicInfo[0].firstName));
         let info = basicInfo[0];
 
         return (

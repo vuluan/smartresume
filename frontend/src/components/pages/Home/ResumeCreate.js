@@ -1,18 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import Breadcrumbs from '../../layouts/Breadcrumbs';
 import Select from 'react-select'
+import { useHistory } from 'react-router-dom';
 import axios, { HOST } from '../../../utils/httpUtilities';
 import LocalStorageService from './../../../utils/localStorage';
 import * as experienceServices from './../../../services/experienceServices';
 import * as projectServices from './../../../services/projectServices';
 import * as languageServices from './../../../services/languageServices';
 import { Button } from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function ResumeCreate(props) {
     let BASE_URL = HOST;
 
     const [resume, setResume] = useState({});
-
+    const history = useHistory();
     let resumeId = props.location.resumeId
 
     const [profile, setProfile] = useState([]);
@@ -24,13 +27,26 @@ function ResumeCreate(props) {
     const [projects, setProjects] = useState([]);
     const [initValues, setInitValues] = useState({});
 
+    const failToast = () => {
+
+        toast.error('😥 Save failed', {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+    }
+
     useEffect(() => {
         getResume();
         getEducationList();
         getExperienceList();
         getSkillsList();
         getLanguagesList();
-        getAwardsList();
+
         getProfileList();
         getObjectiveList();
         getProjectList();
@@ -68,10 +84,8 @@ function ResumeCreate(props) {
     }
 
     const profDefaults = () => {
-        console.log("Resume:" + JSON.stringify(resume));
         if (resume.profile) {
             let values = { value: resume.profile._id, label: `${resume.profile.profile}` }
-            console.log(`Default Values: ${JSON.stringify(values)}`);
             setInitValues((prevState, props) => ({
                 ...prevState,
                 profile: values
@@ -83,7 +97,6 @@ function ResumeCreate(props) {
         if (resume.objective) {
             let values = { value: resume.objective._id, label: `${resume.objective.objective}` }
 
-            console.log(`Default Values: ${JSON.stringify(values)}`);
             setInitValues((prevState, props) => ({
                 ...prevState,
                 objective: values
@@ -92,12 +105,12 @@ function ResumeCreate(props) {
     }
 
     const eduDefaults = () => {
-        console.log("Resume:" + JSON.stringify(resume));
+
         if (resume.education) {
             let values = resume.education.map((adu) => {
                 return { value: adu._id, label: `${adu.school} ${adu.degree} ${adu.field} ${adu.start} : ${adu.finish}` }
             })
-            console.log(`Default Values: ${values}`);
+
             setInitValues((prevState, props) => ({
                 ...prevState,
                 education: values
@@ -232,7 +245,7 @@ function ResumeCreate(props) {
         const payload = { userId: userInfo.userId };
 
         projectServices.getAllProjects(payload).then(res => {
-            // console.log(JSON.stringify(res));
+
             if (res.status === 200) {
                 setProjects(res.data.data.map((lan) => {
                     return { value: lan._id, label: `${lan.name} : ${lan.description}` }
@@ -243,12 +256,8 @@ function ResumeCreate(props) {
     }
 
     useEffect(() => {
-        //console.log(JSON.stringify(resume));
+        console.log(JSON.stringify(resume));
     }, [resume])
-
-    const getAwardsList = () => {
-
-    }
 
     const eduChanged = (value) => {
 
@@ -327,19 +336,33 @@ function ResumeCreate(props) {
     const handleSave = () => {
         if (resumeId) {
             //Update
-            console.log('Update');
             resume.user_id = LocalStorageService.getUserInfo().userId;
             resume.id = resumeId;
+            console.log(`Update: ${resume}`);
             axios.put(`${BASE_URL}/resume`, resume).then((response) => {
+
+                history.push({
+                    pathname: '/',
+                    success: true,
+                    message: "Edit saved."
+                });
             }).catch((error) => {
+                failToast();
                 console.log(error);
             });
         } else {
             //Save New
-            console.log('Save New');
+            console.log(`Save New: ${resume}`);
             resume.user_id = LocalStorageService.getUserInfo().userId;
             axios.post(`${BASE_URL}/resume/add`, resume).then((response) => {
+
+                history.push({
+                    pathname: '/',
+                    success: true,
+                    message: "Resume Created."
+                });
             }).catch((error) => {
+                failToast();
                 console.log(error);
             });
         }
@@ -360,13 +383,12 @@ function ResumeCreate(props) {
     ];
 
     if ((resume && Object.keys(initValues).length && initValues.profile) || !resumeId) {
-        console.log("Init Values: " + JSON.stringify(initValues));
-        console.log("Resume ID: " + resumeId);
+
         return (
             <div>
                 <Breadcrumbs links={breadcrumbLinks} />
-                <h1>Create New Resume</h1>
-
+                {(resumeId) ? <h1>Edit Resume</h1> : <h1>Create New Resume</h1>}
+                <ToastContainer />
                 <label htmlFor="title">Title</label>
                 <input
                     value={resume.title}
