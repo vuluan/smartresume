@@ -32,6 +32,7 @@ function ResumeCreate() {
         getLanguagesList();
         getAwardsList();
         getProfileList();
+        getObjectiveList()
     }, [])
 
     const getProfileList = () => {
@@ -40,6 +41,17 @@ function ResumeCreate() {
             console.log(response);
             setProfile(response.data.data.map((adu) => {
                 return { value: adu._id, label: `${adu.profile}` }
+            })
+            );
+        });
+    }
+
+    const getObjectiveList = () => {
+        let userId = LocalStorageService.getUserInfo().userId;
+        axios.get(`${BASE_URL}/objective/list/${userId}`).then((response) => {
+            console.log(response);
+            setObjective(response.data.data.map((adu) => {
+                return { value: adu._id, label: `${adu.objective}` }
             })
             );
         });
@@ -75,16 +87,23 @@ function ResumeCreate() {
 
 
     const getSkillsList = () => {
-
+        let userId = LocalStorageService.getUserInfo().userId;
+        axios.get(`${BASE_URL}/skill/list/${userId}`).then((response) => {
+            setSkills(response.data.data.map((adu) => {
+                return { value: adu._id, label: `${adu.skill_name} Hard Skill: ${adu.is_hard_skill}` }
+            })
+            );
+        });
     }
 
     const getLanguagesList = () => {
         const userInfo = LocalStorageService.getUserInfo();
         const payload = { userId: userInfo.userId };
+        console.log(userInfo.userId);
 
         languageServices.getAllLanguages(payload).then(res => {
             if (res.status == 200) {
-                console.log(res.data);
+                console.log(`Language: ${JSON.stringify(res.data)}`);
                 setLanguages(res.data.data.map((lan) => {
                     return { value: lan._id, label: `${lan.language} : ${lan.proficiency}` }
                 })
@@ -103,7 +122,7 @@ function ResumeCreate() {
     }
 
     const eduChanged = (value) => {
-        console.log(value);
+        //console.log(value);
 
         let e = value.map((edu) => { return edu.value })
         setResume((prevState, props) => ({
@@ -113,7 +132,7 @@ function ResumeCreate() {
     }
 
     const expChanged = (value) => {
-        console.log(value);
+        //console.log(value);
         let e = value.map((exp) => { return exp.value })
         setResume((prevState, props) => ({
             ...prevState,
@@ -122,7 +141,7 @@ function ResumeCreate() {
     }
 
     const profileChanged = (value) => {
-        console.log(value);
+        //  console.log(value);
 
         setResume((prevState, props) => ({
             ...prevState,
@@ -130,17 +149,55 @@ function ResumeCreate() {
         }));
     }
 
-    const objectiveChanged = (value) => {
-        console.log(value);
-        let e = value.map((obj) => { return obj.value })
+    const titleChanged = (e) => {
+        let title = e.target.value
+        if (e.target !== null) {
+            setResume((prevState, props) => ({
+                ...prevState,
+                title: title
+            }));
+        }
+
+    }
+
+    const descriptionChanged = (e) => {
+        let description = e.target.value
+
         setResume((prevState, props) => ({
             ...prevState,
-            profile: e
+            description: description
+        }));
+    }
+
+    const objectiveChanged = (value) => {
+        //console.log(value);
+
+        setResume((prevState, props) => ({
+            ...prevState,
+            objective: value.value
+        }));
+    }
+    //skillChanged
+    const skillChanged = (value) => {
+        // console.log(value);
+        let e = value.map((exp) => { return exp.value })
+        setResume((prevState, props) => ({
+            ...prevState,
+            skills: e
+        }));
+    }
+
+    const languageChanged = (value) => {
+        // console.log(value);
+        let e = value.map((exp) => { return exp.value })
+        setResume((prevState, props) => ({
+            ...prevState,
+            languages: e
         }));
     }
 
     const handleSave = () => {
-        console.log('Handle Save');
+        // console.log('Handle Save');
         resume.user_id = LocalStorageService.getUserInfo().userId;
 
         axios.post(`${BASE_URL}/resume/add`, resume).then((response) => {
@@ -170,6 +227,22 @@ function ResumeCreate() {
             <Breadcrumbs links={breadcrumbLinks} />
             <h1>Create New Resume</h1>
 
+            <label htmlFor="title">Title</label>
+            <input
+                onChange={titleChanged}
+                className='form-control'
+                type='text'
+                id='title'
+            />
+
+            <label htmlFor="description">Description</label>
+            <input
+                onChange={descriptionChanged}
+                className='form-control'
+                type='text'
+                id='description'
+            />
+
             <label htmlFor="prof">Profile</label>
             <Select options={profile}
                 onChange={profileChanged}
@@ -185,14 +258,6 @@ function ResumeCreate() {
                 classNamePrefix="select"
                 id='obj'
             />
-
-            <label htmlFor="edu">Education</label>
-            <Select isMulti options={education}
-                onChange={eduChanged}
-                className="basic-multi-select"
-                classNamePrefix="select"
-                id='edu'
-            />
             <label htmlFor="exp">Experience</label>
             <Select isMulti options={experience}
                 onChange={expChanged}
@@ -200,14 +265,24 @@ function ResumeCreate() {
                 classNamePrefix="select"
                 id='exp'
             />
+            <label htmlFor="edu">Education</label>
+            <Select isMulti options={education}
+                onChange={eduChanged}
+                className="basic-multi-select"
+                classNamePrefix="select"
+                id='edu'
+            />
+
             <label htmlFor="skills">Skills</label>
             <Select isMulti options={skills}
+                onChange={skillChanged}
                 className="basic-multi-select"
                 classNamePrefix="select"
                 id='skills'
             />
             <label htmlFor="lan">Language</label>
             <Select isMulti options={languages}
+                onChange={languageChanged}
                 className="basic-multi-select"
                 classNamePrefix="select"
                 id='lan'

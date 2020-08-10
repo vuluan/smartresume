@@ -7,7 +7,8 @@ import LocalStorageService from './../../../utils/localStorage';
 import { Modal, Button } from 'react-bootstrap';
 
 function JobObjective() {
-  let BASE_URL = 'https://smartresumebuild.herokuapp.com/api';
+
+  let BASE_URL = HOST;
   const [objective, setObjective] = useState([]);
 
   const [formValues, setFormValues] = useState({});

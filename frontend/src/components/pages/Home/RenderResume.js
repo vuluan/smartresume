@@ -1,23 +1,27 @@
 import React, { useState, useEffect } from 'react'
+import moment from 'moment';
 import axios, { HOST } from '../../../utils/httpUtilities';
 import LocalStorageService from './../../../utils/localStorage';
 import './Resume.css';
-function RenderResume() {
+function RenderResume(props) {
     let BASE_URL = HOST;
+
+    let resumeId = props.location.resumeId
+
+    console.log(`RESUME: ${JSON.stringify(props)}`);
 
     const [resume, setResume] = useState();
     const [basicInfo, setBasicInfo] = useState();
+
     useEffect(() => {
         getResume();
+        getBasicInfo();
     }, [])
 
     useEffect(() => {
-        // console.log(JSON.stringify(resume));
+        console.log(JSON.stringify(resume));
     }, [resume])
 
-    useEffect(() => {
-        getBasicInfo();
-    }, []);
 
     const getBasicInfo = () => {
         let userId = LocalStorageService.getUserInfo().userId;
@@ -34,51 +38,72 @@ function RenderResume() {
     }
 
     const getResume = () => {
-        let resumeId = '5f2fb0203c9d0f514c2908ca';
 
         axios.get(`${BASE_URL}/resume/${resumeId}`).then((response) => {
             setResume(response.data.data);
         });
     }
 
-    if (resume) {
+    if (resume && basicInfo) {
+        //  console.log(JSON.stringify(basicInfo[0].firstName));
+        let info = basicInfo[0];
+
         return (
             <div>
                 <div className='basic_info'>
-                    <h1>Roman Mbwasi</h1>
-                    <h6>test@example.com 555-5555-5555</h6>
-                    <h6>12345 Humber Street, Ontario Canada</h6>
+                    <h1 className='cap'>{info.firstName} {info.lastName}</h1>
+                    <h6 className='cap'>{info.email} {info.phone}</h6>
+                    <h6 className='cap'>{info.address}, {info.region} {info.country}</h6>
+                    <h6 ><a href={`http://${info.gitHub}`} target="_blank"> {info.gitHub} </a>  |<a href={`http://${info.linkedin}`} target="_blank"> {info.linkedin} </a></h6>
                     <h6></h6>
                 </div>
                 <hr />
                 <div className='profile'>
-                    <h4>Profile</h4>
-                    <h6>Omnis et aliquid aperiam. Et et rerum temporibus animi. Eos qui recusandae illo.
-                    Non omnis fugit dolores et sint sed molestiae magni. Qui temporibus cum beatae est consequatur facilis. Omnis aperiam officia et vero magnam saepe cupiditate mollitia. Omnis et aliquid aperiam. Et et rerum temporibus animi.
-                    Eos qui recusandae illo. Non omnis fugit dolores et sint sed molestiae magni.
-                    Qui temporibus cum beatae est consequatur facilis.
-                    Omnis aperiam officia et vero magnam saepe cupiditate mollitia.</h6>
+                    <h6>Profile</h6>
+                    <div>{resume.profile.profile}</div>
                 </div>
                 <div className='objective'>
-                    <h4>Objective</h4>
-                    <h6>Omnis et aliquid aperiam. Et et rerum temporibus animi. Eos qui recusandae illo.
-                    Non omnis fugit dolores et sint sed molestiae magni. Qui temporibus cum beatae est consequatur facilis. Omnis aperiam officia et vero magnam saepe cupiditate mollitia. Omnis et aliquid aperiam. Et et rerum temporibus animi.
-                    Eos qui recusandae illo. Non omnis fugit dolores et sint sed molestiae magni.
-                    Qui temporibus cum beatae est consequatur facilis.
-                    Omnis aperiam officia et vero magnam saepe cupiditate mollitia.</h6>
+                    <h6>Objective</h6>
+                    <div>{resume.objective.objective}</div>
                 </div>
-                <div className='education'>
-                    <h4>Education</h4>
-                    <h5>Humber College, 2019 - 2020</h5>
-                    <h6>Diploma</h6>
-                    <h6>Information Technology Solutions</h6>
+                <h6>Experience</h6>
+                {resume.experience.map((edu) => {
+                    return (
+                        <div className='experience'>
+                            <strong>{edu.title} ({edu.type}),  {edu.company} {moment(edu.start_date).format("LL")} - {moment(edu.end_date).format("LL")}</strong>
+                            <div>{edu.description}</div>
+                        </div>
+                    )
+                })}
+                <h6>Projects</h6>
+                <div>Android Food Locatior App</div>
+                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
+                <div>Created a RestFull backend API, Cteated the App UI/UX in Adobe XD</div>
+                <h6>Education</h6>
+                {resume.education.map((edu) => {
+                    return (
+                        <div className='education'>
+                            <strong>{edu.school}, {edu.start} - {edu.finish}</strong>
+                            <div>{edu.degree}</div>
+                            <div>{edu.field}</div>
+                        </div>
+                    )
+                })}
+                <h6>Hard Skills</h6>
+                <div className='skills'>
+                    {resume.skills.map(skill => (skill.is_hard_skill) ? skill.skill_name : '').join(', ')}
                 </div>
-                <div className='education'>
-                    <h5>University of Toronto, 2020 - 2022</h5>
-                    <h6>Masters</h6>
-                    <h6>Computer Science</h6>
+                <h6>Soft Skills</h6>
+                <div className='skills'>
+                    {resume.skills.map(skill => (!skill.is_hard_skill) ? skill.skill_name : '').join(', ')}
                 </div>
-            </div>
+                <h6>Languages</h6>
+                <div className='languages'>
+                    {resume.languages.map(lang => `${lang.language} : ${lang.proficiency}`).join(', ')}
+                </div>
+
+
+            </div >
         )
     } else {
         return (
