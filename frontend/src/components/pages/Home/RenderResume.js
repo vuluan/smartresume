@@ -27,21 +27,19 @@ function RenderResume(props) {
         let userId = LocalStorageService.getUserInfo().userId;
         axios.get(`${HOST}/basicinfo/list/${userId}`)
             .then(function (response) {
-                // console.log('response', response.data.data);
                 setBasicInfo(response.data.data);
-
             })
             .catch(function (error) {
-                // handle error
                 console.log(error);
             });
     }
 
     const getResume = () => {
-
         axios.get(`${BASE_URL}/resume/${resumeId}`).then((response) => {
             console.log(JSON.stringify(response.data.data));
             setResume(response.data.data);
+        }).catch(function (error) {
+            console.log(error);
         });
     }
 
@@ -55,68 +53,77 @@ function RenderResume(props) {
                     <h1 className='cap'>{info.firstName} {info.lastName}</h1>
                     <h6 className='cap'>{info.email} {info.phone}</h6>
                     <h6 className='cap'>{info.address}, {info.region} {info.country}</h6>
-                    <h6 ><a href={`http://${info.gitHub}`} target="_blank"> {info.gitHub} </a>  |<a href={`http://${info.linkedin}`} target="_blank"> {info.linkedin} </a></h6>
+                    <h6 ><a href={`http://${info.gitHub}`} target="_blank" rel="noopener noreferrer"> {info.gitHub} </a>  |<a href={`http://${info.linkedin}`} target="_blank" rel="noopener noreferrer"> {info.linkedin} </a></h6>
                     <h6></h6>
                 </div>
                 <hr />
+
+                {(resume.profile.profile !== '') ? <h6>Profile</h6> : ''}
                 <div className='profile'>
-                    <h6>Profile</h6>
                     <div>{resume.profile.profile}</div>
                 </div>
-                <hr />
+                {(resume.profile.profile !== '') ? <hr /> : ''}
+
+                {(resume.objective.objective !== '') ? <h6>Objective</h6> : ''}
                 <div className='objective'>
-                    <h6>Objective</h6>
                     <div>{resume.objective.objective}</div>
                 </div>
-                <hr />
-                <h6>Experience</h6>
+                {(resume.objective.objective !== '') ? <hr /> : ''}
+
+                {(resume.experience.length > 0) ? <h6>Experience</h6> : ''}
                 {resume.experience.map((edu) => {
                     return (
-                        <div className='experience'>
+                        <div key={edu._id} className='experience'>
                             <strong>{edu.title} ({edu.type}),  {edu.company} {moment(edu.start_date).format("LL")} - {moment(edu.end_date).format("LL")}</strong>
                             <div>{edu.description}</div>
                         </div>
                     )
                 })}
-                <hr />
+                {(resume.experience.length > 0) ? <hr /> : ''}
 
-                <h6>Projects</h6>
+                {(resume.projects.length > 0) ? <h6>Projects</h6> : ''}
                 {resume.projects.map((edu) => {
                     return (
-                        <div className='projects'>
+                        <div key={edu._id} className='projects'>
                             <strong>{edu.name}</strong>
                             <div>{edu.description}</div>
                         </div>
                     )
                 })}
-                <hr />
-                <h6>Education</h6>
+                {(resume.projects.length > 0) ? <hr /> : ''}
+
+
+                {(resume.education.length > 0) ? <h6>Education</h6> : ''}
                 {resume.education.map((edu) => {
                     return (
-                        <div className='education'>
+                        <div key={edu._id} className='education'>
                             <strong>{edu.school}, {edu.start} - {edu.finish}</strong>
                             <div>{edu.degree}</div>
                             <div>{edu.field}</div>
                         </div>
                     )
                 })}
+                {(resume.education.length > 0) ? <hr /> : ''}
 
-                <hr />
-                <h6>Hard Skills</h6>
+
+                {(resume.skills.filter(skill => skill.is_hard_skill).length > 0) ? <h6>Hard Skills</h6> : ''}
                 <div className='skills'>
-                    {resume.skills.map(skill => (skill.is_hard_skill) ? skill.skill_name : '').join(', ')}
+                    {resume.skills.filter(skill => (skill.is_hard_skill)).map(skill => skill.skill_name).join(', ')}
                 </div>
-                <hr />
-                <h6>Soft Skills</h6>
+                {(resume.skills.filter(skill => skill.is_hard_skill).length > 0) ? <hr /> : ''}
+
+
+                {(resume.skills.filter(skill => !skill.is_hard_skill).length > 0) ? <h6>Soft Skills</h6> : ''}
                 <div className='skills'>
-                    {resume.skills.map(skill => (!skill.is_hard_skill) ? skill.skill_name : '').join(', ')}
+                    {resume.skills.filter(skill => (!skill.is_hard_skill)).map(skill => skill.skill_name).join(', ')}
                 </div>
-                <hr />
-                <h6>Languages</h6>
+                {(resume.skills.filter(skill => !skill.is_hard_skill).length > 0) ? <hr /> : ''}
+
+                {(resume.languages.length > 0) ? <h6>Languages</h6> : ''}
                 <div className='languages'>
                     {resume.languages.map(lang => `${lang.language} : ${lang.proficiency}`).join(', ')}
                 </div>
-
+                {(resume.languages.length > 0) ? <hr /> : ''}
 
             </div >
         )

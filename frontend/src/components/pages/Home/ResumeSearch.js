@@ -6,7 +6,7 @@ function ResumeSearch() {
             <Form className='float-left'>
                 <Form.Row className="align-items-center">
                     <Col xs="auto">
-                        <Form.Label for="inlineFormInput" srOnly>Title</Form.Label>
+                        <Form.Label htmlFor="inlineFormInput" srOnly>Title</Form.Label>
                         <Form.Control
                             size="sm"
                             className="mb-2"

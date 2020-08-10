@@ -24,7 +24,7 @@ function ProfileTable({ profile, onEdit, onDelete }) {
                 <tbody>
 
                     {profile.map((row, index) => (
-                        <TableRow position={index} key={row.id} row={row} onEdit={onEdit} onDelete={onDelete} />
+                        <TableRow position={index} key={row._id} row={row} onEdit={onEdit} onDelete={onDelete} />
                     ))}
 
                 </tbody>

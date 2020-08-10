@@ -130,6 +130,13 @@ export const updateById = async (req, res) => {
             data.user_id,
             data.title,
             data.description,
+            data.education,
+            data.experience,
+            data.profile,
+            data.objective,
+            data.skills,
+            data.languages,
+            data.projects
 
         );
         let updatedResume = await resumeServices.updateById(data.id, resume);

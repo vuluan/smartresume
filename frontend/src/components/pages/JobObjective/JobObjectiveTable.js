@@ -24,7 +24,7 @@ function JobObjectiveTable({ objective, onEdit, onDelete }) {
                 <tbody>
 
                     {objective.map((row, index) => (
-                        <TableRow position={index} key={row.id} row={row} onEdit={onEdit} onDelete={onDelete} />
+                        <TableRow position={index} key={row._id} row={row} onEdit={onEdit} onDelete={onDelete} />
                     ))}
 
                 </tbody>

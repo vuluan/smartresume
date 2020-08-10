@@ -52,9 +52,15 @@ export const updateById = async (id, resumeDTO) => {
         if (isNullOrUndefined(updateResume))
             return null;
 
-
         updateResume.title = resumeDTO.title;
         updateResume.description = resumeDTO.description;
+        newResume.education = resumeDTO.education;
+        newResume.experience = resumeDTO.experience;
+        newResume.profile = resumeDTO.profile;
+        newResume.objective = resumeDTO.objective;
+        newResume.skills = resumeDTO.skills;
+        newResume.languages = resumeDTO.languages;
+        newResume.projects = resumeDTO.projects;
         return await updateResume.save();
     } catch (err) {
         throw err;

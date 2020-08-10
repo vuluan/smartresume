@@ -35,8 +35,13 @@ function Home() {
     });
   }
 
-  const handleEdit = () => {
+  const handleEdit = (id) => {
     console.log("Edit clicked");
+    console.log(id);
+    history.push({
+      pathname: '/resume/create',
+      resumeId: id,
+    });
   }
 
   function handleShow(id) {
@@ -47,6 +52,8 @@ function Home() {
       resumeId: id,
     });
   }
+
+
 
 
   const breadcrumbLinks = [
@@ -60,7 +67,7 @@ function Home() {
   return (
     <>
       <Breadcrumbs links={breadcrumbLinks} />
-      <ResumeSearch />
+
       <NavLink exact to='/resume/create' className='btn btn-success float-right'>New Resume</NavLink>
       <ResumeTable resume={resume} onEdit={handleEdit} onShow={handleShow} onDelete={handleDelete} />
     </>
