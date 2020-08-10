@@ -27,7 +27,7 @@ function RenderResume(props) {
         let userId = LocalStorageService.getUserInfo().userId;
         axios.get(`${HOST}/basicinfo/list/${userId}`)
             .then(function (response) {
-                console.log('response', response.data.data);
+                // console.log('response', response.data.data);
                 setBasicInfo(response.data.data);
 
             })
@@ -62,10 +62,12 @@ function RenderResume(props) {
                     <h6>Profile</h6>
                     <div>{resume.profile.profile}</div>
                 </div>
+                <hr />
                 <div className='objective'>
                     <h6>Objective</h6>
                     <div>{resume.objective.objective}</div>
                 </div>
+                <hr />
                 <h6>Experience</h6>
                 {resume.experience.map((edu) => {
                     return (
@@ -75,10 +77,12 @@ function RenderResume(props) {
                         </div>
                     )
                 })}
+                <hr />
                 <h6>Projects</h6>
                 <div>Android Food Locatior App</div>
                 <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
                 <div>Created a RestFull backend API, Cteated the App UI/UX in Adobe XD</div>
+                <hr />
                 <h6>Education</h6>
                 {resume.education.map((edu) => {
                     return (
@@ -89,14 +93,17 @@ function RenderResume(props) {
                         </div>
                     )
                 })}
+                <hr />
                 <h6>Hard Skills</h6>
                 <div className='skills'>
                     {resume.skills.map(skill => (skill.is_hard_skill) ? skill.skill_name : '').join(', ')}
                 </div>
+                <hr />
                 <h6>Soft Skills</h6>
                 <div className='skills'>
                     {resume.skills.map(skill => (!skill.is_hard_skill) ? skill.skill_name : '').join(', ')}
                 </div>
+                <hr />
                 <h6>Languages</h6>
                 <div className='languages'>
                     {resume.languages.map(lang => `${lang.language} : ${lang.proficiency}`).join(', ')}

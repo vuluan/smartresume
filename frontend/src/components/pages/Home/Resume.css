@@ -9,3 +9,7 @@
 .skills {
     text-transform: capitalize;
 }
+
+h6 {
+    font-weight: bold;
+}

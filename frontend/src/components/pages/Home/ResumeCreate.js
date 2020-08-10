@@ -4,6 +4,7 @@ import Select from 'react-select'
 import axios, { HOST } from '../../../utils/httpUtilities';
 import LocalStorageService from './../../../utils/localStorage';
 import * as experienceServices from './../../../services/experienceServices';
+import * as projectServices from './../../../services/projectServices';
 import * as languageServices from './../../../services/languageServices';
 import { Button } from 'react-bootstrap';
 
@@ -22,7 +23,7 @@ function ResumeCreate() {
     const [experience, setExperience] = useState([]);
     const [skills, setSkills] = useState([]);
     const [languages, setLanguages] = useState([]);
-    const [awards, setAwards] = useState([]);
+    const [projects, setProjects] = useState([]);
 
     useEffect(() => {
         getEducationList();
@@ -32,13 +33,13 @@ function ResumeCreate() {
         getLanguagesList();
         getAwardsList();
         getProfileList();
-        getObjectiveList()
+        getObjectiveList();
+        getProjectList();
     }, [])
 
     const getProfileList = () => {
         let userId = LocalStorageService.getUserInfo().userId;
         axios.get(`${BASE_URL}/jobprofile/list/${userId}`).then((response) => {
-            console.log(response);
             setProfile(response.data.data.map((adu) => {
                 return { value: adu._id, label: `${adu.profile}` }
             })
@@ -49,7 +50,6 @@ function ResumeCreate() {
     const getObjectiveList = () => {
         let userId = LocalStorageService.getUserInfo().userId;
         axios.get(`${BASE_URL}/objective/list/${userId}`).then((response) => {
-            console.log(response);
             setObjective(response.data.data.map((adu) => {
                 return { value: adu._id, label: `${adu.objective}` }
             })
@@ -73,7 +73,6 @@ function ResumeCreate() {
         experienceServices.getAllExperiences(payload)
             .then(res => {
                 if (res.status == 200) {
-                    console.log(res.data);
                     setExperience(res.data.data.map((exp) => {
                         return { value: exp._id, label: `${exp.company} : ${exp.title}` }
                     })
@@ -99,11 +98,10 @@ function ResumeCreate() {
     const getLanguagesList = () => {
         const userInfo = LocalStorageService.getUserInfo();
         const payload = { userId: userInfo.userId };
-        console.log(userInfo.userId);
 
         languageServices.getAllLanguages(payload).then(res => {
             if (res.status == 200) {
-                console.log(`Language: ${JSON.stringify(res.data)}`);
+
                 setLanguages(res.data.data.map((lan) => {
                     return { value: lan._id, label: `${lan.language} : ${lan.proficiency}` }
                 })
@@ -112,8 +110,22 @@ function ResumeCreate() {
         });
     }
 
-    useEffect(() => {
+    const getProjectList = () => {
+        const userInfo = LocalStorageService.getUserInfo();
+        const payload = { userId: userInfo.userId };
 
+        projectServices.getAllProjects(payload).then(res => {
+            console.log(JSON.stringify(res));
+            if (res.status === 200) {
+                setProjects(res.data.data.map((lan) => {
+                    return { value: lan._id, label: `${lan.name} : ${lan.description}` }
+                })
+                );
+            }
+        });
+    }
+
+    useEffect(() => {
         console.log(JSON.stringify(resume));
     }, [resume])
 
@@ -122,8 +134,6 @@ function ResumeCreate() {
     }
 
     const eduChanged = (value) => {
-        //console.log(value);
-
         let e = value.map((edu) => { return edu.value })
         setResume((prevState, props) => ({
             ...prevState,
@@ -132,7 +142,6 @@ function ResumeCreate() {
     }
 
     const expChanged = (value) => {
-        //console.log(value);
         let e = value.map((exp) => { return exp.value })
         setResume((prevState, props) => ({
             ...prevState,
@@ -141,8 +150,6 @@ function ResumeCreate() {
     }
 
     const profileChanged = (value) => {
-        //  console.log(value);
-
         setResume((prevState, props) => ({
             ...prevState,
             profile: value.value
@@ -170,16 +177,13 @@ function ResumeCreate() {
     }
 
     const objectiveChanged = (value) => {
-        //console.log(value);
-
         setResume((prevState, props) => ({
             ...prevState,
             objective: value.value
         }));
     }
-    //skillChanged
+
     const skillChanged = (value) => {
-        // console.log(value);
         let e = value.map((exp) => { return exp.value })
         setResume((prevState, props) => ({
             ...prevState,
@@ -188,7 +192,6 @@ function ResumeCreate() {
     }
 
     const languageChanged = (value) => {
-        // console.log(value);
         let e = value.map((exp) => { return exp.value })
         setResume((prevState, props) => ({
             ...prevState,
@@ -197,12 +200,8 @@ function ResumeCreate() {
     }
 
     const handleSave = () => {
-        // console.log('Handle Save');
         resume.user_id = LocalStorageService.getUserInfo().userId;
-
         axios.post(`${BASE_URL}/resume/add`, resume).then((response) => {
-
-            console.log('Sent Resume');
         }).catch((error) => {
             console.log(error);
         });
@@ -265,6 +264,12 @@ function ResumeCreate() {
                 classNamePrefix="select"
                 id='exp'
             />
+            <label htmlFor="projects">Projects</label>
+            <Select isMulti options={projects}
+                className="basic-multi-select"
+                classNamePrefix="select"
+                id='projects'
+            />
             <label htmlFor="edu">Education</label>
             <Select isMulti options={education}
                 onChange={eduChanged}
@@ -287,12 +292,7 @@ function ResumeCreate() {
                 classNamePrefix="select"
                 id='lan'
             />
-            <label htmlFor="awards">Awards</label>
-            <Select isMulti options={awards}
-                className="basic-multi-select"
-                classNamePrefix="select"
-                id='awards'
-            />
+
             <Button className='btn btn-success float-right' onClick={handleSave}>Save</Button>
         </div>
     )
