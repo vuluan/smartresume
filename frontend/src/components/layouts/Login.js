@@ -9,7 +9,7 @@ function Login() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [invalidCredential, setInvalidCredential] = useState('');
+  const [invalidCredential, setInvalidCredential] = useState(false);
   const history = useHistory();
 
   const handleLogin = function (e) {
@@ -46,8 +46,8 @@ function Login() {
           <Card.Body>
             <Form onSubmit={handleLogin}>
               {invalidCredential ? (
-                <Form.Group className="" >
-                  <Form.Label>Invalid username/password</Form.Label>
+                <Form.Group >
+                  <Form.Label className="alert alert-danger">Invalid username/password</Form.Label>
                 </Form.Group>) : ''}
 
               <Form.Group>
