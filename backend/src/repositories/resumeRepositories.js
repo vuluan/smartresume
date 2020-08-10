@@ -54,13 +54,13 @@ export const updateById = async (id, resumeDTO) => {
 
         updateResume.title = resumeDTO.title;
         updateResume.description = resumeDTO.description;
-        newResume.education = resumeDTO.education;
-        newResume.experience = resumeDTO.experience;
-        newResume.profile = resumeDTO.profile;
-        newResume.objective = resumeDTO.objective;
-        newResume.skills = resumeDTO.skills;
-        newResume.languages = resumeDTO.languages;
-        newResume.projects = resumeDTO.projects;
+        updateResume.education = resumeDTO.education;
+        updateResume.experience = resumeDTO.experience;
+        updateResume.profile = resumeDTO.profile;
+        updateResume.objective = resumeDTO.objective;
+        updateResume.skills = resumeDTO.skills;
+        updateResume.languages = resumeDTO.languages;
+        updateResume.projects = resumeDTO.projects;
         return await updateResume.save();
     } catch (err) {
         throw err;
