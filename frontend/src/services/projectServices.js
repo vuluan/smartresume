@@ -1,7 +1,7 @@
-import axios from "../utils/httpUtilities";
+import axios, { HOST } from "../utils/httpUtilities";
 
-const GET_PROJECTS_ENDPOINT = `${HOST}/project/list/`;
-const PROJECT_DETAIL_ENDPOINT = `${HOST}/project/`;
+const GET_PROJECTS_ENDPOINT = `${HOST}/project/list`;
+const PROJECT_DETAIL_ENDPOINT = `${HOST}/project`;
 const ADD_PROJECT_ENDPOINT = `${HOST}/project/add`;
 
 export function getAllProjects(payload) {

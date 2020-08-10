@@ -16,6 +16,8 @@ import Language from '../pages/Language/Language';
 import AddLanguage from '../pages/Language/AddLanguage';
 import EditLanguage from '../pages/Language/EditLanguage';
 import Project from '../pages/Project/Project';
+import AddProject from '../pages/Project/AddProject';
+import EditProject from '../pages/Project/EditProject';
 import CoverLetters from '../pages/CoverLetter/CoverLetters';
 import AddCoverLetter from '../pages/CoverLetter/AddCoverLetter';
 import ContactMe from '../pages/ContactMe/ContactMe';
@@ -90,6 +92,8 @@ function DashboardContainer() {
             <PrivateRoute path='/language/add' exact component={AddLanguage} />
             <PrivateRoute path='/language/edit/:id' component={EditLanguage} />
             <PrivateRoute path='/project' exact component={Project} />
+            <PrivateRoute path='/project/add' exact component={AddProject} />
+            <PrivateRoute path='/project/edit/:id' exact component={EditProject} />
             <PrivateRoute path='/cover-letter' exact component={CoverLetters} />
             <PrivateRoute path='/cover-letter/add' exact component={AddCoverLetter} />
             <PrivateRoute path='/contact-me' exact component={ContactMe} />
