@@ -4,6 +4,19 @@
 **Michael Anetor:** Contact Me Page, Basic Information Page, Cover Letter Page  
 **Roman Mbwasi:** Resume List (Home) Page, Profile Page, Job Objective Page, Education Page   
 
+
+
+## Frontend
+### Deployed url https://nervous-visvesvaraya-519c39.netlify.app/
+User loc@mbwasi.com can be used to test the site password 12345678
+
+**Roman Mbwasi**
+- Home page creating resumes from the individual information parts. Editing, displaying resumes.
+- Education Page, CRUD for education information
+- Profile Page, CRUD for Resume Profile section.
+- Objectives Page, CRUD for Resume Objectives section.
+
+
 ## Note if running locally use 'npm run local' to start the backend.
 ## EndPoints
 

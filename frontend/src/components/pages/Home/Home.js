@@ -37,8 +37,10 @@ function Home(props) {
     });
   }
 
+
   if (success === true) {
     successToast(message);
+    success = false;
   }
 
 
@@ -61,7 +63,6 @@ function Home(props) {
   }
 
   const handleEdit = (id) => {
-
     history.push({
       pathname: '/resume/create',
       resumeId: id,
@@ -69,7 +70,6 @@ function Home(props) {
   }
 
   function handleShow(id) {
-
     history.push({
       pathname: '/resume/render',
       resumeId: id,
