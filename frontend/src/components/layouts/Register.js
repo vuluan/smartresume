@@ -21,7 +21,7 @@ function Register() {
     const data = {
       email: email,
       password: password,
-      confirmPassword: confirmPassword
+      confirmedPassword: confirmPassword
     }
 
     if (password !== confirmPassword) {
