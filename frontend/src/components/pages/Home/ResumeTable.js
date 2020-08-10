@@ -1,19 +1,20 @@
 import React from 'react'
 import { Table, Button } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
-const TableRow = ({ row, onEdit, onDelete }) => (
+const TableRow = ({ position, row, onEdit, onDelete, onShow }) => (
     <tr>
-        <td >{row.id}</td>
+        <td >{row._id}</td>
         <td >{row.title}</td>
         <td >{row.description}</td>
         <td >{row.date_created}</td>
-        <NavLink exact to='/resume/render' className='btn btn-success '>Show</NavLink>
-        <td><Button value={row.id} onClick={onEdit}>Edit</Button></td>
-        <td><Button variant="danger" value={row.id} onClick={() => onDelete(row.id)}>Delete</Button></td>
+
+        <td><Button value={row.id} onClick={() => onShow(row._id)}>Show</Button></td>
+        <td><Button value={row.id} onClick={() => onEdit(row._id)}>Edit</Button></td>
+        <td><Button variant="danger" value={row._id} onClick={() => onDelete(row._id)}>Delete</Button></td>
     </tr>
 )
 
-function ResumeTable({ resume, onEdit, onDelete }) {
+function ResumeTable({ resume, onEdit, onDelete, onShow }) {
     return (
         <div>
             <Table className="table table-striped">
@@ -28,8 +29,8 @@ function ResumeTable({ resume, onEdit, onDelete }) {
                 </thead>
                 <tbody>
 
-                    {resume.map(row => (
-                        <TableRow key={row.id} row={row} onEdit={onEdit} onDelete={onDelete} />
+                    {resume.map((row, index) => (
+                        <TableRow position={index} key={row._id} row={row} onEdit={onEdit} onDelete={onDelete} onShow={onShow} />
                     ))}
 
                 </tbody>

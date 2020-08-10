@@ -1,49 +1,53 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ResumeTable from './ResumeTable';
 import ResumeSearch from './ResumeSearch';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import Breadcrumbs from '../../layouts/Breadcrumbs';
-
+import axios, { HOST } from '../../../utils/httpUtilities';
+import LocalStorageService from './../../../utils/localStorage';
 
 function Home() {
-  const [resume, setResume] = useState([
-    {
-      id: 1,
-      title: "This is the resume title/name",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
-      date_created: "1/1/2020"
+  let BASE_URL = HOST;
 
-    },
-    {
-      id: 2,
-      title: "This is the resume title/name",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      date_created: "1/1/2020"
-    }, {
-      id: 3,
-      title: "This is the resume title/name",
-      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-      date_created: "1/1/2020"
-    },
-  ]);
+  const [resume, setResume] = useState([]);
+  const history = useHistory();
+
+  useEffect(() => {
+    getResumeList();
+  }, [])
+
+  const getResumeList = () => {
+    let userId = LocalStorageService.getUserInfo().userId;
+    axios.get(`${BASE_URL}/resume/list/${userId}`).then((response) => {
+      setResume(response.data.data);
+    });
+  }
+
+  const handleDelete = (id) => {
+    let deleteId = { id }
+    axios.delete(`${BASE_URL}/resume`, {
+      data: deleteId
+    }).then((response) => {
+      getResumeList();
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
 
   const handleEdit = () => {
     console.log("Edit clicked");
   }
 
-  const handleSave = (data) => {
-
-    console.log("Save clicked: " + JSON.stringify(data));
-    data.id = resume.length + 1;
-    setResume(prevResume => [...prevResume, data]);
+  function handleShow(id) {
+    console.log(id);
+    // history.push("/resume/render");
+    history.push({
+      pathname: '/resume/render',
+      resumeId: id,
+    });
   }
 
-  const handleDelete = (id) => {
-    console.log("Delete clicked:" + id);
-    setResume(prevResume => prevResume.filter((g) => g.id !== id))
-
-  }
 
   const breadcrumbLinks = [
     {
@@ -58,7 +62,7 @@ function Home() {
       <Breadcrumbs links={breadcrumbLinks} />
       <ResumeSearch />
       <NavLink exact to='/resume/create' className='btn btn-success float-right'>New Resume</NavLink>
-      <ResumeTable resume={resume} onEdit={handleEdit} onDelete={handleDelete} />
+      <ResumeTable resume={resume} onEdit={handleEdit} onShow={handleShow} onDelete={handleDelete} />
     </>
   );
 }

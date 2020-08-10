@@ -1,3 +1,11 @@
 .basic_info {
     text-align: center;
 }
+
+.cap {
+    text-transform: capitalize;
+}
+
+.skills {
+    text-transform: capitalize;
+}
