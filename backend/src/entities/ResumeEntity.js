@@ -38,6 +38,12 @@ const ResumeSchema = new mongoose.Schema({
             ref: mongoDBEntityNames.languageCollection
         }
     ],
+    projects: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: mongoDBEntityNames.projectCollection
+        }
+    ],
 
     profile: {
         type: mongoose.Schema.Types.ObjectId,

@@ -1,5 +1,5 @@
 export class ResumeDTO {
-    constructor(user_id, title, description, education, experience, profile, objective, skills, languages) {
+    constructor(user_id, title, description, education, experience, profile, objective, skills, languages, projects) {
         this.user_id = user_id;
         this.title = title;
         this.profile = profile;
@@ -9,5 +9,6 @@ export class ResumeDTO {
         this.experience = experience;
         this.skills = skills
         this.languages = languages
+        this.projects = projects
     }
 }

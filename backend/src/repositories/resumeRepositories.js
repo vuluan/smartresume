@@ -12,6 +12,7 @@ export const add = async (resumeDTO) => {
         newResume.objective = resumeDTO.objective;
         newResume.skills = resumeDTO.skills;
         newResume.languages = resumeDTO.languages;
+        newResume.projects = resumeDTO.projects;
         const createdResume = await newResume.save();
         return createdResume;
     } catch (err) {
@@ -27,6 +28,7 @@ export const detail = async (id) => {
             .populate("objective")
             .populate("languages")
             .populate("skills")
+            .populate("projects")
             .populate("experience");
         return detailResume;
     } catch (err) {

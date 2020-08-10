@@ -8,7 +8,7 @@ function RenderResume(props) {
 
     let resumeId = props.location.resumeId
 
-    console.log(`RESUME: ${JSON.stringify(props)}`);
+    //console.log(`RESUME: ${JSON.stringify(props)}`);
 
     const [resume, setResume] = useState();
     const [basicInfo, setBasicInfo] = useState();
@@ -19,7 +19,7 @@ function RenderResume(props) {
     }, [])
 
     useEffect(() => {
-        console.log(JSON.stringify(resume));
+        //console.log(JSON.stringify(resume));
     }, [resume])
 
 
@@ -40,6 +40,7 @@ function RenderResume(props) {
     const getResume = () => {
 
         axios.get(`${BASE_URL}/resume/${resumeId}`).then((response) => {
+            console.log(JSON.stringify(response.data.data));
             setResume(response.data.data);
         });
     }
@@ -78,10 +79,16 @@ function RenderResume(props) {
                     )
                 })}
                 <hr />
+
                 <h6>Projects</h6>
-                <div>Android Food Locatior App</div>
-                <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-                <div>Created a RestFull backend API, Cteated the App UI/UX in Adobe XD</div>
+                {resume.projects.map((edu) => {
+                    return (
+                        <div className='projects'>
+                            <strong>{edu.name}</strong>
+                            <div>{edu.description}</div>
+                        </div>
+                    )
+                })}
                 <hr />
                 <h6>Education</h6>
                 {resume.education.map((edu) => {
@@ -93,6 +100,7 @@ function RenderResume(props) {
                         </div>
                     )
                 })}
+
                 <hr />
                 <h6>Hard Skills</h6>
                 <div className='skills'>
