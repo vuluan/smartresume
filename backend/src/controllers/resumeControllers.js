@@ -42,6 +42,10 @@ export const add = async (req, res) => {
         // if (data.experience !== undefined && data.experience.isEmpty()) {
         //     data.experience = undefined
         // }
+        console.log("DEBUG!!!! ADD");
+        console.log(data.profile);
+        console.log(typeof data.profile);
+
         if (data.profile !== undefined && data.profile.isEmpty()) {
             data.profile = undefined
         }
@@ -157,6 +161,9 @@ export const updateById = async (req, res) => {
         // if (data.experience !== undefined && data.experience.isEmpty()) {
         //     data.experience = undefined
         // }
+        console.log("DEBUG!!!! EDIT");
+        console.log(data.profile);
+        console.log(typeof data.profile);
         if (data.profile !== undefined && data.profile.isEmpty()) {
             data.profile = undefined
         }
