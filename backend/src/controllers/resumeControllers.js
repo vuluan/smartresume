@@ -36,27 +36,27 @@ export const add = async (req, res) => {
             return await res.status(403).send(new HttpResponseResult(false, "Forbidden", null));
         }
 
-        if (data.education !== undefined && data.education.isEmpty()) {
-            data.education = undefined
-        }
-        if (data.experience !== undefined && data.experience.isEmpty()) {
-            data.experience = undefined
-        }
+        // if (data.education !== undefined && data.education.isEmpty()) {
+        //     data.education = undefined
+        // }
+        // if (data.experience !== undefined && data.experience.isEmpty()) {
+        //     data.experience = undefined
+        // }
         if (data.profile !== undefined && data.profile.isEmpty()) {
             data.profile = undefined
         }
         if (data.objective !== undefined && data.objective.isEmpty()) {
             data.objective = undefined
         }
-        if (data.skills !== undefined && data.skills.isEmpty()) {
-            data.skills = undefined
-        }
-        if (data.languages !== undefined && data.languages.isEmpty()) {
-            data.languages = undefined
-        }
-        if (data.projects !== undefined && data.projects.isEmpty()) {
-            data.projects = undefined
-        }
+        // if (data.skills !== undefined && data.skills.isEmpty()) {
+        //     data.skills = undefined
+        // }
+        // if (data.languages !== undefined && data.languages.isEmpty()) {
+        //     data.languages = undefined
+        // }
+        // if (data.projects !== undefined && data.projects.isEmpty()) {
+        //     data.projects = undefined
+        // }
 
 
 
@@ -151,27 +151,27 @@ export const updateById = async (req, res) => {
         }
 
 
-        if (data.education !== undefined && data.education.isEmpty()) {
-            data.education = undefined
-        }
-        if (data.experience !== undefined && data.experience.isEmpty()) {
-            data.experience = undefined
-        }
+        // if (data.education !== undefined && data.education.isEmpty()) {
+        //     data.education = undefined
+        // }
+        // if (data.experience !== undefined && data.experience.isEmpty()) {
+        //     data.experience = undefined
+        // }
         if (data.profile !== undefined && data.profile.isEmpty()) {
             data.profile = undefined
         }
         if (data.objective !== undefined && data.objective.isEmpty()) {
             data.objective = undefined
         }
-        if (data.skills !== undefined && data.skills.isEmpty()) {
-            data.skills = undefined
-        }
-        if (data.languages !== undefined && data.languages.isEmpty()) {
-            data.languages = undefined
-        }
-        if (data.projects !== undefined && data.projects.isEmpty()) {
-            data.projects = undefined
-        }
+        // if (data.skills !== undefined && data.skills.isEmpty()) {
+        //     data.skills = undefined
+        // }
+        // if (data.languages !== undefined && data.languages.isEmpty()) {
+        //     data.languages = undefined
+        // }
+        // if (data.projects !== undefined && data.projects.isEmpty()) {
+        //     data.projects = undefined
+        // }
 
         let resume = new ResumeDTO(
             data.user_id,
