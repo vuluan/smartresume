@@ -8,7 +8,6 @@ import LocalStorageService from './../../../utils/localStorage';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
 function Home(props) {
   let BASE_URL = HOST;
 
@@ -17,8 +16,6 @@ function Home(props) {
 
   let success = props.location.success
   let message = props.location.message
-
-
 
   useEffect(() => {
     getResumeList();
@@ -37,12 +34,10 @@ function Home(props) {
     });
   }
 
-
   if (success === true) {
     successToast(message);
     success = false;
   }
-
 
   const getResumeList = () => {
     let userId = LocalStorageService.getUserInfo().userId;
@@ -75,9 +70,6 @@ function Home(props) {
       resumeId: id,
     });
   }
-
-
-
 
   const breadcrumbLinks = [
     {

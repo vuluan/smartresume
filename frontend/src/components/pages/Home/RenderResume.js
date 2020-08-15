@@ -20,7 +20,6 @@ function RenderResume(props) {
         console.log(JSON.stringify(resume));
     }, [resume])
 
-
     const getBasicInfo = () => {
         let userId = LocalStorageService.getUserInfo().userId;
         axios.get(`${HOST}/basicinfo/list/${userId}`)
