@@ -46,10 +46,10 @@ export const add = async (req, res) => {
         console.log(data.profile);
         console.log(typeof data.profile);
 
-        if (data.profile !== undefined && data.profile.isEmpty()) {
+        if (data.profile !== undefined && data.profile === '') {
             data.profile = undefined
         }
-        if (data.objective !== undefined && data.objective.isEmpty()) {
+        if (data.objective !== undefined && data.objective === '') {
             data.objective = undefined
         }
         // if (data.skills !== undefined && data.skills.isEmpty()) {
@@ -164,10 +164,10 @@ export const updateById = async (req, res) => {
         console.log("DEBUG!!!! EDIT");
         console.log(data.profile);
         console.log(typeof data.profile);
-        if (data.profile !== undefined && data.profile.isEmpty()) {
+        if (data.profile !== undefined && data.profile === '') {
             data.profile = undefined
         }
-        if (data.objective !== undefined && data.objective.isEmpty()) {
+        if (data.objective !== undefined && data.objective === '') {
             data.objective = undefined
         }
         // if (data.skills !== undefined && data.skills.isEmpty()) {
